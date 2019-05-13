@@ -1,0 +1,28 @@
+extends layout
+
+block content
+    section
+        .container
+            .portfolio-gutter
+                each p in projects
+                    .col-md-3.col-sm-6
+                        .item-box
+                            figure
+                                span.item-hover
+                                    span.overlay.dark-5
+                                    span.inner
+                                        a.ico-rounded(href=`/project?id=${ p.id }`)
+                                            span.fa.fa-plus.size-20
+                                .flexslider(data-arrownav="false" data-slideshowspeed="3000")
+                                    ul.slides
+                                        each pM in p.project_media
+                                            li
+                                                a(href=`/project?id=${ p.id }`)
+                                                    img.img-responsive(src=`${ pM }` width="600" height="399")
+                            .item-box-desc
+                                h3= p.project_title
+                                ul.list-inline.categories.nomargin
+                                    li
+                                        = p.project_city
+                                        br
+                                        small= p.project_address

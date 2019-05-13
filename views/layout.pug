@@ -1,7 +1,89 @@
 doctype html
+<!--[if IE 8]>			<html class="ie ie8"> <![endif]-->
+<!--[if IE 9]>			<html class="ie ie9"> <![endif]-->
+<!--[if gt IE 9]><!-->
 html
-  head
-    title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
-  body
-    block content
+    <!--<![endif]-->
+    head
+        meta(charset='utf-8')
+        title= title
+        meta(name='description', content='Imoges, société de construction')
+        meta(name='keyword', content='Maison, appartements, achat, location')
+        meta(name='Author', content='AfxLab')
+        meta(name='viewport', content='width=device-width, maximum-scale=1, initial-scale=1, user-scalable=0')
+        <!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
+        link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Open+Sans:300,400%7CRaleway:300,400,500,600,700%7CLato:300,400,400italic,600,700')
+        link(rel='stylesheet', href='/javascripts/plugins/bootstrap/css/bootstrap.min.css')
+        link(rel='stylesheet', href='/stylesheets/essentials.css')
+        link(rel='stylesheet', href='/stylesheets/layout.css')
+        link(rel='stylesheet', href='/stylesheets/header-2.css')
+        link(rel='stylesheet', href='/stylesheets/color_scheme/green.css')
+        if css_paths
+            each cssPath in css_paths
+                link(rel='stylesheet', href=`${ cssPath }`)
+    body(class="smoothscroll enable-animation")
+        #wrapper
+            #header.sticky.shadow-after-3.clearfix
+                header#topNav
+                    .container
+                        button(class="btn btn-mobile" data-toggle="collapse" data-target=".nav-main-collapse")
+                            i.fa.fa-bars
+                        a.logo.pull-left(href='/')
+                            img(src='/images/logo-imoges.png' alt='Imoges Société Immobilière')
+                        .navbar-collapse.pull-right.nav-main-collapse.collapse.submenu-dark
+                            nav.nav-main
+                                ul#topMain.nav.nav-pills.nav-main
+                                    include nav
+            if type === 'root'
+                include homeslide
+            else
+                include topbanner
+            block content
+            footer#footer
+                .container
+                    .row
+                        .col-md-8
+                            img.footer-logo(src='/images/logo-footer.png' alt='Imoges Société Immobilière')
+                            address
+                                ul.list-unstyled
+                                    li.footer-sprite.address
+                                        span #{company.address} <br>
+                                        span #{company.pc}, #{company.city}
+                                    li.footer-sprite.phone #{company.phone}
+                                    li.footer-sprite.email
+                                        a(href=`${ 'mailto:' + company.email }`) #{company.email}
+                        .col-md4
+                            h4.letter-spacing-1 RESTONS EN CONTACT
+                            p Inscrivez-vous à notre newsletter
+                            form.validate(action='' method='post' data-success='Inscription réussie. Merci!' data-toastr-position='bottom-right' )
+                                .input-group
+                                    span.input-group-addon
+                                        i.fa.fa-envelope
+                                    input(type="email" id="email" name="email" class="form-control required" placeholder="Adresse mail")
+                                    span.input-group-btn
+                                        button.btn.btn-success(type='submit') S'inscrire
+                            .margin-top-20
+                                if company.facebook
+                                    a(href=`${ company.facebook }` class="social-icon social-icon-border social-facebook pull-left" data-toggle="tooltip" data-placement="top" title="Facebook")
+                                        i.icon-facebook
+                                        i.icon-facebook
+                                if company.youtube
+                                    a(href=`${ company.youtube }` class="social-icon social-icon-border social-youtube pull-left" data-toggle="tooltip" data-placement="top" title="Youtube")
+                                        i.icon-youtube
+                                        i.icon-youtube
+                .copyright
+                    .container
+                        ul.pull-right.nomargin.list-inline.mobile-block
+                            li
+                                a(href='/') Conditions générales
+                        span #{company.name} © #{company.juridical} #{company.year}
+        a(href="#")#toTop
+        #preloader
+            .inner
+                span.loader
+        script(type="text/javascript") var plugin_path = '/javascripts/plugins/';
+        script(type="text/javascript" src="/javascripts/plugins/jquery/jquery-2.1.4.min.js")
+        if js_paths
+            each jsPath in js_paths
+                script(type="text/javascript" src=`${ jsPath }`)
+        script(type="text/javascript" src="/javascripts/scripts.js")

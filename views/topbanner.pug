@@ -1,0 +1,12 @@
+section.page-header.dark.page-header-md.blueprint-bkg-black-1080
+    .container
+        h1 CONSTRUCTION&nbsp;
+            span IMOGES
+        ol.breadcrumb
+            if breadcrumb
+                each b in breadcrumb
+                    if b.link
+                        li
+                            a(href=`${ b.link }`) #{ b.label }
+                    else
+                        li.active #{ b.label }

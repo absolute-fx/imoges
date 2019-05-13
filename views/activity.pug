@@ -1,0 +1,41 @@
+ul.list-group
+    each l in logs
+        li.list-group-item
+            case l.log_table_name
+                when 'Projects'
+                    .row
+                        .col-md-1.size-30
+                            span.fa.fa-building.ligth-grey-text
+                        .col-md-11
+                            | Nouveau projet&nbsp;
+                            strong
+                                a(href="/") #{l.label}
+                            br
+                            small #{l.createdAt}
+                when 'Realties'
+                    .row
+                        .col-md-1.size-30
+                            span.fa.fa-plus-circle.ligth-grey-text
+                        .col-md-11
+                            | Nouveau bien&nbsp;
+                            strong
+                                a(href="/") #{l.label}
+                            | &nbsp;sur le projet&nbsp;
+                            strong
+                                a(href="/") #{l.label_parent}
+                            br
+                            small #{l.createdAt}
+                when 'Clients'
+                    .row
+                        .col-md-1.size-30
+                            span.fa.fa-thumb-tack.ligth-grey-text
+                        .col-md-11
+                            | Le bien&nbsp;
+                            strong
+                                a(href="/") #{l.label}
+                            | &nbsp;du projet&nbsp;
+                            strong
+                                a(href="/") #{l.label_parent}
+                            | &nbsp;est vendu
+                            br
+                            small #{l.createdAt}

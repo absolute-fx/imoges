@@ -1,5 +1,79 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+    if catalog_headlines
+        .box-light.padding-bottom-30
+            .container
+                h2.weight-300.text-center LES BIENS A LA UNE...
+                hr
+                include realtiescatalog
+                .text-center
+                    a(href="" class="btn btn-reveal btn-default")
+                        i.fa.fa-plus
+                        span Voir tous les biens disponibles
+    section.info-bar.info-bar-clean.info-bar-light
+        .container
+            .row
+                .col-sm-4
+                    i.fa.fa-tree
+                    h3 CADRE DE VIE OPTIMISE
+                    p
+                        | Garantir un cadre de vie de qualité fait partie de nos priorités aux quotidiens...
+                        a(href="/") En savoir plus
+                .col-sm-4
+                    i.fa.fa-shield
+                    h3 ISOLATION ACOUSTIQUE ET THERMIQUE
+                    p
+                        | Imoges apporte une grande importance à l'isolation acoustique et thermique...
+                        a(href="/") En savoir plus
+                .col-sm-4
+                    i.fa.fa-cubes
+                    h3 MATERIAUX DE QUALITE
+                    p
+                        | Des matériaux de qualité pour une construction de qualité...
+                        a(href="/") En savoir plus
+    section
+        .container
+            .row
+                .col-sm-6
+                    header.margin-bottom-40
+                        h1.weight-300 DES FINITIONS A LA CARTE
+                        h2.weight-300.letter-spacing-1.size-13
+                            span Un appartement à votre image
+                    p La société Imoges a établi un cahier des charges rigoureux afin d'apporter une qualité de confort à une clientèle exigeante. Ce concept s'appuie sur l'utilisation de matériaux de qualité et d'un savoir-faire de nos partenaires.
+                    p Une caractéristique appréciée de nos clients est le fait de pouvoir choisir à la carte les finitions de leur habitation.
+                    hr
+                .col-sm-6
+                    .owl-carousel.buttons-autohide.controlls-over(data-plugin-options='{"singleItem": true, "autoPlay": 3400, "navigation": false, "pagination": true, "transitionStyle":"fadeUp"}')
+                        div
+                            img.img-responsive(src="/images/temp_projects/slide-01.jpg" alt="")
+                        div
+                            img.img-responsive(src="/images/temp_projects/slide-02.jpg" alt="")
+                        div
+                            img.img-responsive(src="/images/temp_projects/slide-03.jpg" alt="")
+    section.parallax-4.no-transition(style="background-image:url('/images/temp_projects/bkg-01.jpg')")
+        .container
+            .row.padding-10(style="background-color: #FFF;")
+                .col-md-6
+                    .heading-title.heading-line-single.margin-top-10
+                        h4
+                            | Activité récente&nbsp;
+                            span sur le site web
+                    include activity
+                .block.height-450
+                    .col-md-6
+                        .heading-title.heading-line-single.margin-top-10
+                            h4
+                                | Visite virtuelle&nbsp;
+                                span interactive
+                        img(src="/images/temp_projects/rt.jpg" class="img-responsive" alt="3D virtuelle Imoges")
+                        .heading-title.heading-border.margin-top-20
+                            h5 Résidence Ines - R1
+                            ul.list-inline.categories.nomargin
+                                li
+                                    a(href="/") Télécharger l'application _380Mo
+
+    a(href="/" rel="nofollow" target="_sef" class="btn btn-xlg btn-default size-20 fullwidth nomargin noradius padding-40 noborder-left noborder-right noborder-bottom")
+        span.font-lato.size-30
+            | Besoin de plus d'informations?&nbsp;
+            strong Contactez-nous &raquo;

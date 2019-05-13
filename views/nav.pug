@@ -1,0 +1,108 @@
+- var companyNavData = ws_settings.navData.company;
+- var projectsNavData = ws_settings.navData.projects;
+
+li.dropdown(class=`${ topNavActive && topNavActive === 'index' ? 'active' : ''}`)
+	a.dropdown-toggle(href='/') Accueil
+li.dropdown(class=`${ topNavActive && topNavActive === 'company' ? 'active' : ''}`)
+	a.dropdown-toggle(href='/company') #{company.name}
+	ul.dropdown-menu
+		each cD in companyNavData
+			li
+				a(href=`${ cD['service'] }`)= cD.label
+li.dropdown.mega-menu(class=`${ topNavActive && topNavActive === 'projects' ? 'active' : ''}`)
+	a.dropdown-toggle(href='/projects') Les projets
+	ul.dropdown-menu
+		li
+			.row
+				.col-md-5th
+					ul.list-unstyled
+						li
+							a(href="/projects")
+								span.label.label-info.pull-right 10
+								span Voir tous les projets
+						li
+							a(href="/lastproject") Voir tous les biens
+						li
+							a(href="/searchrealty") Rechercher un bien
+						li
+							a(href="/partners") Nos partenaires
+				each pD in projectsNavData
+					.col-md-5th
+						ul.list-unstyled
+							li
+								span #{pD.label}
+							li
+								span
+									img.img-responsive(src=`${ pD.imagepath }`)
+							li
+								a(href="/projets") Fiche du projet
+							li
+								a(href="/projets#biens")
+									if pD.available > 0
+										span.label.label-success.pull-right #{pD.available}
+									else
+										span.label.label-red.pull-right 0
+									span Les biens du projet
+li.dropdown.mega-menu
+	a.dropdown-toggle(href='/') Media
+	ul.dropdown-menu
+		li
+			.row
+				.col-md-4
+					ul.list-unstyled
+						li
+							span Chaîne vidéo Youtube
+						li
+							span
+								img.img-responsive(src="/images/social/youtube_header.jpg")
+						li
+							a(href=`${ company.youtube }` target="_blank") Visiter la chaîne youtube
+				.col-md-2
+					ul.list-unstyled
+						li
+							span Vidéos
+						li
+							span
+								img.img-responsive(src="/images/temp_projects/alexandre.jpg")
+						li
+							a(href="/") Dernière vidéo
+						li
+							a(href="/") Toutes les vidéos
+				.col-md-2
+					ul.list-unstyled
+						li
+							span Images
+						li
+							span
+								img.img-responsive(src="/images/temp_projects/alexandre.jpg")
+						li
+							a(href="/") Dernière galerie
+						li
+							a(href="/") Toutes les galeries
+				.col-md-4
+					ul.list-unstyled
+						li
+							span Page Facebook
+						li
+							span
+								img.img-responsive(src="/images/social/facebook_header.jpg")
+						li
+							a(href=`${ company.facebook }` target="_blank") Visiter la page Facebook
+li.dropdown
+	a.dropdown-toggle(href='/') Support
+	ul.dropdown-menu.pull-right
+		li.dropdown
+			a(href="") Contact avant vente
+		li.dropdown
+			a(href="") Service après vente
+		li.dropdown
+			a(href="") Questoins fréquentes
+li.dropdown
+	a.dropdown-toggle(href='/') Investir
+li.dropdown
+	a.dropdown-toggle(href='/') Mon compte
+	ul.dropdown-menu.pull-right
+		li
+			a(href="/") Se connecter
+		li
+			a(href="/") S'enregistrer

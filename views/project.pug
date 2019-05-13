@@ -1,0 +1,46 @@
+extends layout
+
+block content
+    section
+        .container
+            .slider.fullwidthbanner-container.roundedcorners.margin-bottom-60
+                .fullwidthbanner(data-height="488" data-shadow="3" data-navigationstyle="preview2")
+                    ul.hide
+                        li(data-transition="random" data-slotamount="1" data-masterspeed="1000" data-saveperformance="off" data-title="Les demoiselles" data-thumb="/images/demo/1200x800/24-min.jpg")
+                            img(src="/images/1x1.png" data-lazyload="/images/temp_projects/demoiselles-home.jpg" alt="" data-bgposition="center center" data-kenburns="on" data-duration="10000" data-ease="Linear.easeNone" data-bgfit="100" data-bgfitend="110")
+                            .tp-caption.very_large_text.lfb.ltt.tp-resizeme(data-x="right" data-hoffset="-20" data-y="bottom" data-voffset="-20" data-speed="600" data-start="800" data-easing="Power4.easeOut" data-splitin="none" data-splitout="none" data-elementdelay="0.01" data-endelementdelay="0.1" data-endspeed="500" data-endeasing="Power4.easeIn") 16 appartements
+                    .tp-bannertimer
+            .row.margin-bottom-40
+                .col-md-5
+                    .heading-title.heading-line-single
+                        h3 Présentation&nbsp;
+                            span projet
+                    p.justify!= project.project_long_description
+                .col-md-3
+                    .heading-title.heading-line-single
+                        h3 Infos&nbsp;
+                            span projet
+                    ul.list-unstyled.list-icons
+                        li
+                            i.fa.fa-map-pin
+                            = project.project_address + ", " + project.project_pc + ", " + project.project_city
+                        if project.project_end_build_date || project.project_end_build_date_expect
+                            li
+                                i.fa.fa-calendar-check-o
+                                if project.project_end_build_date && project.project_end_build_date !== ""
+                                    != "Chantier terminé depuis le <strong>" + tools.convertDate(project.project_end_build_date) + "</strong>"
+                                else
+                                    != "Fin de chantier prévue le <strong>" + tools.convertDate(project.project_end_build_date_expect) + "</strong>"
+                        li
+                            i.fa.fa-home
+                            if project.realties.length > 0
+                                != "<strong>" + project.realties.length + "</strong> biens disponible(s)"
+                            else
+                                | Il ne reste plus de bien disponible
+                        li
+                            i.fa.fa-eur
+                            != tools.getPriceRange(project.realties, ws_settings.coreConfig.priceWithVat)
+                .col-md-4
+                    .heading-title.heading-line-single
+                        h3 Localisation&nbsp;
+                            span projet

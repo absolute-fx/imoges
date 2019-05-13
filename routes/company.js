@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 /* GET users page. */
-let users = require('../controllers/users');
-router.get('/', users.index);
+let company = require('../controllers/company');
+router.get('/', company.index);
 
 module.exports = router;
