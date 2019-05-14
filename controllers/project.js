@@ -61,6 +61,14 @@ exports.index = function(req, res, next) {
                 {realty_net_price: 148000, realty_vat: 21},
                 {realty_net_price: 132000, realty_vat: 21},
                 {realty_net_price: 152000, realty_vat: 21}
+            ],
+            project_actual_phase: 1,
+            project_phases:[
+                {title: "Fondation", id:0},
+                {title: "Gros-œuvre", id:1},
+                {title: "Toiture", id:2},
+                {title: "Finitions", id:3},
+                {title: "Terminé", id:4}
             ]
         }
     });
