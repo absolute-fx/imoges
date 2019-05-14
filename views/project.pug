@@ -2,6 +2,7 @@ extends layout
 
 block content
     - allDocs = tools.getDocuments(project.project_libraries)
+    - latLong = {lat: project.project_lat, lng: project.project_long}
     section
         .container
             .slider.fullwidthbanner-container.roundedcorners.margin-bottom-60
@@ -16,12 +17,13 @@ block content
                     .heading-title.heading-line-single
                         h3 Présentation&nbsp;
                             span projet
-                    p.justify!= project.project_long_description
+                    #presentation
+                        p.justify!= project.project_long_description
                 .col-md-3
                     .heading-title.heading-line-single
                         h3 Infos&nbsp;
                             span projet
-                    ul.list-unstyled.list-icons
+                    ul.list-unstyled.list-icons#infos
                         li
                             i.fa.fa-map-pin
                             = project.project_address + ", " + project.project_pc + ", " + project.project_city
@@ -44,12 +46,14 @@ block content
                         li
                             i.fa.fa-leaf
                             | PEB #{ project.project_peb }
-                        each aD in allDocs
-                            li
-                                i.fa.fa-file-pdf-o
-                                a(href=`${ aD.library_media_url }`) #{ aD.library_media_name}
+                        if allDocs.length > 0
+                            hr
+                            each aD in allDocs
+                                li
+                                    i.fa.fa-file-pdf-o
+                                    a(href=`${ aD.library_media_url }`) #{ aD.library_media_name}
                 .col-md-4
                     .heading-title.heading-line-single
                         h3 Localisation&nbsp;
                             span projet
-                    #map2(class="height-200 grayscale")
+                    #map(class="height-200 grayscale" data-lat=`${project.project_lat}` data-lng=`${project.project_long}` data-page="project")

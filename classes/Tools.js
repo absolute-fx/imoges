@@ -34,7 +34,7 @@ class Tools{
                 lowerPrice = price;
             }
         }
-        response = priceWithVat ? "Entre <strong>" + this.numberWithCommas(lowerPrice) + "€</strong> tvac et <strong>" + this.numberWithCommas(higherPrice) + "€</strong> tvac": "Entre <strong>" + this.numberWithCommas(lowerPrice) + "€</strong> htva et <strong>" + this.numberWithCommas(higherPrice) + "€</strong> htva";
+        response = priceWithVat ? "Entre <strong>" + this.numberWithCommas(lowerPrice) + "€</strong> et <strong>" + this.numberWithCommas(higherPrice) + "€</strong> tvac": "Entre <strong>" + this.numberWithCommas(lowerPrice) + "€</strong> et <strong>" + this.numberWithCommas(higherPrice) + "€</strong> htva";
         return response
     }
 

@@ -14,7 +14,9 @@ exports.index = function(req, res, next) {
             js_paths:[
                 "/javascripts/plugins/slider.revolution/js/jquery.themepunch.tools.min.js",
                 "/javascripts/plugins/slider.revolution/js/jquery.themepunch.revolution.min.js",
-                "/javascripts/home_slider.js"
+                "/javascripts/home_slider.js",
+                "https://maps.googleapis.com/maps/api/js?key=" + req.app.locals.ws_settings.coreConfig.gmapKey,
+                "/javascripts/gmap.js"
             ],
         project:{
             id: 40,
@@ -30,15 +32,15 @@ exports.index = function(req, res, next) {
             project_end_build_date_expect: "2020-12-15 00:00:00",
             project_ref: "Alex2",
             project_peb: "A",
-            project_long_description: "La <strong>résidence  INES II </strong> et située à un jet de la collégiale et de son centre historique, une situation hors du commun, proche des commerces, d’écoles, des transports en commun ainsi que des axes routiers. Les alentours permettent d’agréables promenades." +
+            project_long_description: "La <strong>résidence  INES II </strong> est située à un jet de la collégiale et de son centre historique, une situation hors du commun, proche des commerces, d’écoles, des transports en commun ainsi que des axes routiers. Les alentours permettent d’agréables promenades." +
             "<br>" +
             "Le projet a été étudié dans un souci global de développement durable et d'économie d'énergie: chaudière au gaz haut rendement , isolation importante des parois de déperdition et chauffage par le sol ainsi que l’utilisation d’un système double flux. (catégorie basse énergie PEB A)." +
             "<br>" +
             "Nous apportons une attention toute particulière à l’isolation acoustique de chacune de nos réalisations." +
             "<br>" +
             "L’aménagement intérieur de nos appartements est réalisé en fonction des demandes formulées par nos clients , nous possédons l’avantage d’une gestion personnalisée pour chacun de nos acquéreurs.",
-            project_lat: "50.81423320000000",
-            project_long: "4.30373330000000",
+            project_lat: "50.56681600897844",
+            project_long: "4.16819238974914",
             project_libraries: [
                 {Library_category_label: "3D", libraries:[
                     {library_media_name: "shot-01-web.jpg", library_media_url: "upload/Projets/32/81/medias", library_media_type: "jpg"},
