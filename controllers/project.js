@@ -50,9 +50,9 @@ exports.index = function(req, res, next) {
                     {library_media_name: "shot-09-web.jpg", library_media_url: "upload/Projets/32/81/medias", library_media_type: "jpg"}
                 ]},
                 {Library_category_label: "Documents", libraries:[
-                    {library_media_name: "cahier des charges 1 chambre.doc", library_media_url: "upload/Projets/32/81/documents", library_media_type: "docx"},
-                    {library_media_name: "cahier des charges 2 chambres.doc", library_media_url: "upload/Projets/32/81/documents", library_media_type: "docx"},
-                    {library_media_name: "2.2 21.u imoges steenk - plan 2ème étage.pdf", library_media_url: "upload/Projets/32/81/documents", library_media_type: "pdf"}
+                    {library_media_name: "cahier des charges 1 chambre.pdf", library_media_url: "upload/Projets/32/81/documents", library_media_type: "pdf"},
+                    {library_media_name: "cahier des charges 2 chambres.pdf", library_media_url: "upload/Projets/32/81/documents", library_media_type: "pdf"},
+                    {library_media_name: "cahier des charges 1 chambre.doc", library_media_url: "upload/Projets/32/81/documents", library_media_type: "docx"}
                 ]}
             ],
             realties: [

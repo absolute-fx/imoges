@@ -37,5 +37,17 @@ class Tools{
         response = priceWithVat ? "Entre <strong>" + this.numberWithCommas(lowerPrice) + "€</strong> tvac et <strong>" + this.numberWithCommas(higherPrice) + "€</strong> tvac": "Entre <strong>" + this.numberWithCommas(lowerPrice) + "€</strong> htva et <strong>" + this.numberWithCommas(higherPrice) + "€</strong> htva";
         return response
     }
+
+    static getDocuments(arr){
+        let docs = [];
+        for(let d of arr){
+            for(let doc of d.libraries){
+                if(doc.library_media_type === "pdf"){
+                    docs.push({library_media_name: doc.library_media_name, library_media_url: doc.library_media_url});
+                }
+            }
+        }
+        return docs;
+    }
 }
 module.exports = Tools;
