@@ -32,7 +32,7 @@ exports.index = function(req, res, next) {
             project_end_build_date_expect: "2020-12-15 00:00:00",
             project_ref: "Alex2",
             project_peb: "A",
-            project_long_description: "La <strong>résidence  INES II </strong> est située à un jet de la collégiale et de son centre historique, une situation hors du commun, proche des commerces, d’écoles, des transports en commun ainsi que des axes routiers. Les alentours permettent d’agréables promenades." +
+            project_long_description: "La <strong>résidence  INES II </strong> est située à un jet de pierre de la collégiale et de son centre historique, une situation hors du commun, proche des commerces, d’écoles, des transports en commun ainsi que des axes routiers. Les alentours permettent d’agréables promenades." +
             "<br>" +
             "Le projet a été étudié dans un souci global de développement durable et d'économie d'énergie: chaudière au gaz haut rendement , isolation importante des parois de déperdition et chauffage par le sol ainsi que l’utilisation d’un système double flux. (catégorie basse énergie PEB A)." +
             "<br>" +
@@ -55,6 +55,10 @@ exports.index = function(req, res, next) {
                     {library_media_name: "cahier des charges 1 chambre.pdf", library_media_url: "upload/Projets/32/81/documents", library_media_type: "pdf"},
                     {library_media_name: "cahier des charges 2 chambres.pdf", library_media_url: "upload/Projets/32/81/documents", library_media_type: "pdf"},
                     {library_media_name: "cahier des charges 1 chambre.doc", library_media_url: "upload/Projets/32/81/documents", library_media_type: "docx"}
+                ]},
+                {Library_category_label: "3D animée", libraries:[
+                    {library_media_name: "Résidence Ines", library_media_url: "http://www.youtube.com/embed/oA9KGVUVYPw", library_media_type: "youtube"},
+                    {library_media_name: "Résidence Ines", library_media_url: "https://sketchfab.com/models/c1ec451e187048008312ef72fccdfc5a/embed", library_media_type: "sketchfab"},
                 ]}
             ],
             realties: [

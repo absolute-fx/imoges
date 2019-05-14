@@ -49,5 +49,17 @@ class Tools{
         }
         return docs;
     }
+
+    static getVideos(arr){
+        let videos = [];
+        for(let v of arr){
+            for(let vid of v.libraries){
+                if(vid.library_media_type === "youtube"){
+                    videos.push({library_media_name: vid.library_media_name, library_media_url: vid.library_media_url});
+                }
+            }
+        }
+        return videos;
+    }
 }
 module.exports = Tools;
