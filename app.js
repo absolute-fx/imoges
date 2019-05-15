@@ -33,6 +33,7 @@ app.locals.ws_settings.navData.projects = [
     {id: 3, label:"Ines", imagepath:"/images/temp_projects/ines.jpg", available:3},
     {id: 4, label:"O. Strebelle", imagepath:"/images/temp_projects/strebelle.jpg", available:0}
 ];
+
 const actualDate = new Date();
 const actualYear = actualDate.getFullYear();
 app.locals.ws_settings.coreConfig.actualYear = actualYear;

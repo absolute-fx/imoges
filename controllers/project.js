@@ -58,7 +58,7 @@ exports.index = function(req, res, next) {
                 ]},
                 {Library_category_label: "3D animée", libraries:[
                     {library_media_name: "Résidence Ines", library_media_url: "http://www.youtube.com/embed/oA9KGVUVYPw", library_media_type: "youtube"},
-                    {library_media_name: "Résidence Ines", library_media_url: "https://sketchfab.com/models/c1ec451e187048008312ef72fccdfc5a/embed", library_media_type: "sketchfab"},
+                    {library_media_name: "Résidence Ines", library_media_url: "https://sketchfab.com/models/c1ec451e187048008312ef72fccdfc5a/embed", library_media_type: "sketchfab"}
                 ]}
             ],
             realties: [

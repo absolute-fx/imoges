@@ -38,28 +38,16 @@ class Tools{
         return response
     }
 
-    static getDocuments(arr){
-        let docs = [];
-        for(let d of arr){
-            for(let doc of d.libraries){
-                if(doc.library_media_type === "pdf"){
-                    docs.push({library_media_name: doc.library_media_name, library_media_url: doc.library_media_url});
+    static getMedium(arr, type){
+        let medium = [];
+        for(let m of arr){
+            for(let media of m.libraries){
+                if(media.library_media_type === type){
+                    medium.push({library_media_name: media.library_media_name, library_media_url: media.library_media_url});
                 }
             }
         }
-        return docs;
-    }
-
-    static getVideos(arr){
-        let videos = [];
-        for(let v of arr){
-            for(let vid of v.libraries){
-                if(vid.library_media_type === "youtube"){
-                    videos.push({library_media_name: vid.library_media_name, library_media_url: vid.library_media_url});
-                }
-            }
-        }
-        return videos;
+        return medium;
     }
 }
 module.exports = Tools;
