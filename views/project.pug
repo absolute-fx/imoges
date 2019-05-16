@@ -44,9 +44,10 @@ block content
                                 strong.text-danger Dernier bien disponible!
                             else
                                 | Les #{ project.realties.length } biens sont vendus
-                        li
-                            i.fa.fa-eur
-                            != tools.getPriceRange(project.realties, ws_settings.coreConfig.priceWithVat)
+                        if(availableRealtiesNbr !== 0)
+                            li
+                                i.fa.fa-eur
+                                != tools.getPriceRange(project.realties, ws_settings.coreConfig.priceWithVat)
                         li
                             i.fa.fa-leaf
                             | PEB #{ project.project_peb }

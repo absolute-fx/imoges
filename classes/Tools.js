@@ -31,7 +31,8 @@ class Tools{
     // get lower and higher price
     static getPriceRange(arr, priceWithVat)
     {
-        let lowerPrice, response;
+        let lowerPrice;
+        let response = "";
         let higherPrice = 0;
         const lastOne = this.getAvailableRealtiesNbr(arr) === 1;
         for(let realty of arr){
@@ -54,7 +55,7 @@ class Tools{
             response = priceWithVat ? "Entre <strong>" + this.numberWithCommas(lowerPrice) + "€</strong> et <strong>" + this.numberWithCommas(higherPrice) + "€</strong> tvac": "Entre <strong>" + this.numberWithCommas(lowerPrice) + "€</strong> et <strong>" + this.numberWithCommas(higherPrice) + "€</strong> htva";
         } else if(!lastOne && lowerPrice === higherPrice){
             response = priceWithVat ? "<strong>" + this.numberWithCommas(higherPrice) + "€ </strong> tvac": "<strong>" + this.numberWithCommas(higherPrice) + "€ </strong> htva";
-        } else {
+        } else if(lastOne){
             response = priceWithVat ? "<strong>" + this.numberWithCommas(higherPrice) + "€ </strong> tvac": "<strong>" + this.numberWithCommas(higherPrice) + "€ </strong> htva";
         }
         return response
