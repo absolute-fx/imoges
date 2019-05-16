@@ -1,19 +1,30 @@
-row.mix-grid
-    each cH in catalog_headlines
-        .col-md-3.col-sm-3.col-xs-6.mix.vacant.floor-0.garden.height-400
+.row.mix-grid
+    if project
+        - realties = project.realties
+    each r in realties
+        - cssClasses = tools.getSortClass(r)
+        .col-md-3.col-sm-3.col-xs-6.mix.height-400(class= cssClasses)
             .box-inner
-                h3.text-left.bold.size-16.elipsis
-                    a(href="") R1
-                a(href="")
+                if r.clients.length < 1
+                    h3.text-left.bold.size-16.elipsis
+                        a(href=`/realty?id=${r.id}`)= r.realty_title
+                    a(href=`/realty?id=${r.id}`)
+                        img(alt="image" src="/images/temp_projects/plan-int-appart-02.jpg" class="img-responsive margin-bottom-10")
+                else
+                    h3.text-left.bold.size-16.elipsis
+                        span(class="label label-danger pull-right") Vendu
+                        = r.realty_title
                     img(alt="image" src="/images/temp_projects/plan-int-appart-02.jpg" class="img-responsive margin-bottom-10")
-                p.text-left Agréable appartement de 2 chambres au rez de chaussée
+                p.text-left= r.realty_short_description
                 p.text-left.margin-bottom-0.bold
-                    span.label.label-info.pull-right 80m²
-                    | 160.000€
-                a(href="")
-                    | Voir
-                    span(data-delay="2000" class="word-rotator active" style="height: 21px;")
-                        span(class="items" style="top: -21px;")
-                            span &nbsp;maintenant
-                            span &nbsp;plus
-                    i.glyphicon.glyphicon-menu-right.size-12
+                    if r.clients.length < 1
+                        span.label.label-info.pull-right= r.realty_surface + " m²"
+                        = tools.getRelatyPrice(r.realty_net_price, r.realty_vat, ws_settings.coreConfig.priceWithVat) + " €"
+                if r.clients.length < 1
+                    a(href=`/realty?id=${r.id}`)
+                        | Voir
+                        span(data-delay="2000" class="word-rotator active" style="height: 21px;")
+                            span(class="items" style="top: -21px;")
+                                span &nbsp;maintenant
+                                span &nbsp;plus
+                        i.glyphicon.glyphicon-menu-right.size-12

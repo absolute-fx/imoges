@@ -62,9 +62,10 @@ exports.index = function(req, res, next) {
                 ]}
             ],
             realties: [
-                {realty_net_price: 148000, realty_vat: 21},
-                {realty_net_price: 132000, realty_vat: 21},
-                {realty_net_price: 152000, realty_vat: 21}
+                {id: 0, realty_title: "R0", realty_net_price: 132000, realty_vat: 21,realty_floor: 0, realty_short_description: "Agréable appartement de 2 chambres au rez de chaussée", realty_surface: 78, realty_terrace_surface: 16, realty_garden_surface: 55, clients:[]},
+                {id: 2, realty_title: "R1", realty_net_price: 148000, realty_vat: 21,realty_floor: 0, realty_short_description: "Agréable appartement de 2 chambres au rez de chaussée", realty_surface: 82, realty_terrace_surface: 0, realty_garden_surface: 50, clients:[{}]},
+                {id: 3, realty_title: "1.0", realty_net_price: 160000, realty_vat: 21,realty_floor: 1, realty_short_description: "Agréable appartement de 3 chambres au rez de chaussée", realty_surface: 120, realty_terrace_surface: 16, realty_garden_surface: 0, clients:[]},
+                {id: 4, realty_title: "1.1", realty_net_price: 128000, realty_vat: 21,realty_floor: 1, realty_short_description: "Agréable appartement de 3 chambres au 1er étage", realty_surface: 94, realty_terrace_surface: 0, realty_garden_surface: 0, clients:[]}
             ],
             project_actual_phase: 1,
             project_phases:[

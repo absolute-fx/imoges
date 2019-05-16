@@ -20,11 +20,11 @@ exports.index = function(req, res, next) {
             { log_table_id: 64, label: 'Les demoiselles', log_table_name: 'Projects', createdAt: '05/04/2018'},
             { log_table_id: 27, log_table_id_parent: 10, label: 'Rez 04', label_parent: 'Ines', log_table_name: 'Clients', createdAt: '02/04/2018'}
         ],
-        catalog_headlines:[
-            {},
-            {},
-            {},
-            {}
+        realties: [
+            {id: 0, realty_title: "R0", realty_net_price: 132000, realty_vat: 21,realty_floor: 0, realty_short_description: "Agréable appartement de 2 chambres au rez de chaussée", realty_surface: 80, realty_terrace_surface: 16, realty_garden_surface: 0, clients:[]},
+            {id: 2, realty_title: "R1", realty_net_price: 148000, realty_vat: 21,realty_floor: 0, realty_short_description: "Agréable appartement de 2 chambres au rez de chaussée", realty_surface: 80, realty_terrace_surface: 0, realty_garden_surface: 50, clients:[{}]},
+            {id: 3, realty_title: "R2", realty_net_price: 160000, realty_vat: 21,realty_floor: 0, realty_short_description: "Agréable appartement de 3 chambres au rez de chaussée", realty_surface: 120, realty_terrace_surface: 16, realty_garden_surface: 110, clients:[]},
+            {id: 4, realty_title: "1.0", realty_net_price: 128000, realty_vat: 21,realty_floor: 1, realty_short_description: "Agréable appartement de 3 chambres au 1er étage", realty_surface: 94, realty_terrace_surface: 0, realty_garden_surface: 110, clients:[]}
         ]
     });
 };

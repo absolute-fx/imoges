@@ -90,7 +90,7 @@ block content
                                 span volumétrique
                         each r in rt3d
                             div(class="embed-responsive embed-responsive-16by9 margin-bottom-20")
-                                iframe(width="100%" height="315" src=`${ r.library_media_url }` frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" onmousewheel="")
+                                iframe(width="100%" height="315" src=`${ r.library_media_url }` frameborder="0" allow="autoplay; fullscreen; vr" mozallowfullscreen="true" webkitallowfullscreen="true")
     else if videos.length > 0 && rt3d.length === 0
         section
             .container
@@ -108,4 +108,17 @@ block content
                         span volumétrique
                 each r in rt3d
                     div(class="embed-responsive embed-responsive-16by9 margin-bottom-20")
-                        iframe(width="100%" height="315" src=`${ r.library_media_url }` frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" onmousewheel="")
+                        iframe(width="100%" height="315" src=`${ r.library_media_url }` frameborder="0" allow="autoplay; fullscreen; vr" mozallowfullscreen="true" webkitallowfullscreen="true")
+    - sortList = tools.getRealtySortDetails(project.realties)
+    section#biens
+        .box-light
+            .container
+                ul(class="nav nav-pills mix-filter margin-bottom-20")
+                    li(data-filter="all" class="filter active")
+                        a(href="#") Tous
+                    li(data-filter="vacant" class="filter")
+                        a(href="#") Non vendus
+                    each sL in sortList
+                        li(data-filter=`${ sL.cl }` class="filter")
+                            a(href="#")= sL.label
+                include realtiescatalog
