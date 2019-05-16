@@ -33,21 +33,30 @@ class Tools{
     {
         let lowerPrice, response;
         let higherPrice = 0;
+        const lastOne = this.getAvailableRealtiesNbr(arr) === 1;
         for(let realty of arr){
-            let price = realty.realty_net_price;
-            if(priceWithVat) {
-                price += price * (realty.realty_vat / 100);
-            }
-            if(price > higherPrice){
-                higherPrice = price;
-            }
-            if(lowerPrice && price < lowerPrice){
-                lowerPrice = price;
-            } else if(!lowerPrice){
-                lowerPrice = price;
+            if(realty.clients.length === 0) {
+                let price = realty.realty_net_price;
+                if (priceWithVat) {
+                    price += price * (realty.realty_vat / 100);
+                }
+                if (price > higherPrice) {
+                    higherPrice = price;
+                }
+                if (lowerPrice && price < lowerPrice) {
+                    lowerPrice = price;
+                } else if (!lowerPrice) {
+                    lowerPrice = price;
+                }
             }
         }
-        response = priceWithVat ? "Entre <strong>" + this.numberWithCommas(lowerPrice) + "€</strong> et <strong>" + this.numberWithCommas(higherPrice) + "€</strong> tvac": "Entre <strong>" + this.numberWithCommas(lowerPrice) + "€</strong> et <strong>" + this.numberWithCommas(higherPrice) + "€</strong> htva";
+        if(!lastOne && lowerPrice !== higherPrice){
+            response = priceWithVat ? "Entre <strong>" + this.numberWithCommas(lowerPrice) + "€</strong> et <strong>" + this.numberWithCommas(higherPrice) + "€</strong> tvac": "Entre <strong>" + this.numberWithCommas(lowerPrice) + "€</strong> et <strong>" + this.numberWithCommas(higherPrice) + "€</strong> htva";
+        } else if(!lastOne && lowerPrice === higherPrice){
+            response = priceWithVat ? "<strong>" + this.numberWithCommas(higherPrice) + "€ </strong> tvac": "<strong>" + this.numberWithCommas(higherPrice) + "€ </strong> htva";
+        } else {
+            response = priceWithVat ? "<strong>" + this.numberWithCommas(higherPrice) + "€ </strong> tvac": "<strong>" + this.numberWithCommas(higherPrice) + "€ </strong> htva";
+        }
         return response
     }
 
@@ -84,6 +93,14 @@ class Tools{
         if(realty.realty_floor >= 0 )classes.push("floor-" + realty.realty_floor);
         if(realty.realty_garden_surface > 0) classes.push("garden");
         return classes;
+    }
+
+    static getAvailableRealtiesNbr(realties){
+        let counter = 0;
+        for(let r of realties){
+            if(r.clients.length === 0) counter++;
+        }
+        return counter;
     }
 }
 module.exports = Tools;

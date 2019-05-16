@@ -37,10 +37,13 @@ block content
                                     != "Fin de chantier prévue le <strong>" + tools.convertDate(project.project_end_build_date_expect) + "</strong>"
                         li
                             i.fa.fa-home
-                            if project.realties.length > 0
-                                != "<strong>" + project.realties.length + "</strong> biens disponible(s)"
+                            - availableRealtiesNbr = tools.getAvailableRealtiesNbr(project.realties);
+                            if availableRealtiesNbr > 1
+                                != "<strong>" + availableRealtiesNbr + "</strong> biens sur <strong>" + project.realties.length + "</strong> sont disponibles"
+                            else if availableRealtiesNbr === 1
+                                strong.text-danger Dernier bien disponible!
                             else
-                                | Il ne reste plus de bien disponible
+                                | Les #{ project.realties.length } biens sont vendus
                         li
                             i.fa.fa-eur
                             != tools.getPriceRange(project.realties, ws_settings.coreConfig.priceWithVat)
@@ -117,7 +120,7 @@ block content
                     li(data-filter="all" class="filter active")
                         a(href="#") Tous
                     li(data-filter="vacant" class="filter")
-                        a(href="#") Non vendus
+                        a(href="#") Disponibles
                     each sL in sortList
                         li(data-filter=`${ sL.cl }` class="filter")
                             a(href="#")= sL.label
