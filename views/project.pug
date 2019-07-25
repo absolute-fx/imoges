@@ -126,3 +126,15 @@ block content
                         li(data-filter=`${ sL.cl }` class="filter")
                             a(href="#")= sL.label
                 include realtiescatalog
+    section.dark-bkg
+        .container
+            .col-md-3.bg-white.side-nav
+                ul(class="llist-group list-unstyled margin-top-20")
+                    li.list-group-item(class="active")
+                        a(href="#") label
+                    li.list-group-item
+                        a(href="#") label
+                    li.list-group-item
+                        a(href="#") label
+            .col-md-9
+                include gallery

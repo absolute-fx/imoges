@@ -90,7 +90,7 @@ class Tools{
 
     static getSortClass(realty){
         let classes = [];
-        if(realty.clients.length < 1) classes.push("vacant");
+        if(realty.realty_status < 1) classes.push("vacant");
         if(realty.realty_floor >= 0 )classes.push("floor-" + realty.realty_floor);
         if(realty.realty_garden_surface > 0) classes.push("garden");
         return classes;

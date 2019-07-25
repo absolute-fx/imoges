@@ -18,6 +18,7 @@ const pressRouter = require('./routes/press');
 const termsRouter = require('./routes/terms');
 const projectsRouter = require('./routes/projects');
 const projectRouter = require('./routes/project');
+const contactRouter = require('./routes/contact');
 
 
 const app = express();
@@ -60,6 +61,7 @@ app.use('/press', pressRouter);
 app.use('/terms', termsRouter);
 app.use('/projects', projectsRouter);
 app.use('/project', projectRouter);
+app.use('/contact', contactRouter);
 
 
 // catch 404 and forward to error handler
