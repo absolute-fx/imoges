@@ -1,7 +1,7 @@
 const http = require("http");
 const Promise = require("bluebird");
 const fs = require('fs');
-const config = JSON.parse(fs.readFileSync("./config/config.js"));
+let config = require('../config/config');
 const apiLink = config.ws_settings.coreConfig.api;
 
 class RealtiesRepository
