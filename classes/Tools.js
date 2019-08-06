@@ -8,9 +8,17 @@ class Tools{
         return date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear();
     }
 
+    // history Date
+    static  historyDate(d){
+        const date = new Date(d);
+        const months = ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre"];
+        return months[date.getMonth()] + " " + date.getFullYear();
+    }
+
     // add dot on number
     static numberWithCommas(x) {
-        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        x = parseInt(x);
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     }
 
     // get medium type = pdf, youtube, sketchfab
@@ -18,12 +26,97 @@ class Tools{
         let medium = [];
         for(let m of arr){
             for(let media of m.libraries){
-                if(media.library_media_type === type){
+                if(media.library_media_extension === type){
                     medium.push({library_media_name: media.library_media_name, library_media_url: media.library_media_url});
                 }
             }
         }
         return medium;
+    }
+
+    static getGenericImages(librarycategories){
+        let genericImages = [];
+        for(let lC of librarycategories){
+            if(lC.library_category_label === "generic"){
+                for(let l of lC.libraries){
+                    if(l.library_media_extension === "jpg"){
+                        genericImages.push(l);
+                    }
+                }
+            }
+        }
+        if(genericImages.length === 0){
+            genericImages = [{library_media_name: "no-media.jpg", library_media_extension: "jpg"}];
+        }
+        return genericImages;
+    }
+
+    static getProjectSlideShow(librarycategories){
+        let slideshow = [];
+        for(let sL of librarycategories){
+            if(sL.library_category_label === "slideshow"){
+                for(let l of sL.libraries){
+                    if(l.library_media_extension === "jpg"){
+                        slideshow.push(l);
+                    }
+                }
+            }
+        }
+        return slideshow;
+    }
+
+    static getImagesFromCat(librarycategories){
+        let categories = [];
+        for(let lC of librarycategories){
+            let images = [];
+            if(lC.library_category_label !== "default" && lC.library_category_label !== "generic" && lC.library_category_label !== "slideshow" && lC.library_category_label !== "youtube" && lC.libraries.length > 0){
+                categories.push(lC);
+                for(let l of lC.libraries){
+                    if(l.library_media_extension === "jpg"){
+                        images.push(l);
+                    }
+                }
+                lC.images = images;
+            }
+        }
+        return categories;
+    }
+
+    static getRealtyImages(librarycategories){
+        let images = [];
+        for(let lC of librarycategories){
+            for(let l of lC.libraries) {
+                if (l.library_media_extension === "jpg" && l.library_media_param !== "localisation") {
+                    images.push(l);
+                }
+            }
+        }
+        //console.log("IMAGES " + images.length)
+        return images;
+    }
+
+    static getRealtySlideMedia(librarycategories){
+        let images = [];
+        for(let lC of librarycategories){
+            for(let l of lC.libraries) {
+                if (l.library_media_extension === "jpg" && l.library_media_param === "slideshow") {
+                    images.push(l);
+                }
+            }
+        }
+        return images;
+    }
+
+    static getYoutubeVid(librarycategories){
+        let videos = [];
+        for(let lC of librarycategories){
+            if(lC.library_category_label === "youtube"){
+                for(let l of lC.libraries){
+                    videos.push(l);
+                }
+            }
+        }
+        return videos
     }
 
     // ** PROJECT ** //
@@ -36,7 +129,7 @@ class Tools{
         let higherPrice = 0;
         const lastOne = this.getAvailableRealtiesNbr(arr) === 1;
         for(let realty of arr){
-            if(realty.clients.length === 0) {
+            if(realty.realty_status === 0) {
                 let price = realty.realty_net_price;
                 if (priceWithVat) {
                     price += price * (realty.realty_vat / 100);
@@ -61,6 +154,22 @@ class Tools{
         return response
     }
 
+    static setPeb(peb){
+        let pebType;
+        switch(peb){
+            case 1:
+               pebType = "A++";
+               break;
+            case 2:
+                pebType = "A+";
+                break;
+            case 3:
+                pebType = "A";
+                break;
+        }
+        return pebType;
+    }
+
     // ** BIENS ** //
     static getRelatyPrice(price, vat,  priceWithVat){
         return priceWithVat ? this.numberWithCommas(price + (price * (vat / 100))) : this.numberWithCommas(price);
@@ -70,7 +179,7 @@ class Tools{
         let floorList = [];
         let gardenList = [];
         for(let r of arr){
-            if(r.realty_floor >= 0){
+            if(r.realty_floor !== null){
                 if(!searchIfExist(r.realty_floor, floorList)){
                     let cl = "floor-" + r.realty_floor;
                     let label = "Etage " + r.realty_floor;
@@ -99,7 +208,7 @@ class Tools{
     static getAvailableRealtiesNbr(realties){
         let counter = 0;
         for(let r of realties){
-            if(r.clients.length === 0) counter++;
+            if(r.realty_status === 0) counter++;
         }
         return counter;
     }

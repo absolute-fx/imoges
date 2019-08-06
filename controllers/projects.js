@@ -1,15 +1,29 @@
+const Projects = require('../repositories/Projects');
+
 exports.index = function(req, res, next) {
-    res.render('projects', {
-        title: 'Les projets Imoges',
-        topNavActive: 'projects',
-        breadcrumb: [
-            {label: 'Accueil', link: '/'},
-            {label: 'Projets'}
-        ],
-        projects: [
-            {project_title: "Alexander II", project_active_online: 1, project_city: "Ecaussinnes", project_address: "Rue Perniaux", id: 40, project_media: ["/images/temp_projects/project-main-image-web.jpg", "/images/temp_projects/shot-01-v3-web.jpg", "/images/temp_projects/shot-02-v3-web.jpg"]},
-            {project_title: "Les demoiselles", project_active_online: 1, project_city: "Braine Le Comte", project_address: "Rue de l'entente", id: 10, project_media:["/images/temp_projects/demoiselles.jpg"]},
-            {project_title: "Ines", project_active_online: 1, project_city: "Soignies ", project_address: "Rue du Rempart du Vieux Cimetière", id: 20, project_media:["/images/temp_projects/ines.jpg"]}
-        ]
+    const active = 1;
+    const orderField = "id";
+    const orderDirection = "desc";
+    const diffused = 1;
+    const media = 1;
+    Projects.getAll({active, orderField, orderDirection, diffused, media}).then(projects =>{
+        console.log(projects);
+        //projects.genericImages = tools.getGenericImages("2019-07-29 00:00:00");
+
+        // TEMP
+        for(let i in projects){
+            projects[i].project_media = ["/images/temp_projects/demoiselles.jpg"];
+        }
+        // TEMP
+
+        res.render('projects', {
+            title: 'Les projets Imoges',
+            topNavActive: 'projects',
+            breadcrumb: [
+                {label: 'Accueil', link: '/'},
+                {label: 'Projets'}
+            ],
+            projects: projects
+        });
     });
 };

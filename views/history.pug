@@ -21,7 +21,7 @@ block content
                 each h in history
                     li
                         h3.timeline-header
-                            span #{h.date}
+                            span #{tools.historyDate(h.project_start_build_date)}
                             | #{h.project_title}
-                        .timeline-desc.timeline-desc-line #{h.label}
-                        a(href=`/projects?id=${ h.project_id }` class="btn btn-xs btn-default margin-top-20") Voir le projet
+                        .timeline-desc.timeline-desc-line #{h.project_city}
+                        a(href=`/project?id=${ h.id }` class="btn btn-xs btn-default margin-top-20") Voir le projet

@@ -1,140 +1,155 @@
 extends layout
 
 block content
-    - allDocs = tools.getMedium(project.project_libraries, "pdf")
-    - videos = tools.getMedium(project.project_libraries, "youtube")
-    - rt3d = tools.getMedium(project.project_libraries, "sketchfab")
-    section
-        .container
-            .slider.fullwidthbanner-container.roundedcorners.margin-bottom-60
-                .fullwidthbanner(data-height="488" data-shadow="3" data-navigationstyle="preview2")
-                    ul.hide
-                        li(data-transition="random" data-slotamount="1" data-masterspeed="1000" data-saveperformance="off" data-title="Les demoiselles" data-thumb="/images/demo/1200x800/24-min.jpg")
-                            img(src="/images/1x1.png" data-lazyload="/images/temp_projects/demoiselles-home.jpg" alt="" data-bgposition="center center" data-kenburns="on" data-duration="10000" data-ease="Linear.easeNone" data-bgfit="100" data-bgfitend="110")
-                            .tp-caption.very_large_text.lfb.ltt.tp-resizeme(data-x="right" data-hoffset="-20" data-y="bottom" data-voffset="-20" data-speed="600" data-start="800" data-easing="Power4.easeOut" data-splitin="none" data-splitout="none" data-elementdelay="0.01" data-endelementdelay="0.1" data-endspeed="500" data-endeasing="Power4.easeIn") 16 appartements
-                    .tp-bannertimer
-            .row.margin-bottom-40
-                .col-md-5
-                    .heading-title.heading-line-single
-                        h3 Présentation&nbsp;
-                            span projet
-                    #presentation
-                        p.justify!= project.project_long_description
-                .col-md-3
-                    .heading-title.heading-line-single
-                        h3 Infos&nbsp;
-                            span projet
-                    ul.list-unstyled.list-icons#infos
-                        li
-                            i.fa.fa-map-pin
-                            = project.project_address + ", " + project.project_pc + ", " + project.project_city
-                        if project.project_end_build_date || project.project_end_build_date_expect
+    if project
+        - allDocs = tools.getMedium(project.librarycategories, "pdf")
+        - videos = tools.getYoutubeVid(project.librarycategories, "youtube")
+        - rt3d = 0; //tools.getMedium(project.project_libraries, "sketchfab")
+        section
+            .container
+                - slideshow = tools.getProjectSlideShow(project.librarycategories)
+                if slideshow.length > 0
+                    .slider.fullwidthbanner-container.roundedcorners.margin-bottom-60
+                        .fullwidthbanner(data-height="488" data-shadow="3" data-navigationstyle="preview2")
+                            ul.hide
+                                each sL in slideshow
+                                    li(data-transition="random" data-slotamount="1" data-masterspeed="1000" data-saveperformance="off" data-title=`${ project.project_title }` data-thumb="/images/demo/1200x800/24-min.jpg")
+                                        img(src="/images/1x1.png" data-lazyload=`libraries/${ project.id }/library/${ sL.library_media_name }` alt="" data-bgposition="center center" data-kenburns="on" data-duration="10000" data-ease="Linear.easeNone" data-bgfit="100" data-bgfitend="110")
+                                        .tp-caption.very_large_text.lfb.ltt.tp-resizeme(data-x="right" data-hoffset="-20" data-y="bottom" data-voffset="-20" data-speed="600" data-start="800" data-easing="Power4.easeOut" data-splitin="none" data-splitout="none" data-elementdelay="0.01" data-endelementdelay="0.1" data-endspeed="500" data-endeasing="Power4.easeIn")
+                                            != project.project_title
+                            .tp-bannertimer
+                .row.margin-bottom-40
+                    .col-md-5
+                        .heading-title.heading-line-single
+                            h3 Présentation&nbsp;
+                                span projet
+                        #presentation
+                            p.justify!= project.project_long_description
+                    .col-md-3
+                        .heading-title.heading-line-single
+                            h3 Infos&nbsp;
+                                span projet
+                        ul.list-unstyled.list-icons#infos
                             li
-                                i.fa.fa-calendar-check-o
-                                if project.project_end_build_date && project.project_end_build_date !== ""
-                                    != "Chantier terminé depuis le <strong>" + tools.convertDate(project.project_end_build_date) + "</strong>"
-                                else
-                                    != "Fin de chantier prévue le <strong>" + tools.convertDate(project.project_end_build_date_expect) + "</strong>"
-                        li
-                            i.fa.fa-home
-                            - availableRealtiesNbr = tools.getAvailableRealtiesNbr(project.realties);
-                            if availableRealtiesNbr > 1
-                                != "<strong>" + availableRealtiesNbr + "</strong> biens sur <strong>" + project.realties.length + "</strong> sont disponibles"
-                            else if availableRealtiesNbr === 1
-                                strong.text-danger Dernier bien disponible!
-                            else
-                                | Les #{ project.realties.length } biens sont vendus
-                        if(availableRealtiesNbr !== 0)
-                            li
-                                i.fa.fa-eur
-                                != tools.getPriceRange(project.realties, ws_settings.coreConfig.priceWithVat)
-                        li
-                            i.fa.fa-leaf
-                            | PEB #{ project.project_peb }
-                        if allDocs.length > 0
-                            hr
-                            each aD in allDocs
+                                i.fa.fa-map-pin
+                                = project.project_address + ", " + project.project_city
+                            if project.project_start_build_date
                                 li
-                                    i.fa.fa-file-pdf-o
-                                    a(href=`${ aD.library_media_url }`) #{ aD.library_media_name}
-                .col-md-4
-                    .heading-title.heading-line-single
-                        h3 Localisation&nbsp;
-                            span projet
-                    #map(class="height-200 grayscale" data-lat=`${project.project_lat}` data-lng=`${project.project_long}` data-page="project")
-            div(class="row process-wizard process-wizard-primary hidden-xs")
-                - waitForActive = true
-                - colSize = project.project_phases.length !== 5 ?  12 / project.project_phases.length : "5th"
-                each pP in project.project_phases
-                    - phaseStatus = "disabled"
-                    if project.project_actual_phase === pP.id
-                        - phaseStatus = "active"
-                        - waitForActive = false
-                    else if waitForActive
-                        - phaseStatus = "complete"
-                    div(class=`col-xs-${colSize} process-wizard-step ${phaseStatus}`)
-                        div(class="text-center process-wizard-stepnum")= pP.title
-                        .progress
-                            .progress-bar
-                        a.process-wizard-dot(href="#")
-    if  videos.length > 0 && rt3d.length > 0
+                                    i.fa.fa-calendar-check-o
+                                    != "Début chantier: <strong>" + tools.historyDate(project.project_start_build_date) + "</strong>"
+                            if project.project_end_build_date
+                                li
+                                    i.fa.fa-calendar-check-o
+                                    != "Fin chantier: <strong>" + tools.historyDate(project.project_end_build_date) + "</strong>"
+                            li
+                                i.fa.fa-home
+                                - availableRealtiesNbr = tools.getAvailableRealtiesNbr(realties);
+                                if availableRealtiesNbr > 1
+                                    != "<strong>" + availableRealtiesNbr + "</strong> biens sur <strong>" + realties.length + "</strong> sont disponibles"
+                                else if availableRealtiesNbr === 1
+                                    strong.text-danger Dernier bien disponible!
+                                else
+                                    | Les #{ realties.length } biens sont vendus
+                            if(availableRealtiesNbr !== 0)
+                                li
+                                    i.fa.fa-eur
+                                    != tools.getPriceRange(realties, ws_settings.coreConfig.priceWithVat)
+                            if project.project_peb
+                                li
+                                    i.fa.fa-leaf
+                                    | PEB <strong>#{ tools.setPeb(project.project_peb) }</strong>
+                            if allDocs.length > 0
+                                hr
+                                each aD in allDocs
+                                    li
+                                        i.fa.fa-file-pdf-o
+                                        a(href=`${ aD.library_media_url }`) #{ aD.library_media_name}
+                    .col-md-4
+                        .heading-title.heading-line-single
+                            h3 Localisation&nbsp;
+                                span projet
+                        #map(class="height-200 grayscale" data-lat=`${project.project_lat}` data-lng=`${project.project_long}` data-page="project")
+                div(class="row process-wizard process-wizard-primary hidden-xs")
+                    - waitForActive = true
+                    - colSize = project.phases.length !== 5 ?  12 / project.phases.length : "5th"
+                    each pP in project.phases
+                        - phaseStatus = "disabled"
+                        if project.project_actual_phase === pP.id
+                            - phaseStatus = "active"
+                            - waitForActive = false
+                        else if waitForActive
+                            - phaseStatus = "complete"
+                        div(class=`col-xs-${colSize} process-wizard-step ${phaseStatus}`)
+                            div(class="text-center process-wizard-stepnum")= pP.title
+                            .progress
+                                .progress-bar
+                            a.process-wizard-dot(href="#")
+        if  videos.length > 0 && rt3d.length > 0
+            section
+                .container
+                    .row
+                        .col-md-6
+                            div(class="heading-title heading-line-single")
+                                h3 Animation&nbsp;
+                                    span vidéo
+                            each video in videos
+                                div(class="embed-responsive embed-responsive-16by9 margin-bottom-20")
+                                    iframe(class="embed-responsive-item" width="560" height="315" src=`${video.library_media_url}`)
+                        .col-md-6
+                            div(class="heading-title heading-line-single")
+                                h3 Maquette&nbsp;
+                                    span volumétrique
+                            each r in rt3d
+                                div(class="embed-responsive embed-responsive-16by9 margin-bottom-20")
+                                    iframe(width="100%" height="315" src=`${ r.library_media_url }` frameborder="0" allow="autoplay; fullscreen; vr" mozallowfullscreen="true" webkitallowfullscreen="true")
+        else if videos.length > 0 && rt3d.length === 0
+            section
+                .container
+                    div(class="heading-title heading-line-single")
+                        h3 Animation&nbsp;
+                            span vidéo
+                    each video in videos
+                        div(class="embed-responsive embed-responsive-16by9 margin-bottom-20")
+                            iframe(class="embed-responsive-item" width="560" height="315" src=`${video.library_media_url}`)
+        else if videos.length === 0 && rt3d.length > 0
+            section
+                .container
+                    div(class="heading-title heading-line-single")
+                        h3 Maquette&nbsp;
+                            span volumétrique
+                    each r in rt3d
+                        div(class="embed-responsive embed-responsive-16by9 margin-bottom-20")
+                            iframe(width="100%" height="315" src=`${ r.library_media_url }` frameborder="0" allow="autoplay; fullscreen; vr" mozallowfullscreen="true" webkitallowfullscreen="true")
+        - sortList = tools.getRealtySortDetails(realties)
+        section#biens
+            .box-light
+                .container
+                    ul(class="nav nav-pills mix-filter margin-bottom-20")
+                        li(data-filter="all" class="filter active")
+                            a(href="#") Tous
+                        li(data-filter="vacant" class="filter")
+                            a(href="#") Disponibles
+                        each sL in sortList
+                            li(data-filter=`${ sL.cl }` class="filter")
+                                a(href="#")= sL.label
+                    include realtiescatalog
+        section.dark-bkg
+            .container
+                .col-md-3.bg-white.side-nav
+                    ul(class="llist-group list-unstyled margin-top-20 cat-list")
+                        - cActive = "active"
+                        each c in project.librarycategories
+                            if c.library_category_label !== "generic" && c.library_category_label !== "slideshow" && c.library_category_label !== "default" && c.library_category_label !== "youtube" && c.libraries.length > 0
+                                li.list-group-item(class=`${ cActive }`)
+                                    - count = c.libraries.length
+                                    - label = c.library_category_label
+                                    a(href="#" class="cat-btn" data-cat=`cat-${ c.id }`)= label
+                                        span.badge.pull-right= count
+                                - cActive = ""
+                .col-md-9
+                    include gallery
+    else
         section
             .container
-                .row
-                    .col-md-6
-                        div(class="heading-title heading-line-single")
-                            h3 Animation&nbsp;
-                                span vidéo
-                        each video in videos
-                            div(class="embed-responsive embed-responsive-16by9 margin-bottom-20")
-                                iframe(class="embed-responsive-item" width="560" height="315" src=`${video.library_media_url}`)
-                    .col-md-6
-                        div(class="heading-title heading-line-single")
-                            h3 Maquette&nbsp;
-                                span volumétrique
-                        each r in rt3d
-                            div(class="embed-responsive embed-responsive-16by9 margin-bottom-20")
-                                iframe(width="100%" height="315" src=`${ r.library_media_url }` frameborder="0" allow="autoplay; fullscreen; vr" mozallowfullscreen="true" webkitallowfullscreen="true")
-    else if videos.length > 0 && rt3d.length === 0
-        section
-            .container
-                div(class="heading-title heading-line-single")
-                    h3 Animation&nbsp;
-                        span vidéo
-                each video in videos
-                    div(class="embed-responsive embed-responsive-16by9 margin-bottom-20")
-                        iframe(class="embed-responsive-item" width="560" height="315" src=`${video.library_media_url}`)
-    else if videos.length === 0 && rt3d.length > 0
-        section
-            .container
-                div(class="heading-title heading-line-single")
-                    h3 Maquette&nbsp;
-                        span volumétrique
-                each r in rt3d
-                    div(class="embed-responsive embed-responsive-16by9 margin-bottom-20")
-                        iframe(width="100%" height="315" src=`${ r.library_media_url }` frameborder="0" allow="autoplay; fullscreen; vr" mozallowfullscreen="true" webkitallowfullscreen="true")
-    - sortList = tools.getRealtySortDetails(project.realties)
-    section#biens
-        .box-light
-            .container
-                ul(class="nav nav-pills mix-filter margin-bottom-20")
-                    li(data-filter="all" class="filter active")
-                        a(href="#") Tous
-                    li(data-filter="vacant" class="filter")
-                        a(href="#") Disponibles
-                    each sL in sortList
-                        li(data-filter=`${ sL.cl }` class="filter")
-                            a(href="#")= sL.label
+                div(class="alert alert-danger") Ce projet n'existe pas ou n'est pas disponible. #[a(href="/projects") Voir tous les projets disponibles]
                 include realtiescatalog
-    section.dark-bkg
-        .container
-            .col-md-3.bg-white.side-nav
-                ul(class="llist-group list-unstyled margin-top-20")
-                    li.list-group-item(class="active")
-                        a(href="#") label
-                    li.list-group-item
-                        a(href="#") label
-                    li.list-group-item
-                        a(href="#") label
-            .col-md-9
-                include gallery

@@ -5,7 +5,7 @@ block content
         .container
             .portfolio-gutter
                 each p in projects
-                    .col-md-3.col-sm-6
+                    .col-md-3.col-sm-6.margin-bottom-20
                         .item-box
                             figure
                                 span.item-hover
@@ -15,10 +15,13 @@ block content
                                             span.fa.fa-plus.size-20
                                 .flexslider(data-arrownav="false" data-slideshowspeed="3000")
                                     ul.slides
-                                        each pM in p.project_media
+                                        - genericImages = tools.getGenericImages(p.librarycategories)
+                                        each pM in genericImages
                                             li
                                                 a(href=`/project?id=${ p.id }`)
-                                                    img.img-responsive(src=`${ pM }` width="600" height="399")
+                                                    - if(pM.library_media_name !== "no-media.jpg") url = "libraries/" + p.id + "/library/" + pM.library_media_name
+                                                    - else url = "images/no-media.jpg"
+                                                    img.img-responsive(src=`${ url }` width="600" height="399")
                             .item-box-desc
                                 h3= p.project_title
                                 ul.list-inline.categories.nomargin

@@ -1,0 +1,118 @@
+extends layout
+
+block content
+    section
+        .container
+            div(class="heading-title heading-line-single")
+                h3= realty.project.project_title + " - "
+                    span= realty.realty_title
+            if realty
+                - slideshow = tools.getRealtySlideMedia(realty.librarycategories)
+                if slideshow.length > 0
+                    .slider.fullwidthbanner-container.roundedcorners.margin-bottom-60
+                        .fullwidthbanner(data-height="488" data-shadow="3" data-navigationstyle="preview2")
+                            ul.hide
+                                each sL in slideshow
+                                    li(data-transition="boxfade" data-slotamount="1" data-masterspeed="1000" data-saveperformance="off" data-title=`${ realty.realty_title }` data-thumb="/images/demo/1200x800/24-min.jpg")
+                                        img(src="/images/1x1.png" data-lazyload=`libraries/${ realty.projectId }/realties/${ realty.id }/library/${ sL.library_media_name }` alt="" data-bgposition="center center" data-kenburns="on" data-duration="5000"  data-bgfit="100" data-bgfitend="110")
+                                        .tp-caption.very_large_text.lfb.ltt.tp-resizeme(data-x="right" data-hoffset="-20" data-y="bottom" data-voffset="-20" data-speed="600" data-start="800" data-easing="Power4.easeOut" data-splitin="none" data-splitout="none" data-elementdelay="0.01" data-endelementdelay="0.1" data-endspeed="500" data-endeasing="Power4.easeIn")
+                                            != realty.realty_title
+                            .tp-bannertimer
+                    div(class="divider divider-circle divider-center divider-short")
+                        i(class="glyphicon glyphicon-chevron-down")
+                .row
+                    .col-md-4
+                        img(class="img-responsive" src="libraries/31/library/shot-02-web.jpg")
+                    .col-md-5
+                        div
+                            strong= realty.realty_long_description
+                        div.margin-top-10.justify Ce bien est associé au projet&nbsp
+                            a(href=`/project?id ${ realty.projectId }`)= realty.project.project_title
+                            = ", " + realty.project.project_address + " à " + realty.project.project_city + ". N'hésitez pas à consulter les "
+                            a(href=`/project?id= ${ realty.projectId }#biens`) autres biens de ce projet
+                            |. N'hésitez pas également à nous contacter au&nbsp
+                            = company.phone + " "
+                            |ou directement via la page&nbsp
+                            a(href="/contact") contact avant vente
+                            |&nbspde notre site web si vous avez des questions.
+                    .col-md-3
+                        .price-clean
+                            h4= tools.getRelatyPrice(parseFloat(realty.realty_net_price), parseFloat(realty.realty_vat), ws_settings.coreConfig.priceWithVat)
+                                sup €
+                            if(ws_settings.coreConfig.priceWithVat)
+                                h5 TTC
+                            else
+                                h5 HTVA
+                            hr
+                            a(href="#" class="btn btn-3d btn-teal") Mettre une option sur ce bien
+                div(class="divider divider-circle divider-center")
+                    i(class="fa fa-home")
+
+                .row
+                    .col-md-4
+                        - imgs = tools.getRealtyImages(realty.librarycategories);
+                        if imgs.length > 0
+                            img(alt="image" src=`libraries/${ realty.projectId }/realties/${ realty.id }/library/${ imgs[0].library_media_name}` class="img-responsive margin-bottom-10 ")
+                        else
+                            img(alt="image" src=`images/no-media.jpg` class="img-responsive margin-bottom-10")
+                    .col-md-8
+                        ul.list-group
+                            li.list-group-item= "Superficie totale brute: " + realty.realty_surface + " m²"
+                            li.list-group-item= "Superficie totale brute: " + realty.realty_surface + " m²"
+
+                div(class="divider divider-circle divider-center")
+                    i(class="fa fa-building-o")
+                if realty.project.project_distance_schools && realty.project.project_distance_transports && realty.project.project_distance_shops
+                    div(class="info-bar info-bar-clean info-bar-bordered")
+                        .container
+                            .row
+                                .col-sm-4
+                                    i(class="glyphicon glyphicon-pencil")
+                                    h3= "A " + realty.project.project_distance_schools / 1000 + " km"
+                                    p d'une école
+                                .col-sm-4
+                                    i(class="fa fa-bus")
+                                    h3= "A " + realty.project.project_distance_transports / 1000 + " km"
+                                    p des transport en commun
+                                .col-sm-4
+                                    i(class="glyphicon glyphicon-shopping-cart")
+                                    h3= "A " + realty.project.project_distance_shops / 1000 + " km"
+                                    p des commerces
+                .row
+                    .container
+                        if realty.project.project_terrain_size
+                            .col-md-3
+                                i(class="ico-light ico-rounded ico-hover fa fa-map-o")
+                                = "Terrain: "
+                                strong= +tools.numberWithCommas(realty.project.project_terrain_size) + " m²"
+                        if realty.project.project_floor_number
+                            .col-md-3
+                                i(class="ico-light ico-rounded ico-hover fa fa-navicon")
+                                = "Etages: "
+                                strong= realty.project.project_floor_number
+                        if realty.project.project_parking_in_number || realty.project.project_parking_out_number
+                            .col-md-3
+                                i(class="ico-light ico-rounded ico-hover fa fa-car")
+                                = "Parkings: "
+                                strong= realty.project.project_parking_in_number + realty.project.project_parking_out_number
+                        if realty.project.project_handicapped_access
+                            .col-md-3
+                                i(class="ico-light ico-rounded ico-hover fa fa-wheelchair")
+                                |Accès handicapé
+                        if realty.project.project_lift
+                            .col-md-3
+                                i(class="ico-light ico-rounded ico-hover fa fa-arrows-v")
+                                = "Ascenceur"
+                        if realty.project.project_PV
+                            .col-md-3
+                                i(class="ico-light ico-rounded ico-hover fa fa-sun-o")
+                                = "Photovoltaïque"
+                        if realty.project.project_peb
+                            .col-md-3
+                                i(class="ico-light ico-rounded ico-hover fa fa-leaf")
+                                = "PEB: "
+                                strong= tools.setPeb(realty.project.project_peb)
+
+            else
+                div(class="alert alert-danger") Ce bien n'existe pas ou n'est pas disponible. #[a(href="/projects") Voir tous les biens disponibles]
+                include realtiescatalog

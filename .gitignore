@@ -1,5 +1,6 @@
 node_modules
 public/images
+public/libraries
 public/javascripts/plugins
 .idea
 config/config.json

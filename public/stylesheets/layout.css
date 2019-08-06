@@ -133,6 +133,23 @@ section.dark
     border-bottom: rgba(255,255,255,0.1) 1px solid;
 }
 
+section.imoges-red
+{
+    background-color: #b52024!important;
+}
+
+section.imoges-red h1{
+    color: white!important;
+}
+
+section.imoges-red a{
+    color: white!important;
+}
+
+section.imoges-red .active{
+    color: black!important;
+}
+
 section.dark.alternate
 {
     background-color: #151515;
@@ -5725,19 +5742,23 @@ section.dark ul.side-nav .list-group-item
 /** Masonry Gallery
  **************************************************************** **/
 
-.masonry-gallery
+.masonry-gallery,
+.masonry-gallery-afx
 {
     position: relative;
 }
 
-.masonry-gallery a, 
-.masonry-gallery img
+.masonry-gallery a,
+.masonry-gallery-afx a,
+.masonry-gallery img,
+.masonry-gallery-afx img
 {
     display: block;
     height: auto!important;
 }
 
-.masonry-gallery a
+.masonry-gallery a,
+.masonry-gallery-afx a
 {
     position: relative;
     float: left;
@@ -5745,7 +5766,8 @@ section.dark ul.side-nav .list-group-item
     overflow: hidden;
 }
 
-.masonry-gallery img
+.masonry-gallery img,
+.masonry-gallery-afx img
 {
     width: 100%;
     border-radius: 0!important;
@@ -5754,27 +5776,32 @@ section.dark ul.side-nav .list-group-item
 
 /* columns */
 
-.masonry-gallery.columns-2 a
+.masonry-gallery.columns-2 a,
+.masonry-gallery-afx.columns-2 a
 {
     width: 50%;
 }
 
-.masonry-gallery.columns-3 a
+.masonry-gallery.columns-3 a,
+.masonry-gallery-afx.columns-3 a
 {
     width: 33.30%;
 }
 
-.masonry-gallery.columns-4 a
+.masonry-gallery.columns-4 a,
+.masonry-gallery-afx.columns-4 a
 {
     width: 25%;
 }
 
-.masonry-gallery.columns-5 a
+.masonry-gallery.columns-5 a,
+.masonry-gallery-afx.columns-5 a
 {
     width: 20%;
 }
 
-.masonry-gallery.columns-6 a
+.masonry-gallery.columns-6 a,
+.masonry-gallery-afx.columns-6 a
 {
     width: 16.60%;
 }
@@ -7064,7 +7091,7 @@ section#slider .btn-default
 .item-box-desc h4,
 .item-box-desc h5
 {
-    font-size: 18px;
+    font-size: 15px;
     line-height: 21px;
     margin: 0;
     padding: 0;

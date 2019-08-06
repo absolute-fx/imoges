@@ -1,14 +1,15 @@
-const http = require("http");
 const Realties = require('../repositories/Realties');
 
 exports.index = function(req, res, next) {
     const limit = 4;
     const status = 0;
     const active = 1;
-    Realties.getAll({limit, status, active}).then(realties =>{
+    const media = 1;
+    const order_field = "id";
+    const order_direction = "desc";
+    Realties.getAll({limit, status, active, media, order_field, order_direction}).then(realties =>{
         console.log(realties);
-
-;        res.render('index', {
+        res.render('index', {
             title: 'Imoges - Promotion immobilière',
             type: 'root',
             css_paths: [

@@ -678,6 +678,11 @@ h6 > span
     height: 500px !important;
 }
 
+.height-505
+{
+    height: 505px !important;
+}
+
 .height-550
 {
     height: 550px !important;
@@ -20115,11 +20120,11 @@ div.mega-price-table .dropdown-menu
 
 .price-clean h4
 {
-    font-size: 60px;
+    font-size: 45px;
     line-height: 60px;
     font-weight: 300;
     margin: 0;
-    color: #547698;
+    color: #b52024;
 }
 
 .price-clean h4 sup

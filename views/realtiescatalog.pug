@@ -1,20 +1,26 @@
 .row.mix-grid
-    if project
-        - realties = project.realties
     each r in realties
         - cssClasses = tools.getSortClass(r)
-        .col-md-3.col-sm-3.col-xs-6.mix.height-400(class= cssClasses)
+        - imgs = tools.getRealtyImages(r.librarycategories);
+        .col-md-3.col-sm-3.col-xs-6.mix.height-505(class= cssClasses)
             .box-inner
                 if r.realty_status === 0
                     h3.text-left.bold.size-16.elipsis
                         a(href=`/realty?id=${r.id}`)= r.realty_title
                     a(href=`/realty?id=${r.id}`)
-                        img(alt="image" src="/images/temp_projects/plan-int-appart-02.jpg" class="img-responsive margin-bottom-10")
+                    if imgs.length > 0
+                        img(alt="image" src=`libraries/${ r.projectId }/realties/${ r.id }/library/${ imgs[0].library_media_name}` class="img-responsive margin-bottom-10 ")
+                    else
+                        img(alt="image" src=`images/no-media.jpg` class="img-responsive margin-bottom-10")
                 else
                     h3.text-left.bold.size-16.elipsis
                         span(class="label label-danger pull-right") Vendu
                         = r.realty_title
-                    img(alt="image" src="/images/temp_projects/plan-int-appart-02.jpg" class="img-responsive margin-bottom-10")
+
+                    if imgs.length > 0
+                        img(alt="image" src=`libraries/${ r.projectId }/realties/${ r.id }/library/${ imgs[0].library_media_name}` class="img-responsive margin-bottom-10 ")
+                    else
+                        img(alt="image" src=`images/no-media.jpg` class="img-responsive margin-bottom-10")
                 p.text-left= r.realty_short_description
                 p.text-left.margin-bottom-0.bold
                     if r.realty_status === 0

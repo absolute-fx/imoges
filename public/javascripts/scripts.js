@@ -92,7 +92,7 @@
 		_lazyload();
 		_misc();
 		_countDown();
-		_masonryGallery();
+		//_masonryGallery();
 		_toastr(false,false,false,false);
 		_charts();
 		_select2();
@@ -2143,22 +2143,64 @@
 								}
 							});
 
-							_container.isotope('layout');
 
 						}, 1000);
 
 					});
-
                 }
 
 			});
-
-
 		}
-
 	}
 
 
+	function setMasonryGallery(_container) {
+
+		let columns	= 4;
+
+		if(_container.hasClass('columns-2')) 	columns = 2;
+		else if(_container.hasClass('columns-3')) 	columns = 3;
+		else if(_container.hasClass('columns-4')) 	columns = 4;
+		else if(_container.hasClass('columns-5')) 	columns = 5;
+		else if(_container.hasClass('columns-6')) 	columns = 6;
+
+		let _firstElemWidth 	= _container.find('a:eq(0)').outerWidth(),
+			_bigImageNo 		= _container.attr('data-img-big'),
+			_containerWidth		= _container.width();
+
+
+		// Fix margins & Width
+		let postWidth = (_containerWidth/columns);
+		postWidth = Math.floor(postWidth);
+		if((postWidth * columns) >= _containerWidth) {
+			_container.css({ 'margin-right': '-1px' });
+		}
+		if(columns < 6) {
+			_container.children('a').css({"width":postWidth+"px"});
+		}
+
+
+		// Set Big Image
+		if(parseInt(_bigImageNo) > 0) {
+
+			_bigImageNo 	= Number(_bigImageNo) - 1;
+			_container.find('a:eq('+_bigImageNo+')').css({ width: _firstElemWidth*2 + 'px'});
+
+			loadScript(plugin_path + 'isotope/isotope.pkgd.min.js', function() {
+
+				setTimeout( function() {
+					_container.isotope({
+						masonry: {
+							columnWidth: _firstElemWidth
+						}
+					});
+
+
+				}, 1000);
+
+			});
+		}
+	}
 
 
 /** Toastr
