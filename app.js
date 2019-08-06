@@ -4,7 +4,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const fs = require('fs');
-let config = JSON.parse(fs.readFileSync("./config/config.json"));
+let config = JSON.parse(fs.readFileSync("./config/config.js"));
 
 const tools = require('./classes/Tools');
 
