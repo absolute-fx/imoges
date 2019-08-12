@@ -45,9 +45,11 @@ class Tools{
                 }
             }
         }
+        /*
         if(genericImages.length === 0){
             genericImages = [{library_media_name: "no-media.jpg", library_media_extension: "jpg"}];
         }
+        */
         return genericImages;
     }
 
@@ -195,6 +197,80 @@ class Tools{
         }
         let sortList =  floorList.concat(gardenList);
         return sortList;
+    }
+
+    static getKitchen(surface, type){
+        const kitchen = {
+            XE: 'Hyper-équipée',
+            CE: 'Equipée',
+            SE: 'Semi-équipée',
+            NE: 'Non-équipée',
+            AS: 'Américaine semi-équipée',
+            AC: 'Américaine équipée ',
+            AX: 'Américaine hyper-équipée ',
+            AN: 'Américaine Non-équipée'
+        };
+
+        let txt;
+        if(surface && type){
+            txt = "Cuisine <strong>" + kitchen[type] + "</strong>: <strong>" + surface + "</strong> m²";
+        }else if(surface && !type){
+            txt = "Cuisine: <strong>" + surface + "</strong> m²";
+        }else if(!surface && type){
+            txt = "Cuisine <strong>" + kitchen[type] + "</strong>";
+        }
+        return txt;
+    }
+
+    static getBedrooms(bedrooms){
+        let bR = bedrooms.split(";");
+        let returnBedrooms = [];
+        if(bR.length > 1){
+            let i = 1;
+            for (let bedroom of bR){
+                returnBedrooms.push("Chambre " + i + ": <strong>" + bedroom + "</strong> m²");
+                i++;
+            }
+        }else{
+            returnBedrooms.push("Chambre: <strong>" + bR + "</strong> m²");
+        }
+        return returnBedrooms;
+    }
+
+    static getBathrooms(bathrooms, type){
+
+        let bR = bathrooms.split(";");
+        let returnBathrooms = [];
+        if(bR.length > 1){
+            let i = 1;
+            for (let bathroom of bR){
+                if(type === "bath"){
+                    returnBathrooms.push("Salle de bain " + i + ": <strong>" + bathroom + "</strong> m²");
+                }else{
+                    returnBathrooms.push("Salle de douche " + i + ": <strong>" + bathroom + "</strong> m²");
+                }
+
+                i++;
+            }
+        }else{
+            if(type === "bath") {
+                returnBathrooms.push("Salle de bain: <strong>" + bR + "</strong> m²");
+            }else{
+                returnBathrooms.push("Salle de douche: <strong>" + bR + "</strong> m²");
+            }
+        }
+        return returnBathrooms;
+    }
+
+    static getOptionalArrow(opt){
+        let cls;
+        if(opt){
+            cls = "fa fa-check theme-color";
+        }
+        else{
+            cls = "fa fa-close ligth-grey-text";
+        }
+        return cls;
     }
 
     static getSortClass(realty){

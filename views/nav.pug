@@ -11,7 +11,7 @@ li.dropdown(class=`${ topNavActive && topNavActive === 'company' ? 'active' : ''
 				a(href=`${ cD['service'] }`)= cD.label
 li.dropdown.mega-menu(class=`${ topNavActive && topNavActive === 'projects' ? 'active' : ''}`)
 	a.dropdown-toggle(href='/projects') Les projets
-	ul.dropdown-menu
+	ul.dropdown-menu.padding-bottom-10
 		li
 			.row
 				.col-md-5th
@@ -21,23 +21,27 @@ li.dropdown.mega-menu(class=`${ topNavActive && topNavActive === 'projects' ? 'a
 								span.label.label-info.pull-right 10
 								span Voir tous les projets
 						li
-							a(href="/lastproject") Voir tous les biens
-						li
-							a(href="/searchrealty") Rechercher un bien
-						li
-							a(href="/partners") Nos partenaires
+							a(href="/realties") Voir tous les biens
 				each pD in projectsNavData
 					.col-md-5th
 						ul.list-unstyled
 							li
-								span #{pD.label}
+								span #{pD.project_title}
 							li
 								span
-									img.img-responsive(src=`${ pD.imagepath }`)
+									if pD.librarycategories
+										- genericImages = tools.getGenericImages(pD.librarycategories)
+										if genericImages.length > 0
+											- url = "libraries/" + pD.id + "/library/" + genericImages[0].library_media_name
+											img.img-responsive(src=`${ url }`)
+										else
+											img.img-responsive(src="images/no-media.jpg")
+									else
+										img.img-responsive(src="images/no-media.jpg")
 							li
-								a(href="/projets") Fiche du projet
+								a(href=`/project?id=${ pD.id }`) Fiche du projet
 							li
-								a(href="/projets#biens")
+								a(href=`/project?id=${ pD.id }#biens`)
 									if pD.available > 0
 										span.label.label-success.pull-right #{pD.available}
 									else
@@ -45,7 +49,7 @@ li.dropdown.mega-menu(class=`${ topNavActive && topNavActive === 'projects' ? 'a
 									span Les biens du projet
 li.dropdown.mega-menu
 	a.dropdown-toggle(href='/') Media
-	ul.dropdown-menu
+	ul.dropdown-menu.padding-bottom-10
 		li
 			.row
 				.col-md-4

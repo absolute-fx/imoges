@@ -84,25 +84,7 @@ block content
                             .progress
                                 .progress-bar
                             a.process-wizard-dot(href="#")
-        if  videos.length > 0 && rt3d.length > 0
-            section
-                .container
-                    .row
-                        .col-md-6
-                            div(class="heading-title heading-line-single")
-                                h3 Animation&nbsp;
-                                    span vidéo
-                            each video in videos
-                                div(class="embed-responsive embed-responsive-16by9 margin-bottom-20")
-                                    iframe(class="embed-responsive-item" width="560" height="315" src=`${video.library_media_url}`)
-                        .col-md-6
-                            div(class="heading-title heading-line-single")
-                                h3 Maquette&nbsp;
-                                    span volumétrique
-                            each r in rt3d
-                                div(class="embed-responsive embed-responsive-16by9 margin-bottom-20")
-                                    iframe(width="100%" height="315" src=`${ r.library_media_url }` frameborder="0" allow="autoplay; fullscreen; vr" mozallowfullscreen="true" webkitallowfullscreen="true")
-        else if videos.length > 0 && rt3d.length === 0
+        if videos.length > 0
             section
                 .container
                     div(class="heading-title heading-line-single")
@@ -111,15 +93,6 @@ block content
                     each video in videos
                         div(class="embed-responsive embed-responsive-16by9 margin-bottom-20")
                             iframe(class="embed-responsive-item" width="560" height="315" src=`${video.library_media_url}`)
-        else if videos.length === 0 && rt3d.length > 0
-            section
-                .container
-                    div(class="heading-title heading-line-single")
-                        h3 Maquette&nbsp;
-                            span volumétrique
-                    each r in rt3d
-                        div(class="embed-responsive embed-responsive-16by9 margin-bottom-20")
-                            iframe(width="100%" height="315" src=`${ r.library_media_url }` frameborder="0" allow="autoplay; fullscreen; vr" mozallowfullscreen="true" webkitallowfullscreen="true")
         - sortList = tools.getRealtySortDetails(realties)
         section#biens
             .box-light

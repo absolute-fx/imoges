@@ -1,6 +1,15 @@
 extends layout
 
 block content
+    #optionModal(class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true")
+        .modal-dialog
+            .modal-content
+                .modal-header
+                    h4.modal-title Mette une option sur ce bien
+                .modal-body
+                    p Cette fonction n'est pas encore disponible.
+                .modal-footer
+                    button(type="button" class="btn btn-default" data-dismiss="modal") OK
     section
         .container
             div(class="heading-title heading-line-single")
@@ -14,7 +23,7 @@ block content
                             ul.hide
                                 each sL in slideshow
                                     li(data-transition="boxfade" data-slotamount="1" data-masterspeed="1000" data-saveperformance="off" data-title=`${ realty.realty_title }` data-thumb="/images/demo/1200x800/24-min.jpg")
-                                        img(src="/images/1x1.png" data-lazyload=`libraries/${ realty.projectId }/realties/${ realty.id }/library/${ sL.library_media_name }` alt="" data-bgposition="center center" data-kenburns="on" data-duration="5000"  data-bgfit="100" data-bgfitend="110")
+                                        img(src="/images/1x1.png" data-lazyload=`libraries/${ realty.projectId }/realties/${ realty.id }/library/${ sL.library_media_name }` alt=`${ realty.project.project_title }- ${realty.realty_title}` data-bgposition="center center" data-kenburns="on" data-duration="10000"  data-bgfit="100" data-bgfitend="105")
                                         .tp-caption.very_large_text.lfb.ltt.tp-resizeme(data-x="right" data-hoffset="-20" data-y="bottom" data-voffset="-20" data-speed="600" data-start="800" data-easing="Power4.easeOut" data-splitin="none" data-splitout="none" data-elementdelay="0.01" data-endelementdelay="0.1" data-endspeed="500" data-endeasing="Power4.easeIn")
                                             != realty.realty_title
                             .tp-bannertimer
@@ -22,7 +31,16 @@ block content
                         i(class="glyphicon glyphicon-chevron-down")
                 .row
                     .col-md-4
-                        img(class="img-responsive" src="libraries/31/library/shot-02-web.jpg")
+                        if librarycategories
+                            .flexslider(data-arrownav="false" data-slideshowspeed="5000")
+                                ul.slides
+                                    - genericImages = librarycategories.libraries
+                                    each pM in genericImages
+                                        li
+                                            - url = "libraries/" + realty.projectId + "/library/" + pM.library_media_name
+                                            img.img-responsive(src=`${ url }` width="600" height="399" class="img-responsive" )
+                        else
+                            img(class="img-responsive" src="images/no-media.jpg")
                     .col-md-5
                         div
                             strong= realty.realty_long_description
@@ -44,74 +62,141 @@ block content
                             else
                                 h5 HTVA
                             hr
-                            a(href="#" class="btn btn-3d btn-teal") Mettre une option sur ce bien
+                            a(href="#" class="btn btn-3d btn-teal" data-toggle="modal" data-target="#optionModal") Mettre une option sur ce bien
                 div(class="divider divider-circle divider-center")
                     i(class="fa fa-home")
 
-                .row
-                    .col-md-4
-                        - imgs = tools.getRealtyImages(realty.librarycategories);
-                        if imgs.length > 0
-                            img(alt="image" src=`libraries/${ realty.projectId }/realties/${ realty.id }/library/${ imgs[0].library_media_name}` class="img-responsive margin-bottom-10 ")
-                        else
-                            img(alt="image" src=`images/no-media.jpg` class="img-responsive margin-bottom-10")
-                    .col-md-8
-                        ul.list-group
-                            li.list-group-item= "Superficie totale brute: " + realty.realty_surface + " m²"
-                            li.list-group-item= "Superficie totale brute: " + realty.realty_surface + " m²"
+                div(class="box-static box-border-top box-dark padding-10")
+                    div(class="box-title")
+                        h2.size-20.margin-bottom-10!= "Détails du bien <span>" + realty.realty_title + "</span>"
+                    .row
+                        .col-md-4
+                            - imgs = tools.getRealtyImages(realty.librarycategories);
+                            if imgs.length > 0
+                                div(class="lightbox" data-plugin-options='{"delegate": "a", "gallery": {"enabled": true}}')
+                                    a.image-hover(href=`libraries/${ realty.projectId }/realties/${ realty.id }/library/${ imgs[0].library_media_name}`)
+                                        img( src=`libraries/${ realty.projectId }/realties/${ realty.id }/library/${ imgs[0].library_media_name}` class="img-responsive margin-bottom-10")
+                            else
+                                img(alt="image" src=`images/no-media.jpg` class="img-responsive margin-bottom-10")
+                        .col-md-8
+                            ul.list-group.tex-black
+                                li.list-group-item!= "Superficie totale: <strong>" + realty.realty_surface + "</strong> m²"
+                                if realty.realty_bedrooms
+                                    - bedrooms = tools.getBedrooms(realty.realty_bedrooms)
+                                    each bR in bedrooms
+                                        li.list-group-item!= bR
+                                if realty.realty_kitchen_surface || realty.realty_kitchen_type
+                                    li.list-group-item!= tools.getKitchen(realty.realty_kitchen_surface, realty.realty_kitchen_type)
+                                if realty.realty_bathrooms
+                                    li.list-group-item!= tools.getBathrooms(realty.realty_bathrooms, "bath")
+                                if realty.realty_showers
+                                    li.list-group-item!= tools.getBathrooms(realty.realty_showers, "shower")
+                                if realty.realty_living_surface
+                                    li.list-group-item!= "Séjour: <strong>" + realty.realty_living_surface + "</strong> m²"
+                                if realty.realty_dining_room_surface
+                                    li.list-group-item!= "Salle à manger: <strong>" + realty.realty_dining_room_surface + "</strong> m²"
+                                if realty.realty_attic_surface
+                                    li.list-group-item!= "Grenier: <strong>" + realty.realty_attic_surface + "</strong> m²"
+                                if realty.realty_office_surface
+                                    li.list-group-item!= "Bureau: <strong>" + realty.realty_office_surface + "</strong> m²"
+                                if realty.realty_cellar_surface
+                                    li.list-group-item!= "Cave: <strong>" + realty.realty_cellar_surface + "</strong> m²"
+                                if realty.realty_freelance_surface
+                                    li.list-group-item!= "Espace commercial: <strong>" + realty.realty_freelance_surface + "</strong> m²"
+                                if realty.realty_garden_surface
+                                    li.list-group-item!= "Jardin: <strong>" + realty.realty_garden_surface + "</strong> m²"
+                                if realty.realty_wc_number
+                                    li.list-group-item!= "Nbr WC: <strong>" + realty.realty_wc_number + "</strong>"
+                            .row.text-center
+                                .col-md-2
+                                    div
+                                        i(class='fa fa-headphones').size-20
+                                    != "Iso. acous." + "<br><i class='" + tools.getOptionalArrow(realty.realty_acoustic_isolation) + " '></i>"
+                                .col-md-2
+                                    div
+                                        i(class='fa fa-bell-o').size-20
+                                    != "Alarme" + "<br><i class='" + tools.getOptionalArrow(realty.realty_security_system) + "'></i>"
+                                .col-md-2
+                                    div
+                                        i(class='fa fa-bullhorn').size-20
+                                    != "Parlophone" + "<br><i class='" + tools.getOptionalArrow(realty.realty_door_phone) + "'></i>"
+                                .col-md-2
+                                    div
+                                        i(class="fa fa-video-camera").size-20
+                                    != "Vidéophone" + "<br><i class='" + tools.getOptionalArrow(realty.realty_videophone) + "'></i>"
+                                .col-md-2
+                                    div
+                                        i(class="fa fa-shield").size-20
+                                    != "Porte blindée" + "<br><i class='" + tools.getOptionalArrow(realty.realty_security_door) + "'></i>"
+                                .col-md-2
+                                    div
+                                        i(class="fa fa-cubes").size-20
+                                    != "Buanderie" + "<br><i class='" + tools.getOptionalArrow(realty.realty_laundry) + "'></i>"
+                - videos = tools.getYoutubeVid(realty.librarycategories, "youtube")
+                if videos.length > 0
+                    div(class="divider divider-circle divider-center")
+                        i(class="fa fa-youtube-play")
+                    .row.margin-top-20
+                        each video in videos
+                            div(class="embed-responsive embed-responsive-16by9 margin-bottom-20")
+                                iframe(class="embed-responsive-item" width="560" height="315" src=`${video.library_media_url}`)
 
                 div(class="divider divider-circle divider-center")
                     i(class="fa fa-building-o")
-                if realty.project.project_distance_schools && realty.project.project_distance_transports && realty.project.project_distance_shops
-                    div(class="info-bar info-bar-clean info-bar-bordered")
+                div(class="box-static box-border-top box-color padding-10")
+                    div(class="box-title")
+                        h2.size-20.margin-bottom-10= "Infos sur le projet " + realty.project.project_title
+
+                    if realty.project.project_distance_schools && realty.project.project_distance_transports && realty.project.project_distance_shops
+                        div(class="info-bar info-bar-clean info-bar-bordered")
+                            .container
+                                .row
+                                    .col-sm-4
+                                        i(class="glyphicon glyphicon-pencil")
+                                        h3.tex-black= "A " + realty.project.project_distance_schools / 1000 + " km"
+                                        p d'une école
+                                    .col-sm-4
+                                        i(class="fa fa-bus")
+                                        h3.tex-black= "A " + realty.project.project_distance_transports / 1000 + " km"
+                                        p des transport en commun
+                                    .col-sm-4
+                                        i(class="glyphicon glyphicon-shopping-cart")
+                                        h3.tex-black= "A " + realty.project.project_distance_shops / 1000 + " km"
+                                        p des commerces
+                    .row
                         .container
-                            .row
-                                .col-sm-4
-                                    i(class="glyphicon glyphicon-pencil")
-                                    h3= "A " + realty.project.project_distance_schools / 1000 + " km"
-                                    p d'une école
-                                .col-sm-4
-                                    i(class="fa fa-bus")
-                                    h3= "A " + realty.project.project_distance_transports / 1000 + " km"
-                                    p des transport en commun
-                                .col-sm-4
-                                    i(class="glyphicon glyphicon-shopping-cart")
-                                    h3= "A " + realty.project.project_distance_shops / 1000 + " km"
-                                    p des commerces
-                .row
-                    .container
-                        if realty.project.project_terrain_size
-                            .col-md-3
-                                i(class="ico-light ico-rounded ico-hover fa fa-map-o")
-                                = "Terrain: "
-                                strong= +tools.numberWithCommas(realty.project.project_terrain_size) + " m²"
-                        if realty.project.project_floor_number
-                            .col-md-3
-                                i(class="ico-light ico-rounded ico-hover fa fa-navicon")
-                                = "Etages: "
-                                strong= realty.project.project_floor_number
-                        if realty.project.project_parking_in_number || realty.project.project_parking_out_number
-                            .col-md-3
-                                i(class="ico-light ico-rounded ico-hover fa fa-car")
-                                = "Parkings: "
-                                strong= realty.project.project_parking_in_number + realty.project.project_parking_out_number
-                        if realty.project.project_handicapped_access
-                            .col-md-3
-                                i(class="ico-light ico-rounded ico-hover fa fa-wheelchair")
-                                |Accès handicapé
-                        if realty.project.project_lift
-                            .col-md-3
-                                i(class="ico-light ico-rounded ico-hover fa fa-arrows-v")
-                                = "Ascenceur"
-                        if realty.project.project_PV
-                            .col-md-3
-                                i(class="ico-light ico-rounded ico-hover fa fa-sun-o")
-                                = "Photovoltaïque"
-                        if realty.project.project_peb
-                            .col-md-3
-                                i(class="ico-light ico-rounded ico-hover fa fa-leaf")
-                                = "PEB: "
-                                strong= tools.setPeb(realty.project.project_peb)
+                            if realty.project.project_terrain_size
+                                .col-md-3
+                                    i(class="ico-light ico-rounded ico-hover fa fa-map-o")
+                                    = "Terrain: "
+                                    strong= +tools.numberWithCommas(realty.project.project_terrain_size) + " m²"
+                            if realty.project.project_floor_number
+                                .col-md-3
+                                    i(class="ico-light ico-rounded ico-hover fa fa-navicon")
+                                    = "Etages: "
+                                    strong= realty.project.project_floor_number
+                            if realty.project.project_parking_in_number || realty.project.project_parking_out_number
+                                .col-md-3
+                                    i(class="ico-light ico-rounded ico-hover fa fa-car")
+                                    = "Parkings: "
+                                    strong= realty.project.project_parking_in_number + realty.project.project_parking_out_number
+                            if realty.project.project_handicapped_access
+                                .col-md-3
+                                    i(class="ico-light ico-rounded ico-hover fa fa-wheelchair")
+                                    |Accès handicapé
+                            if realty.project.project_lift
+                                .col-md-3
+                                    i(class="ico-light ico-rounded ico-hover fa fa-arrows-v")
+                                    = "Ascenceur"
+                            if realty.project.project_PV
+                                .col-md-3
+                                    i(class="ico-light ico-rounded ico-hover fa fa-sun-o")
+                                    = "Photovoltaïque"
+                            if realty.project.project_peb
+                                .col-md-3
+                                    i(class="ico-light ico-rounded ico-hover fa fa-leaf")
+                                    = "PEB: "
+                                    strong= tools.setPeb(realty.project.project_peb)
 
             else
                 div(class="alert alert-danger") Ce bien n'existe pas ou n'est pas disponible. #[a(href="/projects") Voir tous les biens disponibles]

@@ -1,4 +1,5 @@
 const Realties = require('../repositories/Realties');
+const Librarycategories = require('../repositories/Librarycategories');
 
 exports.index = function(req, res, next) {
     const status = 0;
@@ -10,25 +11,39 @@ exports.index = function(req, res, next) {
     Realties.getOne({realtyId, status, active, media, project}).then(realty =>{
         console.log(realty);
         if(realty){
-            res.render('realty', {
-                title: 'Imoges - Promotion immobilière',
-                topNavActive: 'projects',
-                breadcrumb: [
-                    {label: 'Accueil', link: '/'},
-                    {label: 'Projets', link: '/projects'},
-                    {label: realty.project.project_title, link: '/project?id=' + realty.projectId},
-                    {label: realty.realty_title}
-                ],
-                css_paths: [
-                    "/javascripts/plugins/slider.revolution/css/extralayers.css",
-                    "/javascripts/plugins/slider.revolution/css/settings.css"
-                ],
-                js_paths:[
-                    "/javascripts/plugins/slider.revolution/js/jquery.themepunch.tools.min.js",
-                    "/javascripts/plugins/slider.revolution/js/jquery.themepunch.revolution.min.js",
-                    "/javascripts/home_slider.js"
-                ],
-                realty: realty
+            const table = "projects";
+            const tblId = realty.projectId;
+            const cat = "generic";
+            const libraryMediaExt = "jpg";
+            /*
+            const param;
+            const libraryMediaType;
+            const libraryMediaExt;
+            const userId
+            */
+            Librarycategories.getAll({table, tblId, cat, libraryMediaExt}).then(librarycategories =>{
+                console.log(librarycategories);
+                res.render('realty', {
+                    title: 'Imoges - Promotion immobilière',
+                    topNavActive: 'projects',
+                    breadcrumb: [
+                        {label: 'Accueil', link: '/'},
+                        {label: 'Projets', link: '/projects'},
+                        {label: realty.project.project_title, link: '/project?id=' + realty.projectId},
+                        {label: realty.realty_title}
+                    ],
+                    css_paths: [
+                        "/javascripts/plugins/slider.revolution/css/extralayers.css",
+                        "/javascripts/plugins/slider.revolution/css/settings.css"
+                    ],
+                    js_paths:[
+                        "/javascripts/plugins/slider.revolution/js/jquery.themepunch.tools.min.js",
+                        "/javascripts/plugins/slider.revolution/js/jquery.themepunch.revolution.min.js",
+                        "/javascripts/home_slider.js"
+                    ],
+                    realty: realty,
+                    librarycategories: librarycategories
+                });
             });
         }
         else{

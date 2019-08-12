@@ -31,6 +31,7 @@ class ProjectsRepository
             }
         }
         return new Promise((resolve, reject) => {
+            console.log(apiLink + 'projects' + parameters);
             http.get(apiLink + 'projects' + parameters, (resp) =>{
                 console.log('getall - repository');
                 let data = '';

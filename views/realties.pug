@@ -3,4 +3,11 @@ extends layout
 block content
     section
         .container
-            h3 realties
+            ul(class="nav nav-pills mix-filter margin-bottom-20")
+                li(data-filter="all" class="filter active")
+                    a(href="#") Tous
+                - sortList = tools.getRealtySortDetails(realties)
+                each sL in sortList
+                    li(data-filter=`${ sL.cl }` class="filter")
+                        a(href="#")= sL.label
+            include realtiescatalog

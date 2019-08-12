@@ -16,12 +16,15 @@ block content
                                 .flexslider(data-arrownav="false" data-slideshowspeed="3000")
                                     ul.slides
                                         - genericImages = tools.getGenericImages(p.librarycategories)
-                                        each pM in genericImages
+                                        if genericImages.length > 0
+                                            each pM in genericImages
+                                                li
+                                                    a(href=`/project?id=${ p.id }`)
+                                                        img.img-responsive(src=`${ "libraries/" + p.id + "/library/" + pM.library_media_name }`)
+                                        else
                                             li
                                                 a(href=`/project?id=${ p.id }`)
-                                                    - if(pM.library_media_name !== "no-media.jpg") url = "libraries/" + p.id + "/library/" + pM.library_media_name
-                                                    - else url = "images/no-media.jpg"
-                                                    img.img-responsive(src=`${ url }` width="600" height="399")
+                                                    img.img-responsive(src="images/no-media.jpg")
                             .item-box-desc
                                 h3= p.project_title
                                 ul.list-inline.categories.nomargin

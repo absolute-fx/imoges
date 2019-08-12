@@ -22,6 +22,7 @@ const contactRouter = require('./routes/contact');
 const realtyRouter = require('./routes/realty');
 const realtiesRouter = require('./routes/realties');
 
+const Projects = require('./repositories/Projects');
 
 const app = express();
 
@@ -30,12 +31,21 @@ app.locals.tools = tools;
 app.locals.company = config.company;
 
 app.locals.ws_settings = config.ws_settings;
+
+// JUSTE POUR TESTS, A PLACER DANS LA VUE
+// navigation projet
+Projects.getAll({limit: 4, orderField: "id", orderDirection: "desc", active: 1, diffused: 1, media: 1}).then(projects =>{
+	console.log(projects);
+    app.locals.ws_settings.navData.projects = projects;
+});
+/*
 app.locals.ws_settings.navData.projects = [
-    {id: 1, label:"Les demoiselles", imagepath:"/images/temp_projects/demoiselles.jpg", available:14},
-    {id: 2, label:"Alexander II", imagepath:"/images/temp_projects/project-main-image-web.jpg", available:0},
-    {id: 3, label:"Ines", imagepath:"/images/temp_projects/ines.jpg", available:3},
-    {id: 4, label:"O. Strebelle", imagepath:"/images/temp_projects/strebelle.jpg", available:0}
+    {id: 1, project_title:"Les demoiselles", imagepath:"/images/temp_projects/demoiselles.jpg", available:14},
+    {id: 2, project_title:"Alexander II", imagepath:"/images/temp_projects/project-main-image-web.jpg", available:0},
+    {id: 3, project_title:"Ines", imagepath:"/images/temp_projects/ines.jpg", available:3},
+    {id: 4, project_title:"O. Strebelle", imagepath:"/images/temp_projects/strebelle.jpg", available:0}
 ];
+*/
 
 const actualDate = new Date();
 const actualYear = actualDate.getFullYear();
