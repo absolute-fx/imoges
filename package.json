@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www"
+    "start": "node ./bin/www",
+    "start_dev": "nodemon ./bin/www"
   },
   "author": "Emmanuel Pain <info@absolute-fx.com>",
   "license": "ISC",
