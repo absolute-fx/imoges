@@ -11,7 +11,32 @@ block content
                         h3
                             | A propos de la&nbsp;
                             span société
-                    p La société Imoges a pour vocation de réaliser des immeubles à appartements qui offrent des prestations de qualité. Imoges est à la recherche d'une qualité sans égal, les partenaires avec lesquels nous collaborons apportent leurs savoir-faire à tous les niveaux dans la réalisation d'un projet global. La société Imoges a la motivation d'apporter un label d'excellence dans ses réalisations pour se différencier dans le monde de la construction.
+                    p La société&nbsp;
+                        strong Imoges&nbsp;
+                        |a été fondée en 2006 par Eric Sirault et son épouse Catherine Alard, tout d'abord dans la rénovation pour ensuite se diriger vers la construction de logements neufs.
+                    p Passionnés d’architecture chaque projet développé est un nouveau challenge pour les équipes d’architectes et d’ingénieurs. Avec une vision à long terme, nous nous remettons systématiquement en question pour améliorer  et développer nos nouveaux projets.
+                    .heading-title.heading-line-single
+                        h3
+                            | Nos&nbsp;
+                            span engagements
+                    blockquote
+                        p Nous nous chargons du développement, de la vente ainsi que du suivi de nos chantiers du terrassement jusqu’à la dernière finition.
+                        cite Eric Sirault
+                    .heading-title.heading-line-single.margin-bottom-10
+                        h4!= "Un suivi <span>sur mesure consciencieux</span>"
+                    p Des conseillers vous accueilleront dans les différents show-rooms mis à votre disposition, afin d’aménager l’intérieur de votre appartement comme vous le souhaitez.
+                    .heading-title.heading-line-single.margin-bottom-10
+                        h4!= "Un résultat d’exécution <span>de qualité</span>"
+                    p Nous travaillons en collaboration avec des partenaires renommés qui mettent leur expérience et leur savoir-faire à votre service, vous garantissant une construction de qualité.
+                    .heading-title.heading-line-single.margin-bottom-10
+                        h4!= "Un cahier des charges <span>rigoureux</span>"
+                    p IMOGES  vous fournit un cahier des charges complet dès les premiers contacts. Reprenant l’ensemble des informations techniques des matériaux utilisés dans votre futur logement.
+                    .heading-title.heading-line-single.margin-bottom-10
+                        h4!= "Garantie <span>Loi Breyne</span>"
+                    p Il s’agit de la seule protection pour nos acquéreurs en droit belge. La loi BREYNE protège le candidat-bâtisseur ainsi que le candidat-acheteur d’une habitation à construire ou en voie de construction contre les clauses abusives prévues dans les contrats et contre le risque d’insolvabilité du cocontractant.
     section.dark-bkg
         .container
-            include gallery
+            div(class=`masonry-gallery columns-5 clearfix lightbox` data-img-big="1" data-plugin-options='{"delegate": "a", "gallery": {"enabled": true}}')
+                each m in media
+                    a.image-hover(href=`${ m.media_url }`)
+                        img(src=`${ m.media_url }`)

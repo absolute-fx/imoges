@@ -108,19 +108,20 @@ block content
                     include realtiescatalog
         section.dark-bkg
             .container
-                .col-md-3.bg-white.side-nav
-                    ul(class="llist-group list-unstyled margin-top-20 cat-list")
-                        - cActive = "active"
-                        each c in project.librarycategories
-                            if c.library_category_label !== "generic" && c.library_category_label !== "slideshow" && c.library_category_label !== "default" && c.library_category_label !== "youtube" && c.libraries.length > 0
-                                li.list-group-item(class=`${ cActive }`)
-                                    - count = c.libraries.length
-                                    - label = c.library_category_label
-                                    a(href="#" class="cat-btn" data-cat=`cat-${ c.id }`)= label
-                                        span.badge.pull-right= count
-                                - cActive = ""
-                .col-md-9
-                    include gallery
+                .row
+                    .col-md-3.bg-white.side-nav
+                        ul(class="llist-group list-unstyled margin-top-20 cat-list")
+                            - cActive = "active"
+                            each c in project.librarycategories
+                                if c.library_category_label !== "generic" && c.library_category_label !== "slideshow" && c.library_category_label !== "default" && c.library_category_label !== "youtube" && c.libraries.length > 0
+                                    li.list-group-item(class=`${ cActive }`)
+                                        - count = c.libraries.length
+                                        - label = c.library_category_label
+                                        a(href="#" class="cat-btn" data-cat=`cat-${ c.id }`)= label
+                                            span.badge.pull-right= count
+                                    - cActive = ""
+                    .col-md-9
+                        include gallery
     else
         section
             .container

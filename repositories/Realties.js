@@ -31,6 +31,8 @@ class RealtiesRepository
             if(args.star !== undefined){
                 parameters += "star=" + args.star + "&";
             }
+
+            parameters = parameters.slice(0, -1);
         }
         return new Promise((resolve, reject) => {
             console.log(apiLink + 'realties' + parameters);
@@ -76,7 +78,11 @@ class RealtiesRepository
             if(args.star !== undefined){
                 parameters += "star=" + args.star + "&";
             }
+            if(args.countonly){
+                parameters += "countonly=" + args.countonly + "&";
+            }
 
+            parameters = parameters.slice(0, -1);
         }
         return new Promise((resolve, reject) => {
             console.log(apiLink + 'projects/' + args.projectId + '/realties'  + parameters);
@@ -87,8 +93,14 @@ class RealtiesRepository
                     data += chunk;
                 });
                 resp.on('end', () => {
-                    let realties = JSON.parse(data).realties;
-                    resolve(realties);
+                    if(!args.countonly){
+                        let realties = JSON.parse(data).realties;
+                        resolve(realties);
+                    }else{
+                        let totalRealties = JSON.parse(data).totalRealties;
+                        resolve(totalRealties);
+                    }
+
                 });
             }).on("error", (err) => {
                 console.log("Error: " + err.message);

@@ -7,7 +7,7 @@ block content
                 .modal-header
                     h4.modal-title Mette une option sur ce bien
                 .modal-body
-                    p Cette fonction n'est pas encore disponible.
+                    p!= "Cette fonction n'est pas encore disponible sur notre site web mais vous pouvez demander un rendez-vous en nous contactant directement au <strong>" + company.phone + "</strong>."
                 .modal-footer
                     button(type="button" class="btn btn-default" data-dismiss="modal") OK
     section
@@ -63,9 +63,19 @@ block content
                                 h5 HTVA
                             hr
                             a(href="#" class="btn btn-3d btn-teal" data-toggle="modal" data-target="#optionModal") Mettre une option sur ce bien
+
+                - videos = tools.getYoutubeVid(realty.librarycategories, "youtube")
+                if videos.length > 0
+                    div(class="divider divider-circle divider-center")
+                        i(class="fa fa-youtube-play")
+                    .row.margin-top-20
+                        .col-md-12
+                            each video in videos
+                                div(class="embed-responsive embed-responsive-16by9 margin-bottom-20")
+                                    iframe(class="embed-responsive-item" width="560" height="315" src=`${video.library_media_url}`)
+
                 div(class="divider divider-circle divider-center")
                     i(class="fa fa-home")
-
                 div(class="box-static box-border-top box-dark padding-10")
                     div(class="box-title")
                         h2.size-20.margin-bottom-10!= "Détails du bien <span>" + realty.realty_title + "</span>"
@@ -108,38 +118,30 @@ block content
                                 if realty.realty_wc_number
                                     li.list-group-item!= "Nbr WC: <strong>" + realty.realty_wc_number + "</strong>"
                             .row.text-center
-                                .col-md-2
+                                .col-md-2.col-xs-4
                                     div
                                         i(class='fa fa-headphones').size-20
                                     != "Iso. acous." + "<br><i class='" + tools.getOptionalArrow(realty.realty_acoustic_isolation) + " '></i>"
-                                .col-md-2
+                                .col-md-2.col-xs-4
                                     div
                                         i(class='fa fa-bell-o').size-20
                                     != "Alarme" + "<br><i class='" + tools.getOptionalArrow(realty.realty_security_system) + "'></i>"
-                                .col-md-2
+                                .col-md-2.col-xs-4
                                     div
                                         i(class='fa fa-bullhorn').size-20
                                     != "Parlophone" + "<br><i class='" + tools.getOptionalArrow(realty.realty_door_phone) + "'></i>"
-                                .col-md-2
+                                .col-md-2.col-xs-4
                                     div
                                         i(class="fa fa-video-camera").size-20
                                     != "Vidéophone" + "<br><i class='" + tools.getOptionalArrow(realty.realty_videophone) + "'></i>"
-                                .col-md-2
+                                .col-md-2.col-xs-4
                                     div
                                         i(class="fa fa-shield").size-20
                                     != "Porte blindée" + "<br><i class='" + tools.getOptionalArrow(realty.realty_security_door) + "'></i>"
-                                .col-md-2
+                                .col-md-2.col-xs-4
                                     div
                                         i(class="fa fa-cubes").size-20
                                     != "Buanderie" + "<br><i class='" + tools.getOptionalArrow(realty.realty_laundry) + "'></i>"
-                - videos = tools.getYoutubeVid(realty.librarycategories, "youtube")
-                if videos.length > 0
-                    div(class="divider divider-circle divider-center")
-                        i(class="fa fa-youtube-play")
-                    .row.margin-top-20
-                        each video in videos
-                            div(class="embed-responsive embed-responsive-16by9 margin-bottom-20")
-                                iframe(class="embed-responsive-item" width="560" height="315" src=`${video.library_media_url}`)
 
                 div(class="divider divider-circle divider-center")
                     i(class="fa fa-building-o")

@@ -53,14 +53,14 @@ html
                                     li.footer-sprite.phone #{company.phone}
                                     li.footer-sprite.email
                                         a(href=`${ 'mailto:' + company.email }`) #{company.email}
-                        .col-md4
+                        .col-md-4
                             h4.letter-spacing-1 RESTONS EN CONTACT
                             p Inscrivez-vous à notre newsletter
-                            form.validate(action='' method='post' data-success='Inscription réussie. Merci!' data-toastr-position='bottom-right' )
+                            form.validate#nl_form(data-success='Inscription réussie. Merci!' data-toastr-position='bottom-right' )
                                 .input-group
                                     span.input-group-addon
                                         i.fa.fa-envelope
-                                    input(type="email" id="email" name="email" class="form-control required" placeholder="Adresse mail")
+                                    input(type="email" id="email-nl" name="email" class="form-control required" placeholder="Adresse mail")
                                     span.input-group-btn
                                         button.btn.btn-success(type='submit') S'inscrire
                             .margin-top-20
@@ -77,7 +77,7 @@ html
                         ul.pull-right.nomargin.list-inline.mobile-block
                             li
                                 a(href='/') Conditions générales
-                        span #{company.name} © #{company.juridical} #{ws_settings.coreConfig.actualYear} - Powered by OpenMind Systems© via RealEstate Manager© beta 1.0
+                        span #{company.name} © #{company.juridical} #{ws_settings.coreConfig.actualYear} - Powered by OpenMind Systems © via RealEstate Manager © beta 1.0
         a(href="#")#toTop
         #preloader
             .inner
@@ -88,3 +88,4 @@ html
             each jsPath in js_paths
                 script(type="text/javascript" src=`${ jsPath }`)
         script(type="text/javascript" src="/javascripts/scripts.js")
+        script(type="text/javascript" src="/javascripts/layout-script.js")

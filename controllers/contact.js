@@ -4,7 +4,10 @@ exports.index = function(req, res, next) {
         topNavActive: 'contact',
         breadcrumb: [
             {label: 'Accueil', link: '/'},
-            {label: 'Contact'}
+            {label: 'Contact avant vente'}
+        ],
+        js_paths:[
+            "/javascripts/contact.js"
         ]
     });
 };

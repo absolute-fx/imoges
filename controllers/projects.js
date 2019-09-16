@@ -8,13 +8,6 @@ exports.index = function(req, res, next) {
     const media = 1;
     Projects.getAll({active, orderField, orderDirection, diffused, media}).then(projects =>{
         console.log(projects);
-        //projects.genericImages = tools.getGenericImages("2019-07-29 00:00:00");
-
-        // TEMP
-        for(let i in projects){
-            projects[i].project_media = ["/images/temp_projects/demoiselles.jpg"];
-        }
-        // TEMP
 
         res.render('projects', {
             title: 'Les projets Imoges',

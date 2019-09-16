@@ -21,8 +21,10 @@ const projectRouter = require('./routes/project');
 const contactRouter = require('./routes/contact');
 const realtyRouter = require('./routes/realty');
 const realtiesRouter = require('./routes/realties');
+const investRouter = require('./routes/invest');
+const savRouter = require('./routes/sav');
 
-const Projects = require('./repositories/Projects');
+
 
 const app = express();
 
@@ -32,20 +34,28 @@ app.locals.company = config.company;
 
 app.locals.ws_settings = config.ws_settings;
 
-// JUSTE POUR TESTS, A PLACER DANS LA VUE
+// JUSTE POUR TESTS, A PLACER AILIEURS
 // navigation projet
-Projects.getAll({limit: 4, orderField: "id", orderDirection: "desc", active: 1, diffused: 1, media: 1}).then(projects =>{
-	console.log(projects);
-    app.locals.ws_settings.navData.projects = projects;
+const Projects = require('./repositories/Projects');
+const Realties = require('./repositories/Realties');
+
+Projects.getAll({countonly: 1, active: 1, diffused: 1}).then(totalProjects =>{
+    app.locals.ws_settings.navData.totalProjects = totalProjects;
+    Projects.getAll({limit: 4, orderField: "id", orderDirection: "desc", active: 1, diffused: 1, media: 1}).then(projects =>{
+        console.log(projects);
+        /*
+        for (let i = 0; i < projects.length; i++){
+            Realties.getByProject({projectId: projects[i].id, active: 1, status: 0}).then(totalRealties =>{
+                projects[i].totalRealties = totalRealties;
+            });
+        }
+
+        console.log("------------------------------------------------------> " + projects);
+        */
+        app.locals.ws_settings.navData.projects = projects;
+    });
 });
-/*
-app.locals.ws_settings.navData.projects = [
-    {id: 1, project_title:"Les demoiselles", imagepath:"/images/temp_projects/demoiselles.jpg", available:14},
-    {id: 2, project_title:"Alexander II", imagepath:"/images/temp_projects/project-main-image-web.jpg", available:0},
-    {id: 3, project_title:"Ines", imagepath:"/images/temp_projects/ines.jpg", available:3},
-    {id: 4, project_title:"O. Strebelle", imagepath:"/images/temp_projects/strebelle.jpg", available:0}
-];
-*/
+
 
 const actualDate = new Date();
 const actualYear = actualDate.getFullYear();
@@ -76,6 +86,8 @@ app.use('/project', projectRouter);
 app.use('/contact', contactRouter);
 app.use('/realty', realtyRouter);
 app.use('/realties', realtiesRouter);
+app.use('/invest', investRouter);
+app.use('/sav', savRouter);
 
 
 // catch 404 and forward to error handler
@@ -95,5 +107,3 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
-
-// http://www.imoges.be/projets/id-projetctName/id-realty

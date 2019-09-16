@@ -29,7 +29,13 @@ class ProjectsRepository
             if(args.media){
                 parameters += "media=" + args.media + "&";
             }
+            if(args.countonly){
+                parameters += "countonly=" + args.countonly + "&";
+            }
+
+            parameters = parameters.slice(0, -1);
         }
+
         return new Promise((resolve, reject) => {
             console.log(apiLink + 'projects' + parameters);
             http.get(apiLink + 'projects' + parameters, (resp) =>{
@@ -39,8 +45,13 @@ class ProjectsRepository
                     data += chunk;
                 });
                 resp.on('end', () => {
-                    let projects = JSON.parse(data).projects;
-                    resolve(projects);
+                    if(!args.countonly){
+                        let projects = JSON.parse(data).projects;
+                        resolve(projects);
+                    }else{
+                       let totalProjects = JSON.parse(data).totalProjects;
+                        resolve(totalProjects);
+                    }
                 });
             }).on("error", (err) => {
                 console.log("Error: " + err.message);

@@ -12,9 +12,18 @@ block content
                             | Historique de la&nbsp;
                             span société
                     p
-                        | La société Imoges a été fondée en 2006.
+                        - prjNbr = history.length
+                        | La société&nbsp;
+                        strong Imoges
+                        |&nbsp;a été fondée en &nbsp;
+                        strong 2006
+                        |&nbsp;et a actuellement porté&nbsp;
+                        != "<strong>" + prjNbr + "</strong>"
+                        | &nbsp;projets immobiliers sur Ecaussinnes, Soignies et Braine le Comte.
                         br
-                        | Vous pourrez trouver ci-dessous l'historique des grandes étapes de la sociétés Imoges.
+                        | Vous pourrez trouver ci-dessous l'historique des différentes constructions de la société&nbsp;
+                        strong Imoges
+                        |.
     section
         .container
             ul.timeline_center.list-unstyled

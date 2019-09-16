@@ -42,10 +42,6 @@ module.exports = {
           "service": "qualitychart"
         },
         {
-          "label": "Revue de presse",
-          "service": "press"
-        },
-        {
           "label": "Conditions générales",
           "service": "terms"
         }

@@ -5,9 +5,59 @@ block content
         .container
             .row
                 .col-md-8
+                    .heading-title.heading-line-single
+                        h3
+                            | Contact&nbsp;
+                            span avant vente
+                    p Vous avez une question sur un de nos biens? N'ésitez pas à nous en faire part via ce formulaire.
+                    #alert_success.alert.alert-success.margin-bottom-30
+                        button.close(data-dismiss="alert" aria-hidden="true" type="button")
+                        strong Merci
+                        | votre message a bien été envoyé
+                    #alert_failed.alert.alert-danger.margin-bottom-30
+                        button.close(data-dismiss="alert" aria-hidden="true" type="button")
+                        strong Erreur
+                        | Internal server error!
+                    #alert_mandatory.alert.alert-danger.margin-bottom-30
+                        button.close(data-dismiss="alert" aria-hidden="true" type="button")
+                        strong Désolé
+                        | Vous devez remplir tous les champs avec *
                     form
-                        fieldset
-                            input(type="mail" placeholder="Adresse mail" required name="email" class="form-control")
-                            textarea(class="form-control" required)
+                        .row
+                            .form-group
+                                .col-md-6
+                                    label(for="contact:name") Nom complet *
+                                    input.form-control(required type="text" value="" name="contact[name][required]" id="contact:name")
+                                .col-md-6
+                                    label(for="contact:email") Adresse E-mail *
+                                    input.form-control(required type="email" value="" name="contact[email][required]" id="contact:email")
+                        .row
+                            .form-group
+                                .col-md-6
+                                    label(for="select_projects") Concernant le projet
+                                    select.form-control.pointer(name="project" id="select_projects")
+                                        option(value="") Aucun
+                                .col-md-6
+                                    label(for="select_realties") Concernant le bien
+                                    select.form-control.pointer(name="realty" id="select_realties" disabled)
+                                        option(value="") Choisissez un projet
+                        .row
+                            .form-group
+                                .col-md-12
+                                    label(for="contact:message") Message *
+                                    textarea.form-control(required maxlength="10000" rows="8" name="contact[message]" id="contact:message")
+                        .row
+                            .form-group
+                                .col-md-12
+                                    button(type="submit" class="btn btn-primary")
+                                        i.fa.fa-check
+                                        | ENVOYER
                 .col-md-4
-                    | Coordonnées
+                    .heading-title.heading-line-single
+                        h3
+                            | Nos&nbsp;
+                            span coordonnées
+                    != company.name + " " + company.juridical + "<br>"
+                    != company.address + ", " + company.pc + " " + company.city + "<br>"
+                    != company.email + "<br>"
+                    != company.phone

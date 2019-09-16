@@ -18,7 +18,7 @@ li.dropdown.mega-menu(class=`${ topNavActive && topNavActive === 'projects' ? 'a
 					ul.list-unstyled
 						li
 							a(href="/projects")
-								span.label.label-info.pull-right 10
+								span.label.label-info.pull-right= ws_settings.navData.totalProjects
 								span Voir tous les projets
 						li
 							a(href="/realties") Voir tous les biens
@@ -42,10 +42,7 @@ li.dropdown.mega-menu(class=`${ topNavActive && topNavActive === 'projects' ? 'a
 								a(href=`/project?id=${ pD.id }`) Fiche du projet
 							li
 								a(href=`/project?id=${ pD.id }#biens`)
-									if pD.available > 0
-										span.label.label-success.pull-right #{pD.available}
-									else
-										span.label.label-red.pull-right 0
+									span.label.pull-right.label-count(data-projectid=`${ pD.id }`)
 									span Les biens du projet
 li.dropdown.mega-menu
 	a.dropdown-toggle(href='/') Media
@@ -101,8 +98,8 @@ li.dropdown
 			a(href="/sav") Service après vente
 		li.dropdown
 			a(href="/faq") Questoins fréquentes
-li.dropdown
-	a.dropdown-toggle(href='/') Investir
+li.dropdown(class=`${ topNavActive && topNavActive === 'invest' ? 'active' : ''}`)
+	a.dropdown-toggle(href='/invest') Investir
 li.dropdown
 	a.dropdown-toggle(href='/') Mon compte
 	ul.dropdown-menu.pull-right
