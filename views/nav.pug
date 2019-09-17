@@ -32,7 +32,7 @@ li.dropdown.mega-menu(class=`${ topNavActive && topNavActive === 'projects' ? 'a
 									if pD.librarycategories
 										- genericImages = tools.getGenericImages(pD.librarycategories)
 										if genericImages.length > 0
-											- url = "libraries/" + pD.id + "/library/" + genericImages[0].library_media_name
+											- url = "libraries/" + pD.id + "/library/thumb_" + genericImages[0].library_media_name
 											img.img-responsive(src=`${ url }`)
 										else
 											img.img-responsive(src="images/no-media.jpg")

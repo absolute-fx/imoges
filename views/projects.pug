@@ -20,7 +20,7 @@ block content
                                             each pM in genericImages
                                                 li
                                                     a(href=`/project?id=${ p.id }`)
-                                                        img.img-responsive(src=`${ "libraries/" + p.id + "/library/" + pM.library_media_name }`)
+                                                        img.img-responsive(src=`${ "libraries/" + p.id + "/library/thumb_" + pM.library_media_name }`)
                                         else
                                             li
                                                 a(href=`/project?id=${ p.id }`)

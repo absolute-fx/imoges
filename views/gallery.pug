@@ -4,6 +4,6 @@ each c in librarycategories
     - cl= first === true ? "" : "display:none;"
     div(class=`masonry-gallery columns-5 clearfix lightbox` data-img-big="1" data-plugin-options='{"delegate": "a", "gallery": {"enabled": true}}' style=`${ cl }` id=`cat-${ c.id }`)
         each i in c.images
-            a.image-hover(href=`libraries/${ project.id }/library/${ i.library_media_name }`)
-                img(src=`libraries/${ project.id }/library/${ i.library_media_name }`)
+            a.image-hover(href=`libraries/${ project.id }/library/fhd_${ i.library_media_name }`)
+                img(src=`libraries/${ project.id }/library/thumb_${ i.library_media_name }`)
     - first = false

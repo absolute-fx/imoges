@@ -9,7 +9,7 @@
                         a(href=`/realty?id=${r.id}`)= r.realty_title
                     a(href=`/realty?id=${r.id}`)
                     if imgs.length > 0
-                        img(alt="image" src=`libraries/${ r.projectId }/realties/${ r.id }/library/${ imgs[0].library_media_name}` class="img-responsive margin-bottom-10 ")
+                        img(alt="image" src=`libraries/${ r.projectId }/realties/${ r.id }/library/thumb_${ imgs[0].library_media_name}` class="img-responsive margin-bottom-10 ")
                     else
                         img(alt="image" src=`images/no-media.jpg` class="img-responsive margin-bottom-10")
                 else
@@ -18,7 +18,7 @@
                         = r.realty_title
 
                     if imgs.length > 0
-                        img(alt="image" src=`libraries/${ r.projectId }/realties/${ r.id }/library/${ imgs[0].library_media_name}` class="img-responsive margin-bottom-10 ")
+                        img(alt="image" src=`libraries/${ r.projectId }/realties/${ r.id }/library/thumb_${ imgs[0].library_media_name}` class="img-responsive margin-bottom-10 ")
                     else
                         img(alt="image" src=`images/no-media.jpg` class="img-responsive margin-bottom-10")
                 p.text-left= r.realty_short_description

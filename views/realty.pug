@@ -23,7 +23,7 @@ block content
                             ul.hide
                                 each sL in slideshow
                                     li(data-transition="boxfade" data-slotamount="1" data-masterspeed="1000" data-saveperformance="off" data-title=`${ realty.realty_title }` data-thumb="/images/demo/1200x800/24-min.jpg")
-                                        img(src="/images/1x1.png" data-lazyload=`libraries/${ realty.projectId }/realties/${ realty.id }/library/${ sL.library_media_name }` alt=`${ realty.project.project_title }- ${realty.realty_title}` data-bgposition="center center" data-kenburns="on" data-duration="10000"  data-bgfit="100" data-bgfitend="105")
+                                        img(src="/images/1x1.png" data-lazyload=`libraries/${ realty.projectId }/realties/${ realty.id }/library/hd_${ sL.library_media_name }` alt=`${ realty.project.project_title }- ${realty.realty_title}` data-bgposition="center center" data-kenburns="on" data-duration="10000"  data-bgfit="100" data-bgfitend="105")
                                         .tp-caption.very_large_text.lfb.ltt.tp-resizeme(data-x="right" data-hoffset="-20" data-y="bottom" data-voffset="-20" data-speed="600" data-start="800" data-easing="Power4.easeOut" data-splitin="none" data-splitout="none" data-elementdelay="0.01" data-endelementdelay="0.1" data-endspeed="500" data-endeasing="Power4.easeIn")
                                             != realty.realty_title
                             .tp-bannertimer
@@ -37,7 +37,7 @@ block content
                                     - genericImages = librarycategories.libraries
                                     each pM in genericImages
                                         li
-                                            - url = "libraries/" + realty.projectId + "/library/" + pM.library_media_name
+                                            - url = "libraries/" + realty.projectId + "/library/thumb_" + pM.library_media_name
                                             img.img-responsive(src=`${ url }` width="600" height="399" class="img-responsive" )
                         else
                             img(class="img-responsive" src="images/no-media.jpg")
@@ -84,8 +84,8 @@ block content
                             - imgs = tools.getRealtyImages(realty.librarycategories);
                             if imgs.length > 0
                                 div(class="lightbox" data-plugin-options='{"delegate": "a", "gallery": {"enabled": true}}')
-                                    a.image-hover(href=`libraries/${ realty.projectId }/realties/${ realty.id }/library/${ imgs[0].library_media_name}`)
-                                        img( src=`libraries/${ realty.projectId }/realties/${ realty.id }/library/${ imgs[0].library_media_name}` class="img-responsive margin-bottom-10")
+                                    a.image-hover(href=`libraries/${ realty.projectId }/realties/${ realty.id }/library/hd_${ imgs[0].library_media_name}`)
+                                        img( src=`libraries/${ realty.projectId }/realties/${ realty.id }/library/thumb_${ imgs[0].library_media_name}` class="img-responsive margin-bottom-10")
                             else
                                 img(alt="image" src=`images/no-media.jpg` class="img-responsive margin-bottom-10")
                         .col-md-8

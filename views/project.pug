@@ -14,7 +14,7 @@ block content
                             ul.hide
                                 each sL in slideshow
                                     li(data-transition="random" data-slotamount="1" data-masterspeed="1000" data-saveperformance="off" data-title=`${ project.project_title }` data-thumb="/images/demo/1200x800/24-min.jpg")
-                                        img(src="/images/1x1.png" data-lazyload=`libraries/${ project.id }/library/${ sL.library_media_name }` alt="" data-bgposition="center center" data-kenburns="on" data-duration="10000" data-ease="Linear.easeNone" data-bgfit="100" data-bgfitend="110")
+                                        img(src="/images/1x1.png" data-lazyload=`libraries/${ project.id }/library/hd_${ sL.library_media_name }` alt="" data-bgposition="center center" data-kenburns="on" data-duration="10000" data-ease="Linear.easeNone" data-bgfit="100" data-bgfitend="110")
                                         .tp-caption.very_large_text.lfb.ltt.tp-resizeme(data-x="right" data-hoffset="-20" data-y="bottom" data-voffset="-20" data-speed="600" data-start="800" data-easing="Power4.easeOut" data-splitin="none" data-splitout="none" data-elementdelay="0.01" data-endelementdelay="0.1" data-endspeed="500" data-endeasing="Power4.easeIn")
                                             != project.project_title
                             .tp-bannertimer
