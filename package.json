@@ -1,6 +1,8 @@
 {
   "name": "imoges",
   "version": "0.0.0",
+  "main": "app.js",
+  "description": "Imoges website",
   "private": true,
   "scripts": {
     "start": "node ./bin/www",

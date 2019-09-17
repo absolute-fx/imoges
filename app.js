@@ -43,15 +43,6 @@ Projects.getAll({countonly: 1, active: 1, diffused: 1}).then(totalProjects =>{
     app.locals.ws_settings.navData.totalProjects = totalProjects;
     Projects.getAll({limit: 4, orderField: "id", orderDirection: "desc", active: 1, diffused: 1, media: 1}).then(projects =>{
         console.log(projects);
-        /*
-        for (let i = 0; i < projects.length; i++){
-            Realties.getByProject({projectId: projects[i].id, active: 1, status: 0}).then(totalRealties =>{
-                projects[i].totalRealties = totalRealties;
-            });
-        }
-
-        console.log("------------------------------------------------------> " + projects);
-        */
         app.locals.ws_settings.navData.projects = projects;
     });
 });
