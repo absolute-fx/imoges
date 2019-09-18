@@ -14,15 +14,6 @@ exports.index = function(req, res, next) {
         breadcrumb: [
             {label: 'Accueil', link: '/'},
             {label: 'Projets', link: '/projects'}
-        ],
-        css_paths: [
-            "/javascripts/plugins/slider.revolution/css/extralayers.css",
-            "/javascripts/plugins/slider.revolution/css/settings.css"
-        ],
-        js_paths:[
-            "/javascripts/plugins/slider.revolution/js/jquery.themepunch.tools.min.js",
-            "/javascripts/plugins/slider.revolution/js/jquery.themepunch.revolution.min.js",
-            "/javascripts/home_slider.js"
         ]
     });
 };
