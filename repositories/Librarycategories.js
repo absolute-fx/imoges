@@ -1,4 +1,11 @@
-const http = require("http");
+let http;
+if (process.env.NODE_ENV === "development" || process.env.NODE_ENV === undefined) {
+    http = require("http");
+}
+else
+{
+    http = require("https");
+}
 const Promise = require("bluebird");
 const fs = require('fs');
 let config = require('../config/config');
