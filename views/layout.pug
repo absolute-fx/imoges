@@ -83,6 +83,7 @@ html
             .inner
                 span.loader
         script(type="text/javascript") var plugin_path = '/javascripts/plugins/';
+        script(type="text/javascript") var api_path = '#{ws_settings.coreConfig.api}';
         script(type="text/javascript" src="/javascripts/plugins/jquery/jquery-2.1.4.min.js")
         if js_paths
             each jsPath in js_paths
