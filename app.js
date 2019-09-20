@@ -23,6 +23,7 @@ const realtyRouter = require('./routes/realty');
 const realtiesRouter = require('./routes/realties');
 const investRouter = require('./routes/invest');
 const savRouter = require('./routes/sav');
+const faqRouter = require('./routes/faq');
 
 
 
@@ -79,6 +80,7 @@ app.use('/realty', realtyRouter);
 app.use('/realties', realtiesRouter);
 app.use('/invest', investRouter);
 app.use('/sav', savRouter);
+app.use('/faq', faqRouter);
 
 
 // catch 404 and forward to error handler

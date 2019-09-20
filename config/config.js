@@ -40,10 +40,6 @@ module.exports = {
         {
           "label": "Charte de qualité",
           "service": "qualitychart"
-        },
-        {
-          "label": "Conditions générales",
-          "service": "terms"
         }
       ]
     }

@@ -4,7 +4,7 @@
 li.dropdown(class=`${ topNavActive && topNavActive === 'index' ? 'active' : ''}`)
 	a.dropdown-toggle(href='/') Accueil
 li.dropdown(class=`${ topNavActive && topNavActive === 'company' ? 'active' : ''}`)
-	a.dropdown-toggle(href='/company') #{company.name}
+	a.dropdown-toggle(href=`/${companyNavData[0].service}`) #{company.name}
 	ul.dropdown-menu
 		each cD in companyNavData
 			li
@@ -45,7 +45,7 @@ li.dropdown.mega-menu(class=`${ topNavActive && topNavActive === 'projects' ? 'a
 									span.label.pull-right.label-count(data-projectid=`${ pD.id }`)
 									span Les biens du projet
 li.dropdown
-	a.dropdown-toggle(href='/') Support
+	a.dropdown-toggle(href='/contact') Support
 	ul.dropdown-menu.pull-right
 		li.dropdown
 			a(href="/contact") Contact avant vente
