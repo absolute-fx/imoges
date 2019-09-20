@@ -63,7 +63,7 @@ block content
                                 each aD in allDocs
                                     li
                                         i.fa.fa-file-pdf-o
-                                        a(href=`${ aD.library_media_url }`) #{ aD.library_media_name}
+                                        a(href=`libraries/${ project.id }/library/${ aD.library_media_name }` target="_blank") #{ aD.library_media_name}
                     .col-md-4
                         .heading-title.heading-line-single
                             h3 Localisation&nbsp;
