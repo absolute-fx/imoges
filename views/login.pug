@@ -1,0 +1,96 @@
+extends layout
+
+block content
+    section
+        .container
+            .row
+                .col-md-4.col-sm-5
+                    .alert.alert-mini.alert-danger.margin-bottom-30.hidden
+                    .box-static.box-border-top.padding-30
+                        .box-title.margin-bottom-30
+                            h2.size-20
+                                | Déjà&nbsp;
+                                span inscrit?
+                        form.sky-form()
+                            .clearfix
+                                .form-group
+                                    label Email
+                                    label.input.margin-bottom-10
+                                        i.ico-append.fa.fa-envelope
+                                        input(required type="email" name="email")
+                                        b.tooltip.tooltip-bottom-right Nécessaire pour vous connecter
+                                .form-group
+                                    label Mot de passe
+                                    label.input.margin-bottom-10
+                                        i.ico-append.fa.fa-lock
+                                        input(required type="password" name="password")
+                                        b.tooltip.tooltip-bottom-right Nécessaire pour vous connecter
+                            .row
+                                .col-md-6.col-sm-6.col-xs-6
+                                    .form-tip.pt-20
+                                        a.no-text-decoration.size-13.margin-top-10.block(href="/forgottenpass") Mot de passe oublié?
+                                .col-md-6.col-sm-6.col-xs-6.text-right
+                                    button.btn.btn-primary
+                                        i.fa.fa-check
+                                        | Connection
+                .col-md-8.col-sm-5
+                    .alert.alert-mini.alert-danger.margin-bottom-30.hidden
+                    .box-static.box-transparent.box-bordered.padding-30
+                        .box-title.margin-bottom-30
+                            h2.size-20
+                                | Pas encore&nbsp;
+                                span inscrit?
+                        form.nomargin.sky-form()
+                            fieldset
+                                .row
+                                    .form-group
+                                        .col-md-6.col-sm-6
+                                            label Prénom *
+                                            label.input.margin-bottom-10
+                                                i.ico-append.fa.fa-user
+                                                input(required type="text" name="firstname")
+                                                b.tooltip.tooltip-bottom-right Votre prénom
+                                        .col-md-6.col-sm-6
+                                            label Nom *
+                                            label.input.margin-bottom-10
+                                                i.ico-append.fa.fa-user
+                                                input(required type="text" name="name")
+                                                b.tooltip.tooltip-bottom-right Votre nom
+                                .row
+                                    .form-group
+                                        .col-md-6.col-sm-6
+                                            label Email *
+                                            label.input.margin-bottom-10
+                                                i.ico-append.fa.fa-envelope
+                                                input(required type="email" name="email")
+                                                b.tooltip.tooltip-bottom-right Votre adresse mail
+                                        .col-md-6.col-sm-6
+                                            label Mobile
+                                            label.input.margin-bottom-10
+                                                i.ico-append.fa.fa-phone
+                                                input(required type="text" name="mobile")
+                                                b.tooltip.tooltip-bottom-right Votre numéro de mobile
+                                .row
+                                    .form-group
+                                        .col-md-6.col-sm-6
+                                            label Mot de passe *
+                                            label.input.margin-bottom-10
+                                                i.ico-append.fa.fa-lock
+                                                input(required type="password" name="password")
+                                                b.tooltip.tooltip-bottom-right Minimum 6 caractères
+                                        .col-md-6.col-sm-6
+                                            label Mot de passe à nouveau *
+                                            label.input.margin-bottom-10
+                                                i.ico-append.fa.fa-lock
+                                                input(required type="password" name="repeat-password")
+                                                b.tooltip.tooltip-bottom-right Répétez votre mot de passe
+                                hr
+                                label.checkbox.nomargin
+                                    input.checked-agree(type="checkbox" name="checkbox")
+                                    i
+                                    | J'accèpte les&nbsp;
+                                    a(href="/cg") Conditions générales
+                                .row.margin-top-20
+                                    button.btn.btn-primary(type="submit")
+                                        i.fa.fa-check
+                                        | S'enregistrer
