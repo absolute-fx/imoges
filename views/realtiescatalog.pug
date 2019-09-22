@@ -2,7 +2,7 @@
     each r in realties
         - cssClasses = tools.getSortClass(r)
         - imgs = tools.getRealtyImages(r.librarycategories);
-        .col-md-3.col-sm-3.col-xs-12.mix.height-505(class= cssClasses)
+        .col-md-3.col-sm-3.col-xs-12.mix.realties-box(class= cssClasses)
             .box-inner
                 if r.realty_status === 0
                     h3.text-left.bold.size-16.elipsis
