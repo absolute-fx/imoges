@@ -1,6 +1,7 @@
 exports.index = function(req, res, next) {
     res.render('about', {
         title: 'A propos de la société',
+        page_description: "Imoges a été fondée en 2006 par Eric Sirault et son épouse Catherine Alard, tout d'abord dans la rénovation pour ensuite se diriger vers la construction de logements neufs.",
         topNavActive: 'company',
         sideNavActive: 'about',
         breadcrumb: [

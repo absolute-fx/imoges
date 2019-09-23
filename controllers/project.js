@@ -14,6 +14,7 @@ exports.index = function(req, res, next) {
                 console.log(realties);
                 res.render('project', {
                     title: project.project_title,
+                    page_description: project.project_short_description,
                     topNavActive: 'projects',
                     breadcrumb: [
                         {label: 'Accueil', link: '/'},

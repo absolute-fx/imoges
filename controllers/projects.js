@@ -11,6 +11,7 @@ exports.index = function(req, res, next) {
 
         res.render('projects', {
             title: 'Les projets Imoges',
+            page_description: "Liste de tous les porjets Imoges",
             topNavActive: 'projects',
             breadcrumb: [
                 {label: 'Accueil', link: '/'},

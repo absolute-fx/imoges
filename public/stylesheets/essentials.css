@@ -28509,3 +28509,9 @@ section.dark .md-editor.md-fullscreen-mode
         height: 580px !important;
     }
 }
+
+@media only screen and (max-width: 767px) {
+    .dropdown-menu li {
+        display: none !important;
+    }
+}

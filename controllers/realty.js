@@ -20,6 +20,7 @@ exports.index = function(req, res, next) {
                 console.log(librarycategories);
                 res.render('realty', {
                     title: 'Imoges - Promotion immobilière',
+                    page_description: realty.realty_long_description,
                     topNavActive: 'projects',
                     breadcrumb: [
                         {label: 'Accueil', link: '/'},

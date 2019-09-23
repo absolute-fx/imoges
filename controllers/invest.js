@@ -13,6 +13,7 @@ exports.index = function(req, res, next) {
         console.log(realties);
         res.render('invest', {
             title: 'Investir avec Imoges',
+            page_description: 'Investissez avec Imoges, un investissement sans risque en bon père de famille',
             topNavActive: 'invest',
             breadcrumb: [
                 {label: 'Accueil', link: '/'},

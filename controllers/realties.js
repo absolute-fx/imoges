@@ -11,6 +11,7 @@ exports.index = function(req, res, next) {
         console.log(realties);
         res.render('realties', {
             title: 'Les biens Imoges',
+            page_description: "Liste de tous les biens Imoges disponibles",
             topNavActive: 'projects',
             breadcrumb: [
                 {label: 'Accueil', link: '/'},
