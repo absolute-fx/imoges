@@ -1,16 +1,11 @@
 extends layout
 
 block content
-    if realties
-        .box-light.padding-bottom-30
-            .container
-                h2.weight-300.text-center LES BIENS A LA UNE...
-                hr
-                include realtiescatalog
-                .text-center
-                    a(href="/realties" class="btn btn-reveal btn-default")
-                        i.fa.fa-plus
-                        span Voir tous les biens disponibles
+    .box-light.padding-bottom-30
+        .container
+            h2.weight-300.text-center LES DERNIERS PROJETS
+            hr
+            include lastprojects
     section.info-bar.info-bar-clean.info-bar-light
         .container
             .row

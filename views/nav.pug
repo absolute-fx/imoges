@@ -44,6 +44,8 @@ li.dropdown.mega-menu(class=`${ topNavActive && topNavActive === 'projects' ? 'a
 								a(href=`/project?id=${ pD.id }#biens`)
 									span.label.pull-right.label-count(data-projectid=`${ pD.id }`)
 									span Les biens du projet
+li.dropdown.mega-menu
+	a.dropdown-toggle(href='/') Book
 li.dropdown
 	a.dropdown-toggle(href='/contact') Support
 	ul.dropdown-menu.pull-right

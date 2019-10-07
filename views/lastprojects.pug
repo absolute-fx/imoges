@@ -1,0 +1,18 @@
+.row
+    each p in projects
+        .col-md-6.col-sm-6
+            .box-static.box-border-top.padding-30.margin-bottom-20
+                .box-title.margin-bottom-30
+                    h2.size-20!= "Projet <span>" + p.project_title + "</span>"
+                if p.librarycategories
+                    - genericImages = tools.getGenericImages(p.librarycategories)
+                    if genericImages.length > 0
+                        - url = "libraries/" + p.id + "/library/thumb_" + genericImages[0].library_media_name
+                        img.img-responsive(src=`${ url }`)
+                    else
+                        img.img-responsive(src="images/no-media.jpg")
+                else
+                    img.img-responsive(src="images/no-media.jpg")
+                a.margin-top-20(href=`/project?id=${p.id}` class="btn btn-reveal btn-default")
+                    i.fa.fa-plus
+                    span Voir la fiche projet

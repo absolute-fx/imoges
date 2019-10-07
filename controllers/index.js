@@ -1,16 +1,18 @@
 const Realties = require('../repositories/Realties');
+const Projects = require('../repositories/Projects');
 
 exports.index = function(req, res, next) {
-    const limit = 4;
+    const limit = 2;
     const status = 0;
     const active = 1;
     const media = 1;
-    const order_field = "id";
-    const order_direction = "desc";
-    Realties.getAll({limit, status, active, media, order_field, order_direction}).then(realties =>{
-        console.log(realties);
+    const orderField = "id";
+    const orderDirection = "desc";
+    Projects.getAll({limit, status, active, media, orderField, orderDirection}).then(projects =>{
+        console.log(projects);
         res.render('index', {
             title: 'Imoges - Promotion immobilière',
+            page_description: "La société Imoges a été fondée en  2006 et a actuellement porté " + projects.length + " projets immobiliers sur Ecaussinnes, Soignies et Braine le Comte.",
             type: 'root',
             css_paths: [
                 "/javascripts/plugins/slider.revolution/css/extralayers.css",
@@ -22,15 +24,7 @@ exports.index = function(req, res, next) {
                 "/javascripts/home_slider.js"
             ],
             topNavActive: 'index',
-            logs: [
-                { log_table_id: 25, label: 'Résidence Morgane', log_table_name: 'Projects', createdAt: '12/04/2018'},
-                { log_table_id: 30, log_table_id_parent: 64, label: 'App 14', label_parent: 'Les demoiselles', log_table_name: 'Realties',createdAt: '12/04/2018'},
-                { log_table_id: 22, log_table_id_parent: 64, label: 'App 09', label_parent: 'Les demoiselles', log_table_name: 'Clients', createdAt: '10/04/2018'},
-                { log_table_id: 12, log_table_id_parent: 64, label: 'App 05', label_parent: 'Les demoiselles', log_table_name: 'Realties', createdAt: '08/04/2018'},
-                { log_table_id: 64, label: 'Les demoiselles', log_table_name: 'Projects', createdAt: '05/04/2018'},
-                { log_table_id: 27, log_table_id_parent: 10, label: 'Rez 04', label_parent: 'Ines', log_table_name: 'Clients', createdAt: '02/04/2018'}
-            ],
-            realties: realties
+            projects: projects
         });
     });
 };
