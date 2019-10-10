@@ -8,7 +8,6 @@ $(document).ready(function(){
         request.onload = function(){
             let data = JSON.parse(this.response);
             if (request.status >= 200 && request.status < 400) {
-                realtiesAvailable.push(data.totalRealties);
                 if(data.totalRealties > 0){
                     $('.mega-menu').find(`[data-projectid=${ projectId }]`).addClass('label-success').html(data.totalRealties);
                 }else{
