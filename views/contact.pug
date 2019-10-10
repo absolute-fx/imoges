@@ -37,6 +37,9 @@ block content
                                     label(for="select_projects") Concernant le projet
                                     select.form-control.pointer(name="project" id="select_projects")
                                         option(value="") Aucun
+                                        each p in projects
+                                            if p.totalRealtiesAvailable > 0
+                                                option(value=`${p.id}`)= p.project_title
                                 .col-md-6
                                     label(for="select_realties") Concernant le bien
                                     select.form-control.pointer(name="realty" id="select_realties" disabled)

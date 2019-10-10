@@ -1,24 +1,8 @@
-getProjects();
-
 $(document).ready(()=>{
     $('#select_projects').change(function(){
         getRealties(this.value);
     });
 });
-
-function getProjects(){
-    let api_url = api_path + 'projects?active=1&order_field=id&order_direction=desc&diffused=1';
-    let request = new XMLHttpRequest();
-    request.open('GET', api_url, true);
-    request.onload = function(){
-        let data = JSON.parse(this.response);
-        if (request.status >= 200 && request.status < 400) {
-            setSelect('projects', data);
-            console.log(data);
-        }
-    };
-    request.send();
-}
 
 
 function getRealties(projectId) {
