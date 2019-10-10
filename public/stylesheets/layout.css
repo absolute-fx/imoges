@@ -150,6 +150,24 @@ section.imoges-red .active{
     color: black!important;
 }
 
+section.imoges-grey
+{
+    background-color: #3d4547!important;
+}
+
+section.imoges-grey a
+{
+    color: lightgray!important;
+}
+
+section.imoges-grey .active{
+    color: white!important;
+}
+
+section.imoges-grey h1{
+    color: white!important;
+}
+
 section.dark.alternate
 {
     background-color: #151515;
