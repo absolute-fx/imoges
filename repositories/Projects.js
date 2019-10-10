@@ -39,6 +39,12 @@ class ProjectsRepository
             if(args.countonly){
                 parameters += "countonly=" + args.countonly + "&";
             }
+            if(args.realties){
+                parameters += "realties=" + args.realties + "&";
+            }
+            if(args.realtiesCount){
+                parameters += "realtiesCount=" + args.realtiesCount + "&";
+            }
 
             parameters = parameters.slice(0, -1);
         }
@@ -79,6 +85,7 @@ class ProjectsRepository
         if(args.media){
             parameters += "media=" + args.media + "&";
         }
+        parameters = parameters.slice(0, -1);
         console.log(parameters);
         return new Promise((resolve, reject) => {
             http.get(apiLink + 'projects' + parameters, (resp) =>{

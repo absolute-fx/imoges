@@ -172,6 +172,30 @@ class Tools{
         return pebType;
     }
 
+    static getRealtiesAvailability(projects){
+        let realtiesAvailableList;
+        let realtiesList;
+        let totalRealties;
+        let totalRealtiesAvailable;
+        for(let p of projects){
+            realtiesAvailableList = [];
+            realtiesList = [];
+            for(let r of p.realties){
+                if(r.realty_active_online && r.realty_status === 0) realtiesAvailableList.push(r);
+                if(r.realty_active_online) realtiesList.push(r);
+            }
+            totalRealties = realtiesList.length;
+            totalRealtiesAvailable = realtiesAvailableList.length;
+            let soldRealties = totalRealties - totalRealtiesAvailable;
+            let prctSold = Math.round((soldRealties * 100) / totalRealties);
+
+            p.totalRealties = totalRealties;
+            p.totalRealtiesAvailable = totalRealtiesAvailable;
+            p.prctSold = prctSold;
+        }
+        return projects;
+    }
+
     // ** BIENS ** //
     static getRelatyPrice(price, vat,  priceWithVat){
         return priceWithVat ? this.numberWithCommas(price + (price * (vat / 100))) : this.numberWithCommas(price);

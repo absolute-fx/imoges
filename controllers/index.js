@@ -1,5 +1,6 @@
 const Realties = require('../repositories/Realties');
 const Projects = require('../repositories/Projects');
+const Tools = require('../classes/Tools');
 
 exports.index = function(req, res, next) {
     const limit = 2;
@@ -8,8 +9,10 @@ exports.index = function(req, res, next) {
     const media = 1;
     const orderField = "id";
     const orderDirection = "desc";
-    Projects.getAll({limit, status, active, media, orderField, orderDirection}).then(projects =>{
+    const realties = 1;
+    Projects.getAll({limit, status, active, media, orderField, orderDirection, realties}).then(projects =>{
         console.log(projects);
+        let p = Tools.getRealtiesAvailability(projects);
         res.render('index', {
             title: 'Imoges - Promotion immobilière',
             page_description: "La société Imoges a été fondée en  2006 et a actuellement porté une série de projets immobiliers sur Ecaussinnes, Soignies et Braine le Comte.",
@@ -24,7 +27,7 @@ exports.index = function(req, res, next) {
                 "/javascripts/home_slider.js"
             ],
             topNavActive: 'index',
-            projects: projects
+            projects: p
         });
     });
 };

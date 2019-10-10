@@ -2,8 +2,9 @@
     each p in projects
         .col-md-6.col-sm-6.home-project-box(data-projectid=`${p.id}` id=`project-box-${p.id}`)
             .box-static.box-border-top.padding-30.margin-bottom-20.relative
-                .ribbon(style="display: none;")
-                    .ribbon-inner 60% vendu
+                if p.prctSold > 0 && p.prctSold !== 100
+                    .ribbon
+                        .ribbon-inner= p.prctSold + "% vendu"
                 .box-title.margin-bottom-30
                     h2.size-20!= "Projet <span>" + p.project_title + "</span><br>"
                         small= p.project_city + " - " + p.project_address
