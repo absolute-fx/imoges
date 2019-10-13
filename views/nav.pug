@@ -29,15 +29,16 @@ li.dropdown.mega-menu(class=`${ topNavActive && topNavActive === 'projects' ? 'a
 								span #{pD.project_title}
 							li
 								span
-									if pD.librarycategories
-										- genericImages = tools.getGenericImages(pD.librarycategories)
-										if genericImages.length > 0
-											- url = "libraries/" + pD.id + "/library/thumb_" + genericImages[0].library_media_name
-											img.img-responsive(src=`${ url }`)
+									a.nav-img-btn(href=`/project?id=${ pD.id }` style="padding:0;")
+										if pD.librarycategories
+											- genericImages = tools.getGenericImages(pD.librarycategories)
+											if genericImages.length > 0
+												- url = "libraries/" + pD.id + "/library/thumb_" + genericImages[0].library_media_name
+												img.img-responsive(src=`${ url }`)
+											else
+												img.img-responsive(src="images/no-media.jpg")
 										else
 											img.img-responsive(src="images/no-media.jpg")
-									else
-										img.img-responsive(src="images/no-media.jpg")
 							li
 								a(href=`/project?id=${ pD.id }`) Fiche du projet
 							li
@@ -45,7 +46,46 @@ li.dropdown.mega-menu(class=`${ topNavActive && topNavActive === 'projects' ? 'a
 									span.label.pull-right.label-count(data-projectid=`${ pD.id }`)
 									span Les biens du projet
 li.dropdown.mega-menu
-	a.dropdown-toggle(href='/') Book
+	a.dropdown-toggle(href='/') Media
+	ul.dropdown-menu.padding-bottom-10
+		li
+			.row
+				.col-md-4
+					ul.list-unstyled
+						li
+							span Chaîne vidéo Youtube
+						li
+							span
+								img.img-responsive(src="/images/social/youtube_header.jpg")
+						li
+							a(href=`${ company.youtube }` target="_blank") Visiter la chaîne youtube
+				.col-md-2
+					ul.list-unstyled
+						li
+							span Vidéos
+						li
+							span
+								img.img-responsive(src="/images/temp_projects/alexandre.jpg")
+						li
+							a(href="/videogal") Voir les vidéos
+				.col-md-2
+					ul.list-unstyled
+						li
+							span Images
+						li
+							span
+								img.img-responsive(src="/images/temp_projects/alexandre.jpg")
+						li
+							a(href="/photogal") Voir les galeries
+				.col-md-4
+					ul.list-unstyled
+						li
+							span Page Facebook
+						li
+							span
+								img.img-responsive(src="/images/social/facebook_header.jpg")
+						li
+							a(href=`${ company.facebook }` target="_blank") Visiter la page Facebook
 li.dropdown
 	a.dropdown-toggle(href='/contact') Support
 	ul.dropdown-menu.pull-right

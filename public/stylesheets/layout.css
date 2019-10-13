@@ -3887,6 +3887,11 @@ body.boxed #topBar.dark ul.top-links>li
     {
         position: relative;
     }
+
+    .nav-img-btn{
+        padding: 0!important;
+    }
+
     #topMain>li>a>span
     {
         display: none !important;

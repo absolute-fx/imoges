@@ -25,6 +25,8 @@ const investRouter = require('./routes/invest');
 const savRouter = require('./routes/sav');
 const faqRouter = require('./routes/faq');
 const loginRouter = require('./routes/login');
+const videogalRouter = require('./routes/videogal');
+const photogalRouter = require('./routes/photogal');
 
 
 
@@ -83,6 +85,8 @@ app.use('/invest', investRouter);
 app.use('/sav', savRouter);
 app.use('/faq', faqRouter);
 app.use('/login', loginRouter);
+app.use('/videogal', videogalRouter);
+app.use('/photogal', photogalRouter);
 
 
 // catch 404 and forward to error handler
