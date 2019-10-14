@@ -43,8 +43,7 @@ block content
                             else
                                 img(class="img-responsive" src="images/no-media.jpg")
                         .col-md-5
-                            div
-                                strong= realty.realty_long_description
+                            div= realty.realty_long_description
                             div.margin-top-10.justify Ce bien est associé au projet&nbsp
                                 a(href=`/project?id ${ realty.projectId }`)= realty.project.project_title
                                 = ", " + realty.project.project_address + " à " + realty.project.project_city + ". N'hésitez pas à consulter les "
