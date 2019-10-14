@@ -68,7 +68,7 @@ block content
                         .heading-title.heading-line-single
                             h3 Localisation&nbsp;
                                 span projet
-                        #map(class="height-200 grayscale" data-lat=`${project.project_lat}` data-lng=`${project.project_long}` data-page="project")
+                        #map(class="height-200" data-lat=`${project.project_lat}` data-lng=`${project.project_long}` data-page="project")
                 div(class="row process-wizard process-wizard-primary hidden-xs")
                     - waitForActive = true
                     - colSize = project.phases.length !== 5 ?  12 / project.phases.length : "5th"
