@@ -4,7 +4,7 @@ exports.index = function(req, res, next) {
         topNavActive: 'media',
         breadcrumb: [
             {label: 'Accueil', link: '/'},
-            {label: 'Galerie vidéo', link: '/video'}
+            {label: 'Galerie vidéo'}
         ]
     });
 };

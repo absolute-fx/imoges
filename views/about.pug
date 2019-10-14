@@ -34,9 +34,3 @@ block content
                     .heading-title.heading-line-single.margin-bottom-10
                         h4!= "Garantie <span>Loi Breyne</span>"
                     p Il s’agit de la seule protection pour nos acquéreurs en droit belge. La loi BREYNE protège le candidat-bâtisseur ainsi que le candidat-acheteur d’une habitation à construire ou en voie de construction contre les clauses abusives prévues dans les contrats et contre le risque d’insolvabilité du cocontractant.
-    section.dark-bkg
-        .container
-            div(class=`masonry-gallery columns-5 clearfix lightbox` data-img-big="1" data-plugin-options='{"delegate": "a", "gallery": {"enabled": true}}')
-                each m in media
-                    a.image-hover(href=`${ m.media_url }`)
-                        img(src=`${ m.media_url }`)
