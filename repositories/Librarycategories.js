@@ -42,6 +42,8 @@ class LibrarycategoriesRepository {
                 parameters += "order_direction=" + args.orderDirection + "&";
             }
         }
+        parameters = parameters.slice(0, -1);
+
         return new Promise((resolve, reject) => {
             let masterUrl;
             if(getAllMedia){

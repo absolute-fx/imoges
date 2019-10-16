@@ -86,14 +86,9 @@ li.dropdown.mega-menu
 								img.img-responsive(src="/images/social/facebook_header.jpg")
 						li
 							a(href=`${ company.facebook }` target="_blank") Visiter la page Facebook
-li.dropdown
-	a.dropdown-toggle(href='/contact') Support
-	ul.dropdown-menu.pull-right
-		li.dropdown
-			a(href="/contact") Contact avant vente
-		li.dropdown
-			a(href="/sav") Service après vente
 li.dropdown(class=`${ topNavActive && topNavActive === 'invest' ? 'active' : ''}`)
 	a.dropdown-toggle(href='/invest') Investir
+li.dropdown
+	a.dropdown-toggle(href='/contact') Contact
 li.dropdown
 	a.dropdown-toggle(href='/login') Mon compte
