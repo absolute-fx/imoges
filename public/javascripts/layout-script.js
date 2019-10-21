@@ -19,6 +19,7 @@ $(document).ready(function(){
     });
 });
 
+
 $("#nl_form").submit(function(){
     let email = $("#email-nl").val();
     console.log(email);
@@ -28,13 +29,29 @@ $("#nl_form").submit(function(){
     let request = new XMLHttpRequest();
     request.open('POST', api_url, true);
     request.setRequestHeader("Content-Type", "application/json");
+
     request.onload = function(){
         let data = JSON.parse(this.response);
         if (request.status >= 200 && request.status < 400) {
             console.log(data);
         }
     };
+
     request.send('email=' + email);
 
     return false;
 });
+/*
+
+$("#nl_form").submit(function(){
+    $.ajax({
+        url: api_path + 'newsletter',
+        contentType: "application/json",
+        dataType: 'json',
+        success: function(result){
+            console.log(result);
+        }
+    })
+    return false;
+});
+*/
