@@ -56,7 +56,8 @@ li.dropdown.mega-menu
 							span Chaîne vidéo Youtube
 						li
 							span
-								img.img-responsive(src="/images/social/youtube_header.jpg")
+								a.nav-img-btn(href=`${ company.youtube }` target="_blank" style="padding:0;")
+									img.img-responsive(src="/images/social/youtube_header.jpg")
 						li
 							a(href=`${ company.youtube }` target="_blank") Visiter la chaîne youtube
 				.col-md-2
@@ -65,7 +66,8 @@ li.dropdown.mega-menu
 							span Vidéos
 						li
 							span
-								img.img-responsive(src="/images/temp_projects/alexandre.jpg")
+								a.nav-img-btn(href="/videogal" style="padding:0;")
+									img.img-responsive(src="/images/temp_projects/alexandre.jpg")
 						li
 							a(href="/videogal") Voir les vidéos
 				.col-md-2
@@ -74,7 +76,8 @@ li.dropdown.mega-menu
 							span Images
 						li
 							span
-								img.img-responsive(src="/images/temp_projects/alexandre.jpg")
+								a(href="/photogal" style="padding:0;")
+									img.img-responsive(src="/images/temp_projects/alexandre.jpg")
 						li
 							a(href="/photogal") Voir la galerie
 				.col-md-4
@@ -83,7 +86,8 @@ li.dropdown.mega-menu
 							span Page Facebook
 						li
 							span
-								img.img-responsive(src="/images/social/facebook_header.jpg")
+								a(href=`${ company.facebook }` target="_blank" style="padding:0;")
+									img.img-responsive(src="/images/social/facebook_header.jpg")
 						li
 							a(href=`${ company.facebook }` target="_blank") Visiter la page Facebook
 li.dropdown(class=`${ topNavActive && topNavActive === 'invest' ? 'active' : ''}`)
