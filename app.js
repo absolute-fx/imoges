@@ -27,6 +27,7 @@ const faqRouter = require('./routes/faq');
 const loginRouter = require('./routes/login');
 const videogalRouter = require('./routes/videogal');
 const photogalRouter = require('./routes/photogal');
+const newsletterRouter = require('./routes/newsletter');
 
 
 
@@ -87,6 +88,7 @@ app.use('/faq', faqRouter);
 app.use('/login', loginRouter);
 app.use('/videogal', videogalRouter);
 app.use('/photogal', photogalRouter);
+app.use('/newsletter', newsletterRouter);
 
 
 // catch 404 and forward to error handler
