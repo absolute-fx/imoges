@@ -2,6 +2,15 @@ $(document).ready(()=>{
     $('#select_projects').change(function(){
         getRealties(this.value);
     });
+    $('#contact-form').submit(function (e) {
+        let formData = $(this).serialize();
+        $.post( '/contactform', formData, function(data) {
+            //console.log("-> " + data);
+            //$("#email-nl").val("");
+            _toastr("Votre message a été envoyé","top-right","success",false);
+        });
+        return false;
+    });
 });
 
 

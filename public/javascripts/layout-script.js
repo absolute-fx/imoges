@@ -20,11 +20,17 @@ $(document).ready(function(){
 });
 
 $("#nl_form").submit(function(){
-    let parameters = { email: $("#email-nl").val() };
-    $.get( '/newsletter', parameters, function(data) {
-        //console.log("-> " + data);
-        $("#email-nl").val("");
-        _toastr("Vous avez été enregistré!","bottom-right","success",false);
-    });
+    if($("#email-nl").val() !== ""){
+        let parameters = { email: $("#email-nl").val() };
+        $.get( '/newsletter', parameters, function(data) {
+            //console.log("-> " + data);
+            $("#email-nl").val("");
+            _toastr("Vous avez été enregistré!","bottom-right","success",false);
+        });
+    }
+    else{
+        _toastr("Veuillez indiquer votre adresse mail","bottom-right","error",false);
+    }
+
     return false;
 });
