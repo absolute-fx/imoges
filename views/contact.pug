@@ -40,10 +40,12 @@ block content
                                         each p in projects
                                             if p.totalRealtiesAvailable > 0
                                                 option(value=`${p.id}`)= p.project_title
+                                    input#project_label(type="hidden" name="projectLabel")
                                 .col-md-6
                                     label(for="select_realties") Concernant le bien
                                     select.form-control.pointer(name="realty" id="select_realties" disabled)
                                         option(value="") Choisissez un projet
+                                    input#realty_label(type="hidden" name="realtyLabel")
                         .row
                             .form-group
                                 .col-md-12

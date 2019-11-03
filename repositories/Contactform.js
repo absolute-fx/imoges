@@ -7,22 +7,19 @@ class ContactformRepository
 {
     sendMessage(data){
         console.log(data);
-
-        /*
         return new Promise((resolve, reject) => {
             console.log(apiLink + 'contact' );
             axios.post(apiLink + 'contact', data)
                 .then((res) => {
-                    console.log(`statusCode: ${res.statusCode}`);
-                    console.log(res);
-                    resolve(res);
+                    //console.log(`statusCode: ${res.statusCode}`);
+                    //console.log(res);
+                    resolve(true);
                 })
                 .catch((error) => {
                     console.error(error);
                     reject(error);
                 })
         });
-        */
     }
 }
 module.exports = new ContactformRepository();

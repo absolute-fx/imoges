@@ -1,13 +1,25 @@
 $(document).ready(()=>{
     $('#select_projects').change(function(){
+        $('#project_label').val($('#select_projects option:selected').text());
         getRealties(this.value);
     });
+
+    $('#select_realties').change(function() {
+        $("#realty_label").val($('#select_realties option:selected').text());
+    });
+
     $('#contact-form').submit(function (e) {
         let formData = $(this).serialize();
+        //console.log(formData);
         $.post( '/contactform', formData, function(data) {
-            //console.log("-> " + data);
-            //$("#email-nl").val("");
-            _toastr("Votre message a été envoyé","top-right","success",false);
+            console.log("-> " + data);
+            if(data){
+                _toastr("Votre message a été envoyé","bottom-right","success",false);
+                $("#contact-form")[0].reset();
+                $("#select_realties").prop( "disabled", true );
+            } else{
+                _toastr("Il y a eu un problème lors de l'envoi du message","bottom-right","error",false);
+            }
         });
         return false;
     });
@@ -35,7 +47,6 @@ function getRealties(projectId) {
 function setSelect(cat, data){
     if (cat === "realties"){
         $("#select_realties").removeAttr("disabled").html("").append('<option value="">Choisissez un bien</option>');
-
     }
     for (let d of data[cat]){
         let label = cat === "projects" ?  d.project_title : d.realty_title;

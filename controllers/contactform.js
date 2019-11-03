@@ -5,7 +5,7 @@ exports.index = function(req, res, next) {
 
     Contactform.sendMessage(req.body).then( data => {
         console.log("Data sent");
-        res.send(true);
+        res.send(data);
     });
 
 };
