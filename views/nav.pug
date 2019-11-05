@@ -92,7 +92,7 @@ li.dropdown.mega-menu
 							a(href=`${ company.facebook }` target="_blank") Visiter la page Facebook
 li.dropdown(class=`${ topNavActive && topNavActive === 'invest' ? 'active' : ''}`)
 	a.dropdown-toggle(href='/invest') Investir
-li.dropdown
+li.dropdown(class=`${ topNavActive && topNavActive === 'contact' ? 'active' : ''}`)
 	a.dropdown-toggle(href='/contact') Contact
-li.dropdown
+li.dropdown(class=`${ topNavActive && topNavActive === 'account' ? 'active' : ''}`)
 	a.dropdown-toggle(href='/login') Mon compte

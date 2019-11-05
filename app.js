@@ -29,6 +29,7 @@ const videogalRouter = require('./routes/videogal');
 const photogalRouter = require('./routes/photogal');
 const newsletterRouter = require('./routes/newsletter');
 const contactformRouter = require('./routes/contactform');
+const authRouter = require('./routes/auth');
 
 
 
@@ -91,6 +92,7 @@ app.use('/videogal', videogalRouter);
 app.use('/photogal', photogalRouter);
 app.use('/newsletter', newsletterRouter);
 app.use('/contactform', contactformRouter);
+app.use('/auth', authRouter);
 
 
 // catch 404 and forward to error handler
