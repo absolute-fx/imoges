@@ -4,6 +4,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const fs = require('fs');
+const session = require('express-session');
 let config = require('./config/config');
 
 const tools = require('./classes/Tools');
@@ -30,6 +31,7 @@ const photogalRouter = require('./routes/photogal');
 const newsletterRouter = require('./routes/newsletter');
 const contactformRouter = require('./routes/contactform');
 const authRouter = require('./routes/auth');
+const accountRouter = require('./routes/account');
 
 
 
@@ -49,7 +51,7 @@ const Realties = require('./repositories/Realties');
 Projects.getAll({countonly: 1, active: 1, diffused: 1}).then(totalProjects =>{
     app.locals.ws_settings.navData.totalProjects = totalProjects;
     Projects.getAll({limit: 4, orderField: "id", orderDirection: "desc", active: 1, diffused: 1, media: 1}).then(projects =>{
-        console.log(projects);
+        //console.log(projects);
         app.locals.ws_settings.navData.projects = projects;
     });
 });
@@ -58,6 +60,29 @@ Projects.getAll({countonly: 1, active: 1, diffused: 1}).then(totalProjects =>{
 const actualDate = new Date();
 const actualYear = actualDate.getFullYear();
 app.locals.ws_settings.coreConfig.actualYear = actualYear;
+app.locals.accessToken = "";
+
+// session
+const cookieMaxAge = 60000;
+
+let sess = {
+    secret: 'mysecret',
+    name: 'sid',
+    saveUninitialized: false,
+    resave: true,
+    cookie: {
+        maxAge: cookieMaxAge,
+        sameSite: true,
+		secure: false
+    }
+}
+
+if (app.get('env') === 'production') {
+    app.set('trust proxy', 1) // trust first proxy
+    sess.cookie.secure = true // serve secure cookies
+}
+
+app.use(session(sess));
 
 
 // view engine setup
@@ -93,6 +118,7 @@ app.use('/photogal', photogalRouter);
 app.use('/newsletter', newsletterRouter);
 app.use('/contactform', contactformRouter);
 app.use('/auth', authRouter);
+app.use('/account', accountRouter);
 
 
 // catch 404 and forward to error handler
@@ -110,5 +136,6 @@ app.use(function(err, req, res, next) {
 	res.status(err.status || 500);
 	res.render('error');
 });
+
 
 module.exports = app;

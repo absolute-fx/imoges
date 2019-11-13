@@ -11,7 +11,7 @@ exports.index = function(req, res, next) {
     const orderDirection = "desc";
     const realties = 1;
     Projects.getAll({limit, status, active, media, orderField, orderDirection, realties}).then(projects =>{
-        console.log(projects);
+        //console.log(projects);
         let p = Tools.getRealtiesAvailability(projects);
         res.render('index', {
             title: 'Imoges - Promotion immobilière',

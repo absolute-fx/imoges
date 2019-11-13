@@ -17,7 +17,7 @@ block content
                                     label Email
                                     label.input.margin-bottom-10
                                         i.ico-append.fa.fa-envelope
-                                        input(required type="email" name="email")
+                                        input(required type="email" name="username")
                                         b.tooltip.tooltip-bottom-right Nécessaire pour vous connecter
                                 .form-group
                                     label Mot de passe
@@ -30,9 +30,9 @@ block content
                                     .form-tip.pt-20
                                         a.no-text-decoration.size-13.margin-top-10.block(href="/forgottenpass") Mot de passe oublié?
                                 .col-md-6.col-sm-6.col-xs-6.text-right
-                                    button.btn.btn-primary
+                                    button.btn.btn-primary(type="submit")
                                         i.fa.fa-check
-                                        | Connection
+                                        | Connexion
                 .col-md-8.col-sm-5
                     .alert.alert-mini.alert-danger.margin-bottom-30.hidden
                     .box-static.box-transparent.box-bordered.padding-30

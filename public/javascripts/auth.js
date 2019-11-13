@@ -6,11 +6,11 @@ $('#login_form').submit(function(e){
     let formData = $(this).serialize();
     console.log(formData);
     $.post( '/auth', formData, function(data) {
-        console.log("-> " + data);
-        if(data){
-
+        console.log(data);
+        if(data.auth){
+            $(location).attr('href','/account');
         } else{
-            _toastr("Problème de connection","bottom-right","error",false);
+            _toastr(data.reason,"bottom-right","error",false);
         }
     });
     return false;

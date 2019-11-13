@@ -1,0 +1,49 @@
+extends layout
+
+block content
+    section
+        .container
+            .heading-title.heading-line-single
+                h3
+                    | Bienvenue&nbsp;
+                    span= user.firstname
+            .row
+                .col-md-4
+                    .box-flip.box-color.box-icon.box-icon-center.box-icon-round.box-icon-large.text-center
+                        .front
+                            .box1(style="background-color:#a0ce4e;")
+                                .box-icon-title
+                                    i.fa.fa-user
+                                    h2 Mes informations
+                        .back
+                            .box2(style="background-color:#a0ce4e;")
+                                h4 Informations du compte
+                                hr
+                                p Gérer vos informations personnelles via cette page
+                                a.btn.btn-translucid.btn-lg.btn-block Acceder
+                .col-md-4
+                    .box-flip.box-color.box-icon.box-icon-center.box-icon-round.box-icon-large.text-center
+                        .front
+                            .box1(style="background-color:#a0ce4e;")
+                                .box-icon-title
+                                    i.fa.fa-home
+                                    h2 Mes biens
+                        .back
+                            .box2(style="background-color:#a0ce4e;")
+                                h4 Liste des biens
+                                hr
+                                p Visualiser la liste de vos biens et leurs informations via cette page.
+                                a.btn.btn-translucid.btn-lg.btn-block Acceder
+                .col-md-4
+                    .box-flip.box-color.box-icon.box-icon-center.box-icon-round.box-icon-large.text-center
+                        .front
+                            .box1(style="background-color:#a0ce4e;")
+                                .box-icon-title
+                                    i.fa.fa-bell
+                                    h2 Mon service après-vente
+                        .back
+                            .box2(style="background-color:#a0ce4e;")
+                                h4 Service après-vente
+                                hr
+                                p Vous avez un problème à signaler avec un de vos biens?
+                                a.btn.btn-translucid.btn-lg.btn-block Acceder
