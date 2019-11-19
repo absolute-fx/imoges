@@ -40,57 +40,62 @@ block content
                             h2.size-20
                                 | Pas encore&nbsp;
                                 span inscrit?
-                        form.nomargin.sky-form()
-                            fieldset
-                                .row
-                                    .form-group
-                                        .col-md-6.col-sm-6
-                                            label Prénom *
-                                            label.input.margin-bottom-10
-                                                i.ico-append.fa.fa-user
-                                                input(required type="text" name="firstname")
-                                                b.tooltip.tooltip-bottom-right Votre prénom
-                                        .col-md-6.col-sm-6
-                                            label Nom *
-                                            label.input.margin-bottom-10
-                                                i.ico-append.fa.fa-user
-                                                input(required type="text" name="name")
-                                                b.tooltip.tooltip-bottom-right Votre nom
-                                .row
-                                    .form-group
-                                        .col-md-6.col-sm-6
-                                            label Email *
-                                            label.input.margin-bottom-10
-                                                i.ico-append.fa.fa-envelope
-                                                input(required type="email" name="email")
-                                                b.tooltip.tooltip-bottom-right Votre adresse mail
-                                        .col-md-6.col-sm-6
-                                            label Mobile
-                                            label.input.margin-bottom-10
-                                                i.ico-append.fa.fa-mobile
-                                                input(type="text" name="mobile")
-                                                b.tooltip.tooltip-bottom-right Votre numéro de mobile
-                                .row
-                                    .form-group
-                                        .col-md-6.col-sm-6
-                                            label Mot de passe *
-                                            label.input.margin-bottom-10
-                                                i.ico-append.fa.fa-lock
-                                                input(required type="password" name="password")
-                                                b.tooltip.tooltip-bottom-right Minimum 6 caractères
-                                        .col-md-6.col-sm-6
-                                            label Répéter mot de passe *
-                                            label.input.margin-bottom-10
-                                                i.ico-append.fa.fa-lock
-                                                input(required type="password" name="repeat-password")
-                                                b.tooltip.tooltip-bottom-right Répétez votre mot de passe
-                                hr
-                                label.checkbox.nomargin
-                                    input.checked-agree(type="checkbox" name="checkbox")
-                                    i
-                                    | J'accèpte les&nbsp;
-                                    a(href="/cg") Conditions générales
-                                .row.margin-top-20
-                                    button.btn.btn-primary(type="submit")
-                                        i.fa.fa-check
-                                        | S'enregistrer
+                        #registerBox
+                            form.nomargin.sky-form#register_form()
+                                fieldset
+                                    .row
+                                        .form-group
+                                            .col-md-6.col-sm-6
+                                                label Prénom *
+                                                label.input.margin-bottom-10
+                                                    i.ico-append.fa.fa-user
+                                                    input(required type="text" name="firstname")
+                                                    b.tooltip.tooltip-bottom-right Votre prénom
+                                            .col-md-6.col-sm-6
+                                                label Nom *
+                                                label.input.margin-bottom-10
+                                                    i.ico-append.fa.fa-user
+                                                    input(required type="text" name="lastname")
+                                                    b.tooltip.tooltip-bottom-right Votre nom
+                                    .row
+                                        .form-group
+                                            .col-md-6.col-sm-6
+                                                label Email *
+                                                label.input.margin-bottom-10
+                                                    i.ico-append.fa.fa-envelope
+                                                    input(required type="email" name="email" id="email")
+                                                    b.tooltip.tooltip-bottom-right Votre adresse mail
+                                            .col-md-6.col-sm-6
+                                                label Mobile
+                                                label.input.margin-bottom-10
+                                                    i.ico-append.fa.fa-mobile
+                                                    input(type="text" name="mobile")
+                                                    b.tooltip.tooltip-bottom-right Votre numéro de mobile
+                                    .row
+                                        .form-group
+                                            .col-md-6.col-sm-6
+                                                label Mot de passe *
+                                                label.input.margin-bottom-10
+                                                    i.ico-append.fa.fa-lock
+                                                    input(required type="password" name="password" id="password")
+                                                    b.tooltip.tooltip-bottom-right Minimum 6 caractères
+                                            .col-md-6.col-sm-6
+                                                label Répéter mot de passe *
+                                                label.input.margin-bottom-10
+                                                    i.ico-append.fa.fa-lock
+                                                    input(required type="password" id="repeat_password")
+                                                    b.tooltip.tooltip-bottom-right Répétez votre mot de passe
+                                    hr
+                                    label.checkbox.nomargin
+                                        input.checked-agree(type="checkbox" name="accept_nl" id="accept_nl" checked)
+                                        i
+                                        | M'abonner à la newsletter
+                                    label.checkbox.nomargin
+                                        input.checked-agree(type="checkbox" name="accept_cg" id="accept_cg")
+                                        i
+                                        | J'accèpte les&nbsp;
+                                        a(href="/cg") Conditions générales
+                                    .row.margin-top-20
+                                        button.btn.btn-primary(type="submit")
+                                            i.fa.fa-check
+                                            | S'enregistrer
