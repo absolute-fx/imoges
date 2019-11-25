@@ -1,0 +1,14 @@
+extends layout
+
+block content
+    section
+        .container
+            if(viewData.sent)
+                - boxClass = "alert-info"
+            else
+                - boxClass = "alert-danger"
+            .alert.margin-bottom-200(class=`${ boxClass }`)
+                h4 Mail envoyé
+                p= viewData.message
+                if(viewData.sent)
+                    a.btn.btn-info.btn-sm.margin-top-10(href="/login") Se connecter

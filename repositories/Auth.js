@@ -37,5 +37,41 @@ class AuthRepository
             })
         });
     }
+
+    validate(data){
+        //console.log(data);
+        return new Promise((resolve, reject) =>{
+            console.log(apiLink + 'users/validate');
+            axios.put(apiLink + 'users/validate', {userId : data.userId}, {headers: {"x-access-token": data.token}})
+            .then((res) =>{
+                resolve(res.data)
+            })
+            .catch((error) =>{
+                console.log(error.response.data);
+                resolve(error.response.data);
+            })
+
+        });
+    }
+
+    validationMail(data){
+        return new Promise((resolve, reject) =>{
+            axios.post(apiLink + 'auth/validationmail', data)
+            .then((res) =>{
+                resolve(res.data)
+            }).catch((error) =>{
+                console.log(error.response.data);
+                resolve(error.response.data);
+            })
+
+        });
+    }
+
+    resetPass(data){
+        return new Promise((resolve, reject) => {
+            axios.post(apiLink + 'auth/resetPass', data)
+        });
+    }
 }
+
 module.exports = new AuthRepository();

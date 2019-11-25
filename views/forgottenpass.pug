@@ -1,0 +1,15 @@
+extends layout
+
+block content
+    section
+        .container
+            h2.size-20
+                | Mot de passe&nbsp;
+                span oublié?
+            p Veuillez remplir ce formulaire pour réinitialiser votre mot de passe.
+            form.margin-bottom-200(action="/auth/resetpass")
+                .row
+                    .col-md-6
+                        input.form-control(type="email" required placeholder="Email")
+                    .col-md-6
+                        button.btn.btn-primary(type="submit") Envoyer le mail de réinitialisation

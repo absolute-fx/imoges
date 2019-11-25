@@ -60,7 +60,6 @@ Projects.getAll({countonly: 1, active: 1, diffused: 1}).then(totalProjects =>{
 const actualDate = new Date();
 const actualYear = actualDate.getFullYear();
 app.locals.ws_settings.coreConfig.actualYear = actualYear;
-app.locals.accessToken = "";
 
 // session
 const cookieMaxAge = 60000;
@@ -75,11 +74,11 @@ let sess = {
         sameSite: true,
 		secure: false
     }
-}
+};
 
 if (app.get('env') === 'production') {
-    app.set('trust proxy', 1) // trust first proxy
-    sess.cookie.secure = true // serve secure cookies
+    app.set('trust proxy', 1); // trust first proxy
+    sess.cookie.secure = true ;// serve secure cookies
 }
 
 app.use(session(sess));

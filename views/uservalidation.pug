@@ -1,0 +1,16 @@
+extends layout
+
+block content
+    section
+        .container
+            if(viewData.auth)
+                - boxClass = "alert-info"
+            else
+                - boxClass = "alert-danger"
+            .alert.margin-bottom-200(class=`${ boxClass }`)
+                h4 Validation de compte
+                p= viewData.message
+                if(viewData.auth)
+                    a.btn.btn-info.btn-sm.margin-top-10(href="/login") Se connecter
+                else
+                    a.btn.btn-info.btn-sm.margin-top-10(href=`/auth/validationmail?userId=${viewData.userId}`) Renvoyer un mail de validation
