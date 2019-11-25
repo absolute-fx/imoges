@@ -98,9 +98,9 @@ block content
             .box-light
                 .container
                     ul(class="nav nav-pills mix-filter margin-bottom-20")
-                        li(data-filter="all" class="filter active")
+                        li(data-filter="all" class="filter")
                             a(href="#") Tous
-                        li(data-filter="vacant" class="filter")
+                        li(data-filter="vacant" class="filter active")
                             a(href="#") Disponibles
                         each sL in sortList
                             li(data-filter=`${ sL.cl }` class="filter")
