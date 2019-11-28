@@ -32,6 +32,7 @@ const newsletterRouter = require('./routes/newsletter');
 const contactformRouter = require('./routes/contactform');
 const authRouter = require('./routes/auth');
 const accountRouter = require('./routes/account');
+const googleRouter = require('./routes/google');
 
 const app = express();
 
@@ -116,6 +117,7 @@ app.use('/newsletter', newsletterRouter);
 app.use('/contactform', contactformRouter);
 app.use('/auth', authRouter);
 app.use('/account', accountRouter);
+app.use('/google75ff5b703311b407.html', googleRouter);
 
 
 // catch 404 and forward to error handler
