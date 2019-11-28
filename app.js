@@ -33,8 +33,6 @@ const contactformRouter = require('./routes/contactform');
 const authRouter = require('./routes/auth');
 const accountRouter = require('./routes/account');
 
-
-
 const app = express();
 
 // settings locals
@@ -136,5 +134,5 @@ app.use(function(err, req, res, next) {
 	res.render('error');
 });
 
-
 module.exports = app;
+
