@@ -22,12 +22,11 @@ if (process.env.NODE_ENV === "development" || process.env.NODE_ENV === undefined
 }else{
     ext = 'be';
     http = 'https';
-    port = 80;
 }
 
 let app2 = express();
 app2.get('*', function(req, res) {
-    res.writeHead(301, { "Location": http + "://imoges." + ext + ":" + port + req.url });
+    res.writeHead(301, { "Location": http + "://imoges." + ext + req.url });
     return res.end();
 });
 
