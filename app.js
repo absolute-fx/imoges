@@ -5,7 +5,6 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const fs = require('fs');
 const session = require('express-session');
-const sitemap = require('express-sitemap');
 let config = require('./config/config');
 
 const tools = require('./classes/Tools');
@@ -122,7 +121,6 @@ app.use('/account', accountRouter);
 app.use('/google75ff5b703311b407.html', googleRouter);
 app.use('/cg', cgRouter);
 
-//sitemap({url: 'imoges.loc:3000'}).XMLtoFile('sitemap.xml');
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
