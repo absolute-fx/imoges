@@ -11,7 +11,7 @@ exports.index = function(req, res, next) {
         console.log(projects);
 
         res.render('history', {
-            title: 'Historique de la société)',
+            title: 'Historique de la société',
             page_description: "La société Imoges a été fondée en  2006 et a actuellement porté " + projects.length + " projets immobiliers sur Ecaussinnes, Soignies et Braine le Comte.",
             topNavActive: 'company',
             sideNavActive: 'history',
