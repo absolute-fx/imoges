@@ -70,6 +70,42 @@ class AuthRepository
     resetPass(data){
         return new Promise((resolve, reject) => {
             axios.post(apiLink + 'auth/resetPass', data)
+            .then((res) =>{
+                resolve(res.data)
+            }).catch((error) =>{
+                console.log(error.response.data);
+                resolve(error.response.data);
+            });
+        });
+    }
+
+    savePass(data){
+        return new Promise((resolve, reject) =>{
+            console.log(apiLink + 'auth/newpass');
+            axios.put(apiLink + 'auth/newpass', {password : data.password}, {headers: {"x-access-token": data.token}})
+                .then((res) =>{
+                    resolve(res.data)
+                })
+                .catch((error) =>{
+                    console.log(error.response.data);
+                    resolve(error.response.data);
+                })
+
+        });
+    }
+
+    verifyToken(data){
+        return new Promise((resolve, reject) =>{
+            console.log(apiLink + 'auth/verifytoken');
+            axios.get(apiLink + 'auth/verifytoken?token=' + data)
+                .then((res) =>{
+                    resolve(res.data)
+                })
+                .catch((error) =>{
+                    console.log(error.response.data);
+                    resolve(error.response.data);
+                })
+
         });
     }
 }

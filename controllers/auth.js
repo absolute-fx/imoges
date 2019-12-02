@@ -1,7 +1,6 @@
 const Auth = require("../repositories/Auth");
 
-exports.signin = function(req, res, next) {
-
+exports.signin = function(req, res) {
     Auth.singin(req.body).then( data => {
         console.log("Data sent");
         if(data.auth){
@@ -15,15 +14,14 @@ exports.signin = function(req, res, next) {
     });
 };
 
-exports.signup = function(req, res, next) {
-
+exports.signup = function(req, res) {
     Auth.signup(req.body).then( data => {
         console.log("Data sent");
         res.send(data);
     });
 };
 
-exports.validate = function(req, res, next){
+exports.validate = function(req, res){
     Auth.validate(req.query).then(data =>{
         console.log(data.auth);
         let viewData;
@@ -43,9 +41,9 @@ exports.validate = function(req, res, next){
     });
 };
 
-exports.validationMail = function(req, res, next){
+exports.validationMail = function(req, res){
     Auth.validationMail(req.query).then(data =>{
-        let viewData = {sent: true, message: "Le mail contenant votre lien de validation vient de vous être envoyé. Vérifier votre messagerie"};
+        let viewData = {sent: true, message: "Le mail contenant votre lien de validation vient de vous être envoyé. Vérifiez votre messagerie"};
         res.render('mailsent', {
             title: 'Mail envoyé',
             page_description: "Mail envoyé",
@@ -68,7 +66,46 @@ exports.forgottenPass = function(req, res){
 };
 
 exports.resetPass = function(req, res){
-    Auth.resetPass().then( data =>{
-        
-    }).catch();
+    //console.log(req.body);
+    let viewData = {sent: true, message: "Le mail de changement de mot de passe vient de vous être envoyé. Vérifiez votre messagerie"};
+    Auth.resetPass(req.body).then( data =>{
+        res.render('mailsent', {
+            title: 'Mail envoyé',
+            page_description: "Mail envoyé",
+            breadcrumb: [
+                {label: 'Accueil', link: '/'}
+            ],
+            viewData: viewData
+        });
+    });
+};
+
+exports.newPass = function(req, res){
+    const token = req.query.token;
+    Auth.verifyToken(token).then(data =>{
+        res.render('newpass', {
+            title: 'Nouveau mot de passe',
+            page_description: "Nouveau mot de passe",
+            breadcrumb: [
+                {label: 'Accueil', link: '/'}
+            ],
+            js_paths:[
+                "/javascripts/newpass.js"
+            ],
+            token: token,
+            valid: data.valid
+        });
+    });
+};
+
+exports.verifyToken = function(req, res){
+    Auth.verifyToken(req.body).then(data =>{
+
+    });
+};
+
+exports.savePass = function(req, res){
+    Auth.savePass(req.body).then(data =>{
+        res.send(data);
+    });
 };

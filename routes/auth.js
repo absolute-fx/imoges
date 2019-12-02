@@ -9,5 +9,7 @@ router.get('/validate', auth.validate);
 router.get('/validationmail', auth.validationMail);
 router.get('/forgottenpass', auth.forgottenPass);
 router.post('/resetpass', auth.resetPass);
+router.get('/newpass', auth.newPass);
+router.post('/savepass', auth.savePass);
 
 module.exports = router;

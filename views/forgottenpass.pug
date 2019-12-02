@@ -7,9 +7,9 @@ block content
                 | Mot de passe&nbsp;
                 span oublié?
             p Veuillez remplir ce formulaire pour réinitialiser votre mot de passe.
-            form.margin-bottom-200(action="/auth/resetpass")
+            form.margin-bottom-200(action="/auth/resetpass" method="post")
                 .row
                     .col-md-6
-                        input.form-control(type="email" required placeholder="Email")
+                        input.form-control(type="email" name="email" required placeholder="Email")
                     .col-md-6
                         button.btn.btn-primary(type="submit") Envoyer le mail de réinitialisation

@@ -1,0 +1,26 @@
+extends layout
+
+block content
+    section
+        .container
+            h2.size-20
+                | Nouveau&nbsp;
+                span mot de passe
+            if valid
+                #newpassBox
+                    p Veuillez entrer un nouveau mot de passe.
+                    form.margin-bottom-200#newpassform(method="post")
+                        .row
+                            .col-md-6
+                                input.form-control#password(type="password" name="password" required placeholder="Mot de passe")
+                            .col-md-6
+                                input.form-control#repeat_password(type="password" required placeholder="Répéter le mot de passe")
+                                input(type="hidden" name="token" value=`${token}`)
+                        .row
+                            .col-md-6
+                                button.btn.btn-primary(type="submit") Sauver le mot de passe
+            else
+                .alert.margin-bottom-200.alert-danger
+                    h4 Lien expiré
+                    p Le lien vers le changement de mot de passe a expiré. Veuillez recomencer la prodédure.
+                    a.btn.btn-info.btn-sm.margin-top-10(href="/forgottenpass") Mot de passe oublié

@@ -6,6 +6,8 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
+    "push_online": "git push gandi master",
+    "deploy": "ssh 3998416@git.dc2.gpaas.net deploy default.git",
     "start_dev": "nodemon ./bin/www"
   },
   "author": "Emmanuel Pain <info@absolute-fx.com>",
@@ -17,6 +19,7 @@
     "debug": "~2.6.9",
     "express": "~4.16.0",
     "express-session": "^1.17.0",
+    "express-sitemap": "^1.8.0",
     "express-urlrewrite": "^1.2.0",
     "http-errors": "~1.6.2",
     "jquery": "^3.4.1",
