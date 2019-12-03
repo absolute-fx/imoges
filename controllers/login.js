@@ -1,5 +1,5 @@
-exports.index = function(req, res, next) {
-    console.log(req.session.token)
+exports.index = function(req, res) {
+    console.log(req.session.token);
     if(!req.session.token){
         res.render('login', {
             title: 'Espace client',
@@ -16,20 +16,16 @@ exports.index = function(req, res, next) {
             ]
         });
     }else{
-        res.render('account', {
-            title: 'Espace client',
-            topNavActive: 'account',
-            breadcrumb: [
-                {label: 'Accueil', link: '/'},
-                {label: 'Mon compte'}
-            ],
-            css_paths: [
-
-            ],
-            js_paths:[
-
-            ],
-            user: req.session.user
-        });
+        let ext, http, port;
+        if (process.env.NODE_ENV === "development" || process.env.NODE_ENV === undefined) {
+            ext = 'loc';
+            http = 'http';
+            port = ':3000'
+        }else{
+            ext = 'be';
+            http = 'https';
+            port ='';
+        }
+        res.redirect(302, http + "://imoges." + ext + port + "/account");
     }
 };

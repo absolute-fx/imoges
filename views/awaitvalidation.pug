@@ -1,0 +1,12 @@
+extends layout
+
+block content
+    section
+        .container
+            .heading-title.heading-line-single
+                h3 Compte&nbsp;
+                    span non validé
+            .alert.margin-bottom-200.alert-danger
+                h4 Validation de compte
+                p Votre compte n'a pas encore été validé. Vérifiez le mail de validation dans votre messagerie ou renvoyé-en un.
+                a.btn.btn-info.btn-sm.margin-top-10(href=`/auth/validationmail?userId=${userId}`) Renvoyer un mail de validation

@@ -98,6 +98,17 @@ exports.newPass = function(req, res){
     });
 };
 
+exports.notValidated = function(req, res){
+    res.render('awaitvalidation', {
+        title: 'Compte non vérifié',
+        page_description: "Compte non vérifié",
+        breadcrumb: [
+            {label: 'Accueil', link: '/'}
+        ],
+        userId: req.session.user.id
+    });
+};
+
 exports.verifyToken = function(req, res){
     Auth.verifyToken(req.body).then(data =>{
 
