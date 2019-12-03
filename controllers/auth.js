@@ -99,13 +99,15 @@ exports.newPass = function(req, res){
 };
 
 exports.notValidated = function(req, res){
+    const userId = req.session.user.id;
+    req.session.destroy();
     res.render('awaitvalidation', {
         title: 'Compte non vérifié',
         page_description: "Compte non vérifié",
         breadcrumb: [
             {label: 'Accueil', link: '/'}
         ],
-        userId: req.session.user.id
+        userId: userId
     });
 };
 
