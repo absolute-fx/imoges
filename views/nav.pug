@@ -4,24 +4,24 @@
 li.dropdown(class=`${ topNavActive && topNavActive === 'index' ? 'active' : ''}`)
 	a.dropdown-toggle(href='/') Accueil
 li.dropdown(class=`${ topNavActive && topNavActive === 'company' ? 'active' : ''}`)
-	a.dropdown-toggle(href=`/${companyNavData[0].service}`) #{company.name}
+	a.dropdown-toggle(href=`../${companyNavData[0].service}`) #{company.name}
 	ul.dropdown-menu
 		each cD in companyNavData
 			li
-				a(href=`${ cD['service'] }`)= cD.label
+				a(href=`../${ cD['service'] }`)= cD.label
 li.dropdown.mega-menu(class=`${ topNavActive && topNavActive === 'projects' ? 'active' : ''}`)
-	a.dropdown-toggle(href='/projects') Les projets
+	a.dropdown-toggle(href='../projects') Les projets
 	ul.dropdown-menu.padding-bottom-10
 		li
 			.row
 				.col-md-5th
 					ul.list-unstyled
 						li
-							a(href="/projects")
+							a(href="../projects")
 								span.label.label-info.pull-right= ws_settings.navData.totalProjects
 								span Voir tous les projets
 						li
-							a(href="/realties") Voir tous les biens
+							a(href="../realties") Voir tous les biens
 				each pD in projectsNavData
 					.col-md-5th
 						ul.list-unstyled
@@ -29,20 +29,20 @@ li.dropdown.mega-menu(class=`${ topNavActive && topNavActive === 'projects' ? 'a
 								span #{pD.project_title}
 							li
 								span
-									a.nav-img-btn(href=`/project?id=${ pD.id }` style="padding:0;")
+									a.nav-img-btn(href=`../project?id=${ pD.id }` style="padding:0;")
 										if pD.librarycategories
 											- genericImages = tools.getGenericImages(pD.librarycategories)
 											if genericImages.length > 0
-												- url = "libraries/" + pD.id + "/library/thumb_" + genericImages[0].library_media_name
+												- url = "../libraries/" + pD.id + "/library/thumb_" + genericImages[0].library_media_name
 												img.img-responsive(src=`${ url }`)
 											else
-												img.img-responsive(src="images/no-media.jpg")
+												img.img-responsive(src="../images/no-media.jpg")
 										else
-											img.img-responsive(src="images/no-media.jpg")
+											img.img-responsive(src="../images/no-media.jpg")
 							li
-								a(href=`/project?id=${ pD.id }`) Fiche du projet
+								a(href=`../project?id=${ pD.id }`) Fiche du projet
 							li
-								a(href=`/project?id=${ pD.id }#biens`)
+								a(href=`../project?id=${ pD.id }#biens`)
 									span.label.pull-right.label-count(data-projectid=`${ pD.id }`)
 									span Les biens du projet
 li.dropdown.mega-menu
@@ -56,30 +56,30 @@ li.dropdown.mega-menu
 							span Chaîne vidéo Youtube
 						li
 							span
-								a.nav-img-btn(href=`${ company.youtube }` target="_blank" style="padding:0;")
-									img.img-responsive(src="/images/social/youtube_header.jpg")
+								a.nav-img-btn(href=`../${ company.youtube }` target="_blank" style="padding:0;")
+									img.img-responsive(src="../images/social/youtube_header.jpg")
 						li
-							a(href=`${ company.youtube }` target="_blank") Visiter la chaîne youtube
+							a(href=`../${ company.youtube }` target="_blank") Visiter la chaîne youtube
 				.col-md-2
 					ul.list-unstyled
 						li
 							span Vidéos
 						li
 							span
-								a.nav-img-btn(href="/videogal" style="padding:0;")
-									img.img-responsive(src="/images/temp_projects/alexandre.jpg")
+								a.nav-img-btn(href="../videogal" style="padding:0;")
+									img.img-responsive(src="../images/temp_projects/alexandre.jpg")
 						li
-							a(href="/videogal") Voir les vidéos
+							a(href="../videogal") Voir les vidéos
 				.col-md-2
 					ul.list-unstyled
 						li
 							span Images
 						li
 							span
-								a(href="/photogal" style="padding:0;")
-									img.img-responsive(src="/images/temp_projects/alexandre.jpg")
+								a(href="../photogal" style="padding:0;")
+									img.img-responsive(src="../images/temp_projects/alexandre.jpg")
 						li
-							a(href="/photogal") Voir la galerie
+							a(href="../photogal") Voir la galerie
 				.col-md-4
 					ul.list-unstyled
 						li
@@ -87,24 +87,24 @@ li.dropdown.mega-menu
 						li
 							span
 								a(href=`${ company.facebook }` target="_blank" style="padding:0;")
-									img.img-responsive(src="/images/social/facebook_header.jpg")
+									img.img-responsive(src="../images/social/facebook_header.jpg")
 						li
 							a(href=`${ company.facebook }` target="_blank") Visiter la page Facebook
 li.dropdown(class=`${ topNavActive && topNavActive === 'invest' ? 'active' : ''}`)
-	a.dropdown-toggle(href='/invest') Investir
+	a.dropdown-toggle(href='../invest') Investir
 li.dropdown(class=`${ topNavActive && topNavActive === 'contact' ? 'active' : ''}`)
-	a.dropdown-toggle(href='/contact') Contact
+	a.dropdown-toggle(href='../contact') Contact
 li.dropdown(class=`${ topNavActive && topNavActive === 'account' ? 'active' : ''}`)
 	if !session.token
-		a.dropdown-toggle(href='/login') Mon compte
+		a.dropdown-toggle(href='../login') Mon compte
 	else
-		a.dropdown-toggle(href='/login') #{session.user.firstname}
+		a.dropdown-toggle(href='../login') #{session.user.firstname}
 		ul.dropdown-menu
 			li
-				a(href="/account/user") Mes données
+				a(href="../account/user") Mes données
 			li
-				a(href="/account/realties") Mes biens
+				a(href="../account/realties") Mes biens
 			li
-				a(href="/account/sav") Mon SAV
+				a(href="../account/sav") Mon SAV
 			li
-				a(href="/account/logout") Déconnexion
+				a(href="../account/logout") Déconnexion

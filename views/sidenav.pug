@@ -4,4 +4,4 @@
     ul(class="list-group list-group-bordered list-group-noicon uppercase")
         each cD in companyNavData
             li.list-group-item(class=`${ sideNavActive && sideNavActive === cD.service ? 'active' : ''}`)
-                a(href=`${ cD['service'] }`)= cD.label
+                a(href=`../${ cD['service'] }`)= cD.label
