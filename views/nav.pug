@@ -1,6 +1,5 @@
 - var companyNavData = ws_settings.navData.company;
 - var projectsNavData = ws_settings.navData.projects;
--
 
 li.dropdown(class=`${ topNavActive && topNavActive === 'index' ? 'active' : ''}`)
 	a.dropdown-toggle(href='/') Accueil
@@ -96,4 +95,16 @@ li.dropdown(class=`${ topNavActive && topNavActive === 'invest' ? 'active' : ''}
 li.dropdown(class=`${ topNavActive && topNavActive === 'contact' ? 'active' : ''}`)
 	a.dropdown-toggle(href='/contact') Contact
 li.dropdown(class=`${ topNavActive && topNavActive === 'account' ? 'active' : ''}`)
-	a.dropdown-toggle(href='/login') Mon compte
+	if !session.token
+		a.dropdown-toggle(href='/login') Mon compte
+	else
+		a.dropdown-toggle(href='/login') #{session.user.firstname}
+		ul.dropdown-menu
+			li
+				a(href="/account/user") Mes données
+			li
+				a(href="/account/realties") Mes biens
+			li
+				a(href="/account/sav") Mon SAV
+			li
+				a(href="/account/logout") Déconnexion
