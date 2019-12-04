@@ -62,7 +62,7 @@ const actualYear = actualDate.getFullYear();
 app.locals.ws_settings.coreConfig.actualYear = actualYear;
 
 // session
-const cookieMaxAge = 60000;
+const cookieMaxAge = 3600000; // 1h
 
 let sess = {
     secret: 'mysecret',
