@@ -16,3 +16,19 @@ exports.index = function(req, res) {
         user: req.session.user
     });
 };
+
+exports.userData = function (req, res) {
+    res.render('userdata', {
+        title: 'Données utilisateur',
+        topNavActive: 'account',
+        sideNavActive: 'user',
+        breadcrumb: [
+            {label: 'Accueil', link: '/'},
+            {label: 'Mon compte', link: '/account'},
+            {label: 'Mes données'}
+        ],
+        js_paths:[
+
+        ]
+    });
+};

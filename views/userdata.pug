@@ -1,0 +1,84 @@
+extends layout
+
+block content
+    section
+        .container
+            .row
+                .col-md-3
+                    include accountsidenav
+                .col-md-9
+                    form.nomargin.sky-form#user_form()
+                        fieldset
+                            .row
+                                .form-group
+                                    .col-md-6.col-sm-6
+                                        label Prénom *
+                                        label.input.margin-bottom-10
+                                            i.ico-append.fa.fa-user
+                                            input(required type="text" name="firstname")
+                                            b.tooltip.tooltip-bottom-right Votre prénom
+                                    .col-md-6.col-sm-6
+                                        label Nom *
+                                        label.input.margin-bottom-10
+                                            i.ico-append.fa.fa-user
+                                            input(required type="text" name="lastname")
+                                            b.tooltip.tooltip-bottom-right Votre nom
+                            .row
+                                .form-group
+                                    .col-md-6.col-sm-6
+                                        label Email *
+                                        label.input.margin-bottom-10
+                                            i.ico-append.fa.fa-envelope
+                                            input(required type="email" name="email" id="email")
+                                            b.tooltip.tooltip-bottom-right Votre adresse mail
+                                    .col-md-6.col-sm-6
+                                        label Mobile
+                                        label.input.margin-bottom-10
+                                            i.ico-append.fa.fa-mobile
+                                            input(type="text" name="mobile")
+                                            b.tooltip.tooltip-bottom-right Votre numéro de mobile
+                            .row
+                                .form-group
+                                    .col-md-6.col-sm-6
+                                        label Adresse
+                                        label.input.margin-bottom-10
+                                            i.ico-append.fa.fa-home
+                                            input(required type="text" name="address")
+                                            b.tooltip.tooltip-bottom-right Votre adresse
+                                    .col-md-4
+                                        label Ville
+                                        label.input.margin-bottom-10
+                                            i.ico-append.fa.fa-home
+                                            input(required type="text" name="city")
+                                            b.tooltip.tooltip-bottom-right Votre ville
+                                    .col-md-2
+                                        label Code postal
+                                        label.input.margin-bottom-10
+                                            i.ico-append.fa.fa-home
+                                            input(required type="text" name="cp")
+                                            b.tooltip.tooltip-bottom-right Votre code postal
+                            .row.margin-top-20
+                                button.btn.btn-primary(type="submit")
+                                    i.fa.fa-check
+                                    | Enregistrer
+                            hr
+                    form.nomargin.sky-form#pass_form()
+                        fieldset
+                            .row
+                                .form-group
+                                    .col-md-6.col-sm-6
+                                        label Mot de passe *
+                                        label.input.margin-bottom-10
+                                            i.ico-append.fa.fa-lock
+                                            input(required type="password" name="password" id="password")
+                                            b.tooltip.tooltip-bottom-right Minimum 6 caractères
+                                    .col-md-6.col-sm-6
+                                        label Répéter mot de passe *
+                                        label.input.margin-bottom-10
+                                            i.ico-append.fa.fa-lock
+                                            input(required type="password" id="repeat_password")
+                                            b.tooltip.tooltip-bottom-right Répétez votre mot de passe
+                            .row.margin-top-20
+                                button.btn.btn-primary(type="submit")
+                                    i.fa.fa-check
+                                    | Modifier le mot de passe
