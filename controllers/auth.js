@@ -122,3 +122,18 @@ exports.savePass = function(req, res){
         res.send(data);
     });
 };
+
+exports.logout = function(req, res){
+    req.session.destroy();
+    let ext, http, port;
+    if (process.env.NODE_ENV === "development" || process.env.NODE_ENV === undefined) {
+        ext = 'loc';
+        http = 'http';
+        port = ':3000'
+    }else{
+        ext = 'be';
+        http = 'https';
+        port ='';
+    }
+    res.redirect(302, http + "://imoges." + ext + port + "/login");
+};

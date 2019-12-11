@@ -6,5 +6,6 @@ const verifyConnection = require('../middleware/verifyConnection');
 let account = require('../controllers/account');
 router.get('/', verifyConnection, account.index);
 router.get('/user', verifyConnection, account.userData);
+router.post('/userupdate', verifyConnection, account.updateUser);
 
 module.exports = router;

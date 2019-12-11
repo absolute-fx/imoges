@@ -7,7 +7,7 @@ block content
                 .col-md-3
                     include accountsidenav
                 .col-md-9
-                    form.nomargin.sky-form#user_form()
+                    form.nomargin.sky-form#user_form(method="post")
                         fieldset
                             .row
                                 .form-group
@@ -15,13 +15,13 @@ block content
                                         label Prénom *
                                         label.input.margin-bottom-10
                                             i.ico-append.fa.fa-user
-                                            input(required type="text" name="firstname")
+                                            input(required type="text" name="firstname" value=`${user.firstname}`)
                                             b.tooltip.tooltip-bottom-right Votre prénom
                                     .col-md-6.col-sm-6
                                         label Nom *
                                         label.input.margin-bottom-10
                                             i.ico-append.fa.fa-user
-                                            input(required type="text" name="lastname")
+                                            input(required type="text" name="lastname" value=`${user.lastname}`)
                                             b.tooltip.tooltip-bottom-right Votre nom
                             .row
                                 .form-group
@@ -29,13 +29,13 @@ block content
                                         label Email *
                                         label.input.margin-bottom-10
                                             i.ico-append.fa.fa-envelope
-                                            input(required type="email" name="email" id="email")
-                                            b.tooltip.tooltip-bottom-right Votre adresse mail
+                                            input(required type="email" name="email" id="email" value=`${user.email}`)
+                                            b.tooltip.tooltip-bottom-right Votre adresse mail. Attention il s'agit également de votre login!
                                     .col-md-6.col-sm-6
                                         label Mobile
                                         label.input.margin-bottom-10
                                             i.ico-append.fa.fa-mobile
-                                            input(type="text" name="mobile")
+                                            input(type="text" name="mobile" value=(user.mobile ? user.mobile : ''))
                                             b.tooltip.tooltip-bottom-right Votre numéro de mobile
                             .row
                                 .form-group
@@ -43,19 +43,19 @@ block content
                                         label Adresse
                                         label.input.margin-bottom-10
                                             i.ico-append.fa.fa-home
-                                            input(required type="text" name="address")
+                                            input(required type="text" name="address" value=(user.address ? user.address : ''))
                                             b.tooltip.tooltip-bottom-right Votre adresse
                                     .col-md-4
                                         label Ville
                                         label.input.margin-bottom-10
                                             i.ico-append.fa.fa-home
-                                            input(required type="text" name="city")
+                                            input(required type="text" name="city" value=(user.city ? user.city : ''))
                                             b.tooltip.tooltip-bottom-right Votre ville
                                     .col-md-2
                                         label Code postal
                                         label.input.margin-bottom-10
                                             i.ico-append.fa.fa-home
-                                            input(required type="text" name="cp")
+                                            input(required type="text" name="cp" value=(user.pc ? user.pc : ''))
                                             b.tooltip.tooltip-bottom-right Votre code postal
                             .row.margin-top-20
                                 button.btn.btn-primary(type="submit")

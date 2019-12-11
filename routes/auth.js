@@ -12,5 +12,6 @@ router.post('/resetpass', auth.resetPass);
 router.get('/newpass', auth.newPass);
 router.post('/savepass', auth.savePass);
 router.get('/notvalidated', auth.notValidated);
+router.get('/logout', auth.logout);
 
 module.exports = router;

@@ -98,8 +98,10 @@ li.dropdown(class=`${ topNavActive && topNavActive === 'account' ? 'active' : ''
 	if !session.token
 		a.dropdown-toggle(href='../login') Mon compte
 	else
-		a.dropdown-toggle(href='../login') #{session.user.firstname}
-		ul.dropdown-menu
+		a.dropdown-toggle(href='../login')
+			i.et-profile-male.margin-right-10(style='color: #8ab933; font-weight: bold;')
+			| #{session.user.firstname}
+		ul.dropdown-menu.pull-right
 			li
 				a(href="../account/user") Mes données
 			li
@@ -107,4 +109,4 @@ li.dropdown(class=`${ topNavActive && topNavActive === 'account' ? 'active' : ''
 			li
 				a(href="../account/sav") Mon SAV
 			li
-				a(href="../account/logout") Déconnexion
+				a(href="../auth/logout") Déconnexion
