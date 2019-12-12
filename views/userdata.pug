@@ -29,7 +29,7 @@ block content
                                         label Email *
                                         label.input.margin-bottom-10
                                             i.ico-append.fa.fa-envelope
-                                            input(required type="email" name="email" id="email" value=`${user.email}`)
+                                            input(required type="email" name="email" disabled value=`${user.email}`)
                                             b.tooltip.tooltip-bottom-right Votre adresse mail. Attention il s'agit également de votre login!
                                     .col-md-6.col-sm-6
                                         label Mobile
@@ -55,30 +55,44 @@ block content
                                         label Code postal
                                         label.input.margin-bottom-10
                                             i.ico-append.fa.fa-home
-                                            input(required type="text" name="cp" value=(user.pc ? user.pc : ''))
+                                            input(required type="text" name="pc" value=(user.pc ? user.pc : ''))
                                             b.tooltip.tooltip-bottom-right Votre code postal
+                            hr.margin-bottom-40
+                            .row
+                                .form-group
+                                    .col-md-6.col-sm-6
+                                        label Société
+                                        label.input.margin-bottom-10
+                                            i.ico-append.fa.fa-industry
+                                            input(type="text" name="company_name" value=(user.company_name ? user.company_name : ''))
+                                            b.tooltip.tooltip-bottom-right Nom de la société
+                                    .col-md-6.col-sm-6
+                                        label N° entreprise
+                                        label.input.margin-bottom-10
+                                            i.ico-append.fa.fa-legal
+                                            input(type="text" name="company_vat" value=(user.company_vat ? user.company_vat : ''))
+                                            b.tooltip.tooltip-bottom-right N° de TVA
+                            .row
+                                .form-group
+                                    .col-md-6.col-sm-6
+                                        label Adresse
+                                        label.input.margin-bottom-10
+                                            i.ico-append.fa.fa-home
+                                            input(type="text" name="company_address" value=(user.company_address ? user.company_address : ''))
+                                            b.tooltip.tooltip-bottom-right Adresse de la société
+                                    .col-md-4
+                                        label Ville
+                                        label.input.margin-bottom-10
+                                            i.ico-append.fa.fa-home
+                                            input(type="text" name="company_city" value=(user.company_city ? user.company_city : ''))
+                                            b.tooltip.tooltip-bottom-right Ville de la société
+                                    .col-md-2
+                                        label Code postal
+                                        label.input.margin-bottom-10
+                                            i.ico-append.fa.fa-home
+                                            input(type="text" name="company_pc" value=(user.company_pc ? user.company_pc : ''))
+                                            b.tooltip.tooltip-bottom-right Code postal de la société
                             .row.margin-top-20
                                 button.btn.btn-primary(type="submit")
                                     i.fa.fa-check
                                     | Enregistrer
-                            hr
-                    form.nomargin.sky-form#pass_form()
-                        fieldset
-                            .row
-                                .form-group
-                                    .col-md-6.col-sm-6
-                                        label Mot de passe *
-                                        label.input.margin-bottom-10
-                                            i.ico-append.fa.fa-lock
-                                            input(required type="password" name="password" id="password")
-                                            b.tooltip.tooltip-bottom-right Minimum 6 caractères
-                                    .col-md-6.col-sm-6
-                                        label Répéter mot de passe *
-                                        label.input.margin-bottom-10
-                                            i.ico-append.fa.fa-lock
-                                            input(required type="password" id="repeat_password")
-                                            b.tooltip.tooltip-bottom-right Répétez votre mot de passe
-                            .row.margin-top-20
-                                button.btn.btn-primary(type="submit")
-                                    i.fa.fa-check
-                                    | Modifier le mot de passe
