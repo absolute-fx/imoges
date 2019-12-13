@@ -1,0 +1,33 @@
+extends layout
+
+block content
+    section
+        .container
+            .row
+                .col-md-3
+                    include accountsidenav
+                .col-md-9
+                    if realties.length > 0
+                        .panel.panel-default.margin-bottom-200
+                            .panel-heading
+                                h2.panel-title Liste de mes biens
+                            .nopadding.panel-body
+                                table.table.nomargin
+                                    thead
+                                        tr
+                                            th Libellé du bien
+                                            th Prix
+                                            th Superficies
+                                            th Documents
+                                    tbody
+                                        each r in realties
+                                            tr
+                                                td= r.realty_title
+                                                td= tools.getRelatyPrice(parseFloat(r.realty_net_price), parseFloat(r.realty_vat), ws_settings.coreConfig.priceWithVat) + "€"
+                                                td= r.realty_surface + "m²"
+                                                td
+                                                    button.btn.btn-primary.btn-xs
+                                                        i.fa.fa-file
+                                                        | Documents
+                    else
+                        p Vous n'avez pas encore de bien associé à votre compte.

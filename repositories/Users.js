@@ -31,6 +31,20 @@ class UsersRepository
             })
         });
     }
+
+    userRealties(data){
+        return new Promise((resolve, reject) => {
+            console.log(apiLink + 'users/' + data.id + '?realties=1');
+            axios.get(apiLink + 'users/' + data.id + '?realties=1', {headers: {"x-access-token": data.token}})
+                .then((res) => {
+                    resolve(res.data);
+                })
+                .catch((error) => {
+                    console.error(error.response.data);
+                    resolve(error.response.data);
+                })
+        });
+    }
 }
 
 module.exports = new UsersRepository();

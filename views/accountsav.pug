@@ -1,0 +1,41 @@
+extends layout
+
+block content
+    section
+        .container
+            .row
+                .col-md-3
+                    include accountsidenav
+                .col-md-9
+                    form.nomargin.sky-form#savr_form(method="post")
+                        fieldset
+                            .row
+                                .form-group
+                                    .col-md-12
+                                        label Bien *
+                                        select.form-control(required name="realty")
+                                            each r in realties
+                                                option= r.realty_title
+                            .row
+                                .form-group
+                                    .col-md-12
+                                        label Service *
+                                        select.form-control(required name="service")
+                                            option Sélectionnez un service
+                                            each r in realties
+                                                option xxxxx
+                            .row
+                                .form-group
+                                    .col-md-12
+                                        label Message *
+                                        textarea.form-control.height-150(required row="4" name="message")
+                            .row
+                                .form-group
+                                    .col-md-12
+                                        label Photos
+                                        .fancy-file-upload.fancy-file-primary
+                                            input.custom-file-upload(name="pictures" type="file" data-btn-text="Selectionner des photos" multiple)
+                            .row.margin-top-20
+                                button.btn.btn-primary(type="submit")
+                                    i.fa.fa-check
+                                    | Envoyer

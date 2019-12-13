@@ -48,3 +48,39 @@ exports.updateUser = function(req, res){
         res.send(user);
     });
 };
+
+exports.realtiesList = function(req, res){
+    Users.userRealties({id: req.session.user.id, token: req.session.token}).then( user => {
+        console.log(user.realties);
+        res.render('accountrealties', {
+            title: 'Liste des mes biens',
+            topNavActive: 'account',
+            sideNavActive: 'realties',
+            breadcrumb: [
+                {label: 'Accueil', link: '/'},
+                {label: 'Mon compte', link: '/account'},
+                {label: 'Mes biens'}
+            ],
+            js_paths: [],
+            realties: user.realties
+        });
+    });
+};
+
+exports.afterSale = function (req, res) {
+    Users.userRealties({id: req.session.user.id, token: req.session.token}).then( user => {
+        console.log(user.realties);
+        res.render('accountsav', {
+            title: 'Mon SAV',
+            topNavActive: 'account',
+            sideNavActive: 'sav',
+            breadcrumb: [
+                {label: 'Accueil', link: '/'},
+                {label: 'Mon compte', link: '/account'},
+                {label: 'Mon SAV'}
+            ],
+            js_paths: [],
+            realties: user.realties
+        });
+    });
+};
