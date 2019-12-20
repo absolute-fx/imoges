@@ -15,7 +15,7 @@ block content
                                         label Bien *
                                         select.form-control(required name="realty")
                                             each r in realties
-                                                option= r.realty_title
+                                                option= r.project.project_title + ' - ' + r.realty_title
                             .row
                                 .form-group
                                     .col-md-12
