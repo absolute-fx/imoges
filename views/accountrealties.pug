@@ -15,15 +15,15 @@ block content
                                 table.table.nomargin
                                     thead
                                         tr
-                                            th Libellé du bien
-                                            th Prix
-                                            th Superficies
+                                            th Projet
+                                            th Bien
+                                            th Superficie
                                             th Documents
                                     tbody
                                         each r in realties
                                             tr
+                                                td= r.project.project_title
                                                 td= r.realty_title
-                                                td= tools.getRelatyPrice(parseFloat(r.realty_net_price), parseFloat(r.realty_vat), ws_settings.coreConfig.priceWithVat) + "€"
                                                 td= r.realty_surface + "m²"
                                                 td
                                                     button.btn.btn-primary.btn-xs
