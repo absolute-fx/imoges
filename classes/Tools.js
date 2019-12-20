@@ -22,12 +22,14 @@ class Tools{
     }
 
     // get medium type = pdf, youtube, sketchfab
-    static getMedium(arr, type){
+    static getMedium(arr, type, role='guest'){
         let medium = [];
         for(let m of arr){
             for(let media of m.libraries){
                 if(media.library_media_extension === type){
-                    medium.push({library_media_name: media.library_media_name, library_media_url: media.library_media_url});
+                    if(role === media.library_media_resource){
+                        medium.push({library_media_name: media.library_media_name, library_media_url: media.library_media_url});
+                    }
                 }
             }
         }
