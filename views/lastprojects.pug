@@ -2,7 +2,7 @@
     each p in projects
         .col-md-6.col-sm-6.home-project-box(data-projectid=`${p.id}` id=`project-box-${p.id}`)
             .box-static.box-border-top.padding-30.margin-bottom-20.relative
-                if p.prctSold > 0 && p.prctSold !== 100
+                if p.prctSold > 1
                     .ribbon
                         .ribbon-inner= p.prctSold + "% vendu"
                 .box-title.margin-bottom-30
