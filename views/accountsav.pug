@@ -7,36 +7,43 @@ block content
                 .col-md-3
                     include accountsidenav
                 .col-md-9
-                    form.nomargin.sky-form#savr_form(method="post")
-                        fieldset
-                            .row
-                                .form-group
-                                    .col-md-12
-                                        label Bien *
-                                        select.form-control(required name="realty")
-                                            each r in realties
-                                                option= r.project.project_title + ' - ' + r.realty_title
-                            .row
-                                .form-group
-                                    .col-md-12
-                                        label Service *
-                                        select.form-control(required name="service")
-                                            option Sélectionnez un service
-                                            each r in realties
-                                                option xxxxx
-                                            option Autre
-                            .row
-                                .form-group
-                                    .col-md-12
-                                        label Message *
-                                        textarea.form-control.height-150(required row="4" name="message")
-                            .row
-                                .form-group
-                                    .col-md-12
-                                        label Photos
-                                        .fancy-file-upload.fancy-file-primary
-                                            input.custom-file-upload(name="pictures" type="file" data-btn-text="Selectionner des photos" multiple)
-                            .row.margin-top-20
-                                button.btn.btn-primary(type="submit")
-                                    i.fa.fa-check
-                                    | Envoyer
+                    if realties
+                        - realtiesList = []
+                        form.nomargin.sky-form#savr_form(action="/tickets" method="post" enctype="multipart/form-data")
+                            fieldset
+                                .row
+                                    .form-group
+                                        .col-md-12
+                                            label Bien *
+                                            select.form-control#realties-list(required name="realty")
+                                                each r in realties
+                                                    option(value=`${r.id}`)= r.project.project_title + ' - ' + r.realty_title
+                                                    - realtiesList.push({id: r.id, partners: r.project.partners})
+                                .row
+                                    .form-group
+                                        .col-md-12
+                                            label Demande d'intervention *
+                                            select.form-control#partners-list(required name="service")
+                                                option Sélectionnez un service
+                                                each partner in realties[0].project.partners
+                                                    option(value=`${partner.id}`)= partner.title
+                                                option(value="0") Autre
+                                .row
+                                    .form-group
+                                        .col-md-12
+                                            label Message *
+                                            textarea.form-control.height-150(required row="4" name="message")
+                                .row
+                                    .form-group
+                                        .col-md-12
+                                            label Photos
+                                            .fancy-file-upload.fancy-file-primary
+                                                input.custom-file-upload(name="pictures" type="file" data-btn-text="Selectionner des photos" multiple)
+                                .row.margin-top-20
+                                    button.btn.btn-primary(type="submit")
+                                        i.fa.fa-check
+                                        | Envoyer
+                        script(type='text/javascript').
+                            var realties = !{JSON.stringify(realtiesList)}
+                    else
+                        p Vous n'avez pas encore de bien associé à votre compte.

@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const fs = require('fs');
 const session = require('express-session');
+const fileUpload = require('express-fileupload');
 let config = require('./config/config');
 
 const tools = require('./classes/Tools');
@@ -34,6 +35,7 @@ const authRouter = require('./routes/auth');
 const accountRouter = require('./routes/account');
 const googleRouter = require('./routes/google');
 const cgRouter = require('./routes/cg');
+const ticketsRooter = require('./routes/tickets');
 
 const app = express();
 
@@ -87,6 +89,10 @@ app.use(function(req,res,next){
     next();
 });
 
+
+// file upload
+app.use(fileUpload());
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
@@ -123,6 +129,7 @@ app.use('/auth', authRouter);
 app.use('/account', accountRouter);
 app.use('/google75ff5b703311b407.html', googleRouter);
 app.use('/cg', cgRouter);
+app.use('/tickets', ticketsRooter);
 
 
 // catch 404 and forward to error handler

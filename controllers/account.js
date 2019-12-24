@@ -79,7 +79,7 @@ exports.afterSale = function (req, res) {
                 {label: 'Mon compte', link: '/account'},
                 {label: 'Mon SAV'}
             ],
-            js_paths: [],
+            js_paths: ['/javascripts/sav.js'],
             realties: user.realties
         });
     });
