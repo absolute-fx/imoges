@@ -1,4 +1,5 @@
 const Users = require('../repositories/Users');
+const moment = require('moment');
 
 
 exports.index = function(req, res) {
@@ -51,6 +52,15 @@ exports.updateUser = function(req, res){
 
 exports.realtiesList = function(req, res){
     Users.userRealties({id: req.session.user.id, token: req.session.token}).then( user => {
+        for (const i in user.realties){
+            if(user.realties[i].realty_reception_date){
+                const now = moment();
+                user.realties[i].months_from_reception = now.diff(moment(user.realties[i].realty_reception_date), 'months');
+                user.realties[i].realty_reception_date = moment(user.realties[i].realty_reception_date).format('DD/MM/YYYY');
+            }else{
+                user.realties[i].months_from_reception = 0;
+            }
+        }
         console.log(user.realties);
         res.render('accountrealties', {
             title: 'Liste des mes biens',
@@ -69,6 +79,16 @@ exports.realtiesList = function(req, res){
 
 exports.afterSale = function (req, res) {
     Users.userRealties({id: req.session.user.id, token: req.session.token}).then( user => {
+        console.log();
+        for (const i in user.realties){
+            if(user.realties[i].realty_reception_date){
+                const now = moment();
+                user.realties[i].months_from_reception = now.diff(moment(user.realties[i].realty_reception_date), 'months');
+                user.realties[i].realty_reception_date = moment(user.realties[i].realty_reception_date).format('DD/MM/YYYY');
+            }else{
+                user.realties[i].months_from_reception = 0;
+            }
+        }
         console.log(user.realties);
         res.render('accountsav', {
             title: 'Mon SAV',

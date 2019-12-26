@@ -17,14 +17,26 @@ block content
                                         tr
                                             th Projet
                                             th Bien
-                                            th Superficie
+                                            th Réception
+                                            th Garantie
                                             th Documents
                                     tbody
                                         each r in realties
                                             tr
                                                 td= r.project.project_title
                                                 td= r.realty_title
-                                                td= r.realty_surface + "m²"
+                                                td= r.realty_reception_date
+                                                if r.months_from_reception === 0 && !r.realty_reception_date
+                                                    td(title="Ce bien n'a pas encore été réceptionné")
+                                                        span.fa.fa-question
+                                                else if r.months_from_reception > parseInt(r.realty_warranty)
+                                                    - label = "La garantie de " + r.realty_warranty + " mois de ce bien est terminée"
+                                                    td(title=`${label}`)
+                                                        span.fa.fa-close(style="color: #970506!important")
+                                                else if r.months_from_reception <= parseInt(r.realty_warranty)
+                                                    - label = "La garantie de ce bien est toujours valide"
+                                                    td(title=`${label}`)
+                                                        i.fa.fa-check(style="color: #8ab933!important")
                                                 td
                                                     button.btn.btn-primary.btn-xs
                                                         i.fa.fa-file
