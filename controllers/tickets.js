@@ -59,8 +59,8 @@ uploadFile = function(sampleFiles, req, res){
 
 createTicket = function(req, res){
     console.log(req.body);
-    Tickets.createTicket(req).then(ticket =>{
-        console.log(ticket);
+    Tickets.createTicket(req).then(data =>{
+        console.log(data);
         let ext, http, port;
         if (process.env.NODE_ENV === "development" || process.env.NODE_ENV === undefined) {
             ext = 'loc';
@@ -71,6 +71,6 @@ createTicket = function(req, res){
             http = 'https';
             port ='';
         }
-        res.redirect(302, http + "://imoges." + ext + port + "/account");
+        res.redirect(302, http + "://imoges." + ext + port + "/account/ticket?id=" + data.ticket.id);
     });
 };

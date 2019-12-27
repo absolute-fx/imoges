@@ -1,0 +1,16 @@
+extends layout
+
+block content
+    section
+        .container
+            .col-md-3
+                include accountsidenav
+            .col-md-9
+                .box-static.box-border-top
+                    .box-title
+                        h4= "Ticket " + ticket.ref
+
+                    p!= "Date de création: <strong>" + ticket.startDate + "</strong> - "
+                        small= ticket.fromNow
+                    blockquote
+                        p= ticket.title

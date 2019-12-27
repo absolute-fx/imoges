@@ -33,7 +33,6 @@ function setWoSelect(partners){
     for(let p in partners){
         $('#partners-list').append('<option value="' + partners[p].id + '">' + partners[p].title + '</option>');
     }
-    $('#partners-list').append('<option value="0">Autre</option>');
 }
 
 function setInfoHolder(type){

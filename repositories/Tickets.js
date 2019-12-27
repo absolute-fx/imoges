@@ -28,6 +28,19 @@ class TicketsRepository
                 })
         });
     }
+
+    getTicket(data){
+        return new Promise((resolve, reject) => {
+            axios.get(apiLink + 'ticket?id=' + data.id, {headers: {"x-access-token": data.token}})
+                .then((res) => {
+                    resolve(res.data);
+                })
+                .catch((error) => {
+                    console.error(error.response.data);
+                    resolve(error.response.data);
+                })
+        });
+    }
 }
 
 module.exports = new TicketsRepository();

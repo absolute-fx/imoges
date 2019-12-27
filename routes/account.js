@@ -9,5 +9,6 @@ router.get('/user', verifyConnection, account.userData);
 router.post('/userupdate', verifyConnection, account.updateUser);
 router.get('/realties', verifyConnection, account.realtiesList);
 router.get('/sav', verifyConnection, account.afterSale);
+router.get('/ticket', verifyConnection, account.getTicket);
 
 module.exports = router;

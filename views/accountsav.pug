@@ -14,7 +14,7 @@ block content
                                 .row
                                     .col-md-12
                                         .form-group
-                                            label Bien *
+                                            label Bien concerné *
                                             select.form-control#realties-list(required name="realtyId")
                                                 each r in realties
                                                     option(value=`${r.id}`)= r.project.project_title + ' - ' + r.realty_title
@@ -41,19 +41,23 @@ block content
                                                 option(value="") Sélectionnez un service
                                                 each partner in realties[0].project.partners
                                                     option(value=`${partner.id}`)= partner.title
-                                                option(value="0") Autre
                                     .col-md-6
                                         .form-group
                                             label Priorité *
                                             select.form-control#priority-list(required name="priority")
-                                                option Sélectionnez une priorité
+                                                option(value="") Sélectionnez une priorité
                                                 option(value="0") Pas urgent
                                                 option(value="1") Urgent
                                                 option(value="2") Très urgent
                                 .row
                                     .col-md-12
                                         .form-group
-                                            label Message *
+                                            label Libellé du problème *
+                                            input.form-control(type="text" required name="title")
+                                .row
+                                    .col-md-12
+                                        .form-group
+                                            label Description du problème *
                                             textarea.form-control.height-150(required row="4" name="message")
                                 .row
                                     .col-md-12

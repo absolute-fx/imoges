@@ -1,4 +1,5 @@
 const Users = require('../repositories/Users');
+const Tickets = require('../repositories/Tickets');
 const moment = require('moment');
 
 
@@ -101,6 +102,29 @@ exports.afterSale = function (req, res) {
             ],
             js_paths: ['/javascripts/sav.js'],
             realties: user.realties
+        });
+    });
+};
+
+exports.getTicket = function(req, res){
+    Tickets.getTicket({id: req.query.id, token: req.session.token}).then(data =>{
+        moment.lang("fr");
+        data.ticket.ref = moment(data.ticket.createdAt).format('YYYY') + '-' + moment(data.ticket.createdAt).format('MM') + '-' + data.ticket.realtyId + '-' + data.ticket.id ;
+        data.ticket.startDate = moment(data.ticket.createdAt).format('dddd') + " " + moment(data.ticket.createdAt).format('DD/MM/YYYY à HH[h]mm');
+        data.ticket.fromNow = moment(data.ticket.createdAt).fromNow();
+        console.log(data.ticket);
+        res.render('ticket', {
+            title: 'Ticket ' + data.ticket.ref,
+            topNavActive: 'account',
+            sideNavActive: 'sav',
+            breadcrumb: [
+                {label: 'Accueil', link: '/'},
+                {label: 'Mon compte', link: '/account'},
+                {label: 'Mon SAV', link: '/account/sav'},
+                {label: 'Ticket ' + data.ticket.ref},
+            ],
+            js_paths: [],
+            ticket: data.ticket
         });
     });
 };
