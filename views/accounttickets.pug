@@ -1,0 +1,29 @@
+extends layout
+
+block content
+    section
+        .container
+            .col-md-3
+                include accountsidenav
+            .col-md-9
+                .heading-title.heading-line-single
+                    h3!= "Mes <span>tickets d'intervention</span>"
+                .panel.panel-default.margin-bottom-200
+                    .panel-heading
+                        h2.panel-title Liste de mes tickets
+                    .nopadding.panel-body
+                        table.table.nomargin
+                            thead
+                                tr
+                                    th Référence
+                                    th Bien
+                                    th Libellé
+                                    th statut
+                            tbody
+                                each t in tickets
+                                    tr
+                                        td
+                                            a(href=`/account/ticket?id=${t.id}`)= t.ref
+                                        td= t.realty.realty_title
+                                        td= t.title
+                                        td= t.statusLabel

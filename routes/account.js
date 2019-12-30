@@ -10,5 +10,6 @@ router.post('/userupdate', verifyConnection, account.updateUser);
 router.get('/realties', verifyConnection, account.realtiesList);
 router.get('/sav', verifyConnection, account.afterSale);
 router.get('/ticket', verifyConnection, account.getTicket);
+router.get('/tickets', verifyConnection, account.getAllTickets);
 
 module.exports = router;

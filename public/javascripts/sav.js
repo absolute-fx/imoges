@@ -48,7 +48,7 @@ function setInfoHolder(type){
         case 'no-warranty':
             html += '<div class="alert alert-danger margin-top-10">';
             html += '<strong class="fa fa-exclamation-triangle margin-right-10"></strong>';
-            html += 'Ce bien n\'est plus sous garantie';
+            html += 'Ce bien n\'est plus sous garantie. Des frais d\'intervention pourraient être à votre charge.';
             html += '</div>';
             break;
 

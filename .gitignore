@@ -2,5 +2,6 @@ node_modules
 public/images
 public/libraries
 public/javascripts/plugins
+public/tickets_libraries
 views/_nav.pug
 .idea

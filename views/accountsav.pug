@@ -8,6 +8,8 @@ block content
                     include accountsidenav
                 .col-md-9
                     if realties
+                        .heading-title.heading-line-single
+                            h3!= "Demander <span>une intervention</span>"
                         - realtiesList = []
                         form.nomargin.sky-form#savr_form(action="/tickets" method="post" enctype="multipart/form-data")
                             fieldset
@@ -24,7 +26,7 @@ block content
                                                     if parseInt(realties[0].realty_warranty) < realties[0].months_from_reception
                                                         .alert.alert-danger.margin-top-10
                                                             strong.fa.fa-exclamation-triangle.margin-right-10
-                                                            | Ce bien n'est plus sous garantie
+                                                            | Ce bien n'est plus sous garantie. Des frais d'intervention pourraient être à votre charge.
                                                     if parseInt(realties[0].realty_warranty) >= realties[0].months_from_reception
                                                         .alert.alert-success.margin-top-10
                                                             strong.fa.fa-check.margin-right-10
@@ -36,7 +38,7 @@ block content
                                 .row
                                     .col-md-6
                                         .form-group
-                                            label Demande d'intervention *
+                                            label Type d'intervention *
                                             select.form-control#partners-list(required name="partnerId")
                                                 option(value="") Sélectionnez un service
                                                 each partner in realties[0].project.partners

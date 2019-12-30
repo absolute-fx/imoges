@@ -27,6 +27,7 @@
     "moment": "^2.24.0",
     "morgan": "~1.9.0",
     "pug": "^2.0.4",
+    "textmagic-rest-client": "^1.0.10",
     "vhost": "^3.0.2"
   },
   "devDependencies": {
