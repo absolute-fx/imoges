@@ -98,7 +98,7 @@ exports.afterSale = function (req, res) {
             breadcrumb: [
                 {label: 'Accueil', link: '/'},
                 {label: 'Mon compte', link: '/account'},
-                {label: 'Mon SAV'}
+                {label: 'Demande d\'intervention'}
             ],
             js_paths: ['/javascripts/sav.js'],
             realties: user.realties

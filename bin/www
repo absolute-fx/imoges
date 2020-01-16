@@ -26,15 +26,25 @@ if (process.env.NODE_ENV === "development" || process.env.NODE_ENV === undefined
 
 let app2 = express();
 app2.get('*', function(req, res) {
+    console.log(req);
     res.writeHead(301, { "Location": http + "://imoges." + ext + req.url });
+    return res.end();
+});
+
+let app3 = express();
+app3.get('*', function(req, res) {
+    console.log(req);
+    res.writeHead(301, { "Location": http + "://partners.imoges." + ext + req.url });
     return res.end();
 });
 
 let mainApp = vhost('imoges.' + ext, app);
 let redirectApp = vhost('www.imoges.' + ext, app2);
+let redirectPartnersApp = vhost('partners.imoges.' + ext, app3);
 
 server.use(mainApp);
 server.use(redirectApp);
+server.use(redirectPartnersApp);
 
 server.listen(port);
 
