@@ -17,7 +17,7 @@ let port = normalizePort(process.env.PORT || '3000');
 
 let ext, http;
 if (process.env.NODE_ENV === "development" || process.env.NODE_ENV === undefined) {
-    ext = 'loc/:3000';
+    ext = 'loc';
     http = 'http';
 }else{
     ext = 'be';
@@ -31,7 +31,7 @@ app2.get('*', function(req, res) {
     return res.end();
 });
 
-let app3 = express();
+;let app3 = express();
 app3.get('*', function(req, res) {
     console.log(req);
     //res.writeHead(301, { "Location": http + "://partners.imoges." + ext + req.url });
@@ -40,7 +40,7 @@ app3.get('*', function(req, res) {
 
 let mainApp = vhost('imoges.' + ext, app);
 let redirectApp = vhost('www.imoges.' + ext, app2);
-let redirectPartnersApp = vhost('partners.imoges.' + ext, app3);
+let redirectPartnersApp = vhost('partners.imoges.' + ext, app);
 
 server.use(mainApp);
 server.use(redirectApp);
