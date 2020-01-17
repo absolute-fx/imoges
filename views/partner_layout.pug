@@ -1,0 +1,26 @@
+doctype html
+<!--[if IE 8]>			<html class="ie ie8"> <![endif]-->
+<!--[if IE 9]>			<html class="ie ie9"> <![endif]-->
+<!--[if gt IE 9]><!-->
+html
+    <!--<![endif]-->
+    head
+        meta(charset='utf-8')
+        title= title
+        meta(name='description', "Accès partenaire")
+        meta(name='keyword', content='Accès partenaire')
+        meta(name='Author', content='AfxLab')
+        meta(name='viewport', content='width=device-width, maximum-scale=1, initial-scale=1, user-scalable=0')
+        <!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
+        link(rel='icon' href='/images/icon.png')
+        link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Open+Sans:300,400%7CRaleway:300,400,500,600,700%7CLato:300,400,400italic,600,700')
+        link(rel='stylesheet', href='/javascripts/plugins/bootstrap/css/bootstrap.min.css')
+        if css_paths
+            each cssPath in css_paths
+                link(rel='stylesheet', href=`${ cssPath }`)
+    body(class="smoothscroll enable-animation")
+        block content
+        script(type="text/javascript" src="/javascripts/plugins/jquery/jquery-2.1.4.min.js")
+            if js_paths
+                each jsPath in js_paths
+                    script(type="text/javascript" src=`${ jsPath }`)

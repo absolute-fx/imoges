@@ -12,11 +12,13 @@ verifyConnection = (req, res, next) => {
     if(req.session.token){
         if(!req.session.user.validated){
             res.redirect(302, http + "://imoges." + ext + port + "/auth/notvalidated");
+        }else{
+            req.connected = true;
+            next();
         }
     }else{
         res.redirect(302, http + "://imoges." + ext + port + "/login");
     }
-    next();
 };
 
 module.exports = verifyConnection;

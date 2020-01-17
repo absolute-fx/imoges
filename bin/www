@@ -31,12 +31,7 @@ app2.get('*', function(req, res) {
     return res.end();
 });
 
-;let app3 = express();
-app3.get('*', function(req, res) {
-    console.log(req);
-    //res.writeHead(301, { "Location": http + "://partners.imoges." + ext + req.url });
-    return res.end();
-});
+
 
 let mainApp = vhost('imoges.' + ext, app);
 let redirectApp = vhost('www.imoges.' + ext, app2);
@@ -47,8 +42,6 @@ server.use(redirectApp);
 server.use(redirectPartnersApp);
 
 server.listen(port);
-
-
 
 function normalizePort(val) {
     let port = parseInt(val, 10);
