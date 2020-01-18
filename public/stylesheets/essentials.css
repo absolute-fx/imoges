@@ -28515,3 +28515,9 @@ section.dark .md-editor.md-fullscreen-mode
         display: none !important;
     }
 }
+
+.vcenter {
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
+}

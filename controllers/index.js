@@ -14,7 +14,7 @@ exports.index = function(req, res, next) {
         Projects.getAll({limit, status, active, media, orderField, orderDirection, realties}).then(projects =>{
             let p = Tools.getRealtiesAvailability(projects);
             res.render('index', {
-                title: 'Imoges - Promotion immobilière',
+                title: 'Imoges - Promotion immobilière depuis 2006',
                 page_description: "La société Imoges a été fondée en  2006 et a actuellement porté une série de projets immobiliers sur Ecaussinnes, Soignies et Braine le Comte.",
                 type: 'root',
                 css_paths: [
@@ -33,15 +33,29 @@ exports.index = function(req, res, next) {
         });
 
     }else{
-        // Partner dashboard
-        res.render('partner_index', {
-            type: 'root',
-            css_paths: [
+        if(req.session.token){
+            // Partner dashboard
+            res.render('partner_index', {
+                type: 'root',
+                css_paths: [
 
-            ],
-            js_paths:[
-            ],
-            topNavActive: 'index',
-        });
+                ],
+                js_paths:[
+                ],
+                topNavActive: 'index',
+            });
+        }else{
+            res.render('partner_login', {
+                type: 'root',
+                css_paths: [
+
+                ],
+                js_paths:[
+                    "/javascripts/auth_partner.js"
+                ],
+                topNavActive: 'index',
+            });
+        }
+
     }
 };
