@@ -21,7 +21,6 @@
                         img(alt="image" src=`libraries/${ r.projectId }/realties/${ r.id }/library/thumb_${ imgs[0].library_media_name}` class="img-responsive margin-bottom-10 ")
                     else
                         img(alt="image" src=`images/no-media.jpg` class="img-responsive margin-bottom-10")
-                p.text-left= r.realty_short_description
                 p.text-left.margin-bottom-0.bold
                     if r.realty_status === 0
                         span.label.label-info.pull-right= r.realty_surface + " m²"
