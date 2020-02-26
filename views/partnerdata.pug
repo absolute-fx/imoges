@@ -1,12 +1,9 @@
-extends layout
-
+extends partner_layout
 block content
     section
         .container
             .row
-                .col-md-3
-                    include accountsidenav
-                .col-md-9
+                .col-md-12
                     form.nomargin.sky-form#user_form(method="post")
                         fieldset
                             .row
@@ -43,19 +40,19 @@ block content
                                         label Adresse
                                         label.input.margin-bottom-10
                                             i.ico-append.fa.fa-home
-                                            input( type="text" name="address" value=(user.address ? user.address : ''))
+                                            input(required type="text" name="address" value=(user.address ? user.address : ''))
                                             b.tooltip.tooltip-bottom-right Votre adresse
                                     .col-md-4
                                         label Ville
                                         label.input.margin-bottom-10
                                             i.ico-append.fa.fa-home
-                                            input( type="text" name="city" value=(user.city ? user.city : ''))
+                                            input(required type="text" name="city" value=(user.city ? user.city : ''))
                                             b.tooltip.tooltip-bottom-right Votre ville
                                     .col-md-2
                                         label Code postal
                                         label.input.margin-bottom-10
                                             i.ico-append.fa.fa-home
-                                            input( type="text" name="pc" value=(user.pc ? user.pc : ''))
+                                            input(required type="text" name="pc" value=(user.pc ? user.pc : ''))
                                             b.tooltip.tooltip-bottom-right Votre code postal
                             hr.margin-bottom-40
                             .row

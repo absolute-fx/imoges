@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const verifyDomain = require('../middleware/verifyDomain');
 
 /* GET auth  */
 let auth = require('../controllers/auth');
@@ -12,6 +13,6 @@ router.post('/resetpass', auth.resetPass);
 router.get('/newpass', auth.newPass);
 router.post('/savepass', auth.savePass);
 router.get('/notvalidated', auth.notValidated);
-router.get('/logout', auth.logout);
+router.get('/logout', verifyDomain, auth.logout);
 
 module.exports = router;

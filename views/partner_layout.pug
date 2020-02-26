@@ -2,7 +2,7 @@ doctype html
 <!--[if IE 8]>			<html class="ie ie8"> <![endif]-->
 <!--[if IE 9]>			<html class="ie ie9"> <![endif]-->
 <!--[if gt IE 9]><!-->
-html
+html(lang="fr")
     <!--<![endif]-->
     head
         meta(charset='utf-8')
@@ -17,12 +17,46 @@ html
         link(rel='stylesheet', href='/javascripts/plugins/bootstrap/css/bootstrap.min.css')
         link(rel='stylesheet', href='/stylesheets/essentials.css')
         link(rel='stylesheet', href='/stylesheets/layout.css')
+        link(rel='stylesheet', href='/stylesheets/sticky-footer.css')
         if css_paths
             each cssPath in css_paths
                 link(rel='stylesheet', href=`${ cssPath }`)
     body(class="smoothscroll enable-animation")
-        block content
+        if(session.user)
+            if(session.isAdmin || session.isPartner)
+                nav.navbar.navbar-default.navbar-fixed-top
+                    .container-fluid
+                        .navbar-header
+                            button(type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar")
+                                .sr-only Toggle navigation
+                                .icon-bar
+                                .icon-bar
+                                .icon-bar
+                            a.navbar-brand IMOGES
+                        #navbar.collapse.navbar-collapse
+                            ul.nav.navbar-nav
+                                li(class=`${ topNavActive && topNavActive === 'home' ? 'active' : ''}`)
+                                    a(href="/") Accueil
+                                li(class=`${ topNavActive && topNavActive === 'user' ? 'active' : ''}`)
+                                    a(href="../account/user") Mon compte
+                                li
+                                    a(href="../auth/logout") Déconnexion
+        .margin-top-40
+            block content
+        footer.footer
+            .container.container-footer
+                .footer-copyright.text-center= company.name + " © " + company.juridical + " " + ws_settings.coreConfig.actualYear + ' - '
+                    a(href="https://partners.imoges.be") partners.imoges.be
+
         script(type="text/javascript" src="/javascripts/plugins/jquery/jquery-2.1.4.min.js")
         if js_paths
             each jsPath in js_paths
                 script(type="text/javascript" src=`${ jsPath }`)
+        script(type="text/javascript") var plugin_path = '/javascripts/plugins/';
+        script(type="text/javascript") var api_path = '#{ws_settings.coreConfig.api}';
+        script(type="text/javascript" src="/javascripts/plugins/jquery/jquery-2.1.4.min.js")
+        script(type="text/javascript" src="/javascripts/scripts.js")
+        if js_paths
+            each jsPath in js_paths
+                script(type="text/javascript" src=`${ jsPath }`)
+        script(type="text/javascript" src="/javascripts/layout-script.js")

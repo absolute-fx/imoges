@@ -1,5 +1,5 @@
 verifyConnection = (req, res, next) => {
-    let ext, http, port;
+    let ext, http, port, subdomain;
     if (process.env.NODE_ENV === "development" || process.env.NODE_ENV === undefined) {
         ext = 'loc';
         http = 'http';
@@ -9,15 +9,20 @@ verifyConnection = (req, res, next) => {
         http = 'https';
         port ='';
     }
+    subdomain = req.mainDomain ? '' : 'partners.';
     if(req.session.token){
         if(!req.session.user.validated){
-            res.redirect(302, http + "://imoges." + ext + port + "/auth/notvalidated");
+            res.redirect(302, http + "://" + subdomain + "imoges." + ext + port + "/auth/notvalidated");
         }else{
+            req.session.user.roles.forEach((role)=>{
+                req.isAdmin = role.name === 'ADMIN';
+                req.isPArtner = role.name === 'PARTNER';
+            });
             req.connected = true;
             next();
         }
     }else{
-        res.redirect(302, http + "://imoges." + ext + port + "/login");
+        res.redirect(302, http + "://" + subdomain + "imoges." + ext + port + "/login");
     }
 };
 

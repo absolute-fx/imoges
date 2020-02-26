@@ -2529,9 +2529,21 @@
 						var _t 		= jQuery(this),
 							_lang 	=	_t.attr('data-lang') || 'en';
 
-						if(_lang != 'en' && _lang != '') { // load language file
+						/*if(_lang != 'en' && _lang != '') { // load language file
 							loadScript(plugin_path + 'bootstrap.datepicker/locales/bootstrap-datepicker.'+_lang+'.min.js');
-						}
+						}*/
+
+                        jQuery.fn.datepicker.dates['fr'] = {
+                            days:["dimanche","lundi","mardi","mercredi","jeudi","vendredi","samedi"],
+							daysShort:["dim.","lun.","mar.","mer.","jeu.","ven.","sam."],
+							daysMin:["Di","Lu","Ma","Me","Je","Ve","Sa"],
+							months:["janvier","février","mars","avril","mai","juin","juillet","août","septembre","octobre","novembre","décembre"],
+							monthsShort:["janv.","févr.","mars","avril","mai","juin","juil.","août","sept.","oct.","nov.","déc."],
+							today:"Aujourd'hui",
+							clear:"Effacer",
+							weekStart:1,
+							format:"dd/mm/yyyy"
+                        };
 
 						jQuery(this).datepicker({
 							format:			_t.attr('data-format') 			|| 'yyyy-mm-dd',

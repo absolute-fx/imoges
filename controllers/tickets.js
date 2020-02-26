@@ -2,6 +2,7 @@ const path = require('path');
 const root = path.resolve('./public');
 const fs = require('fs');
 const Tickets = require('../repositories/Tickets');
+const moment = require('moment');
 
 // TICKET
 exports.setTicket = function(req, res) {
@@ -43,8 +44,24 @@ createTicket = function(req, res){
 
 exports.closeTicket = function(req, res){
     Tickets.closeTicket(req).then(data =>{
-        console.log(data);
-        res.redirect(302, redirectUrl("account/ticket?id=" + data.id));
+        //console.log(data);
+        res.redirect("../account/ticket?id=" + data.id);
+    });
+};
+
+exports.planWo = function(req, res){
+    let date = moment(req.query.date, 'DD-MM-YYYY').format('YYYY-MM-DD');
+    req.query.date_en = date;
+    Tickets.planWo(req).then(data =>{
+        //console.log(data);
+        res.redirect("../account/ticket?id=" + data.id);
+    });
+};
+
+exports.setWoDone = function(req, res){
+    Tickets.setWoDone(req).then(data =>{
+        //console.log(data);
+        res.redirect("../account/ticket?id=" + data.id);
     });
 };
 
@@ -81,7 +98,7 @@ exports.setMessage = function(req, res){
 createMessage = function(req, res){
     Tickets.createMessage(req).then(data =>{
         console.log(data);
-        res.redirect(302, redirectUrl("account/ticket?id=" + data.message.ticketId + "#message-" + data.message.id));
+        res.redirect("../account/ticket?id=" + data.message.ticketId + "#message-" + data.message.id);
     });
 };
 

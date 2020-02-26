@@ -1,0 +1,155 @@
+extends partner_layout
+
+block content
+    section
+        .container
+            .col-md-12.margin-bottom-20
+                button(type="button" class="btn btn-info btn-lg btn-block" onclick="javascript:window.location.assign('/')") Retour
+        .container
+            .col-md-12
+                if ticket
+                    if (session.partner && session.partner.id === ticket.partnerId) || isAdmin
+                        .box-static.box-border-top
+                            .box-title
+                                h4!= "<i class='fa fa-ticket'></i> Ticket " + ticket.ref
+
+                            if ticket.status === 3 || ticket.status === 4
+                                .alert.alert-info.margin-top-10
+                                    strong.fa.fa-exclamation-triangle.margin-right-10
+                                    != "Ce ticket a été fermé le <strong>" + ticket.closeDate + "</strong>"
+                            p!= "Ticket créé le <strong>" + ticket.startDate + "</strong> - "
+                                small= ticket.fromNow
+                            .info-bar.info-bar-clean.info-bar-bordered.margin-top-10
+                                .row
+                                    .col-md-12.text-center
+                                        h1 Informations client
+                                        div= user.firstname + " " + user.lastname
+                                        div= user.mobile
+                                        div= user.email
+                            .info-bar.info-bar-clean.info-bar-bordered.margin-bottom-0
+                                .row
+                                    .col-xs-6
+                                        i.fa.fa-building.margin-left-20
+                                        h3 Projet
+                                        p= ticket.realty.project.project_title
+                                    .col-xs-6
+                                        i.fa.fa-home
+                                        h3 Bien
+                                        p= ticket.realty.realty_title
+                            .info-bar.info-bar-clean.info-bar-bordered.margin-top-10
+                                .row
+                                    .col-md-4.text-center
+                                        p= ticket.partner.title
+                                    .col-md-4.text-center
+                                        p= ticket.statusLabel
+                                    .col-md-4.text-center
+                                        p= ticket.priorityLabel
+                            if ticket.planned && ticket.status === 1
+                                .info-bar.info-bar-color.info-bar-bordered.margin-top-10
+                                    .row
+                                        .col-md-12
+                                            p.size-20.text-center.text-black= 'Planifié pour le ' + ticket.plannedDate
+                                button(type="button" class="btn btn-primary btn-lg btn-block" onclick="return false;" data-toggle="modal" data-target="#setPlannedDateModal") Planifier une autre date d'intervention
+                                button(type="button" class="btn btn-warning btn-lg btn-block" onclick="return false;" data-toggle="modal" data-target="#doneModal") L'intervention a été effectuée
+
+                            else if ticket.status === 0
+                                button(type="button" class="btn btn-primary btn-lg btn-block" onclick="return false;" data-toggle="modal" data-target="#setPlannedDateModal") Planifier une date d'intervention
+                            blockquote
+                                p= ticket.title
+                        .divider.divider-circle.divider-center
+                            .fa.fa-users
+                        each tM in ticket.ticketmessages
+                            - cls = ''
+                            - msgCls = ''
+                            if tM.user.id !== ticket.user.id
+                                - cls = 'quote reverse'
+                                -msgCls = 'bold'
+                            blockquote.quote(class=`${cls}` id=`message-${tM.id}`)
+                                p.size-14.text-left(class=`${msgCls}`)= tM.message
+                                if tM.librarycategories[0]
+                                    - opt = '{"singleItem": false, "items": "'+ tM.imgCount + '", "autoPlay": 3500, "navigation": true, "pagination": false}'
+                                    .owl-carousel.owl-padding-1.nomargin.buttons-autohide.controlls-over(data-plugin-options=`${opt}`)
+                                        each i in tM.librarycategories[0].libraries
+                                            .item-box
+                                                figure
+                                                    - url = "../" + "tickets_libraries/" + ticket.realtyId + "/" + tM.userId + "/" + i.library_media_name
+                                                    a.lightbox(href=`${ url }` data-plugin-options='{"type":"image"}')
+                                                        img.img-responsive(src=`${ url }` width="600" height="399")
+                                if tM.user.id === ticket.user.id
+                                    cite.margin-top-20= tM.user.firstname + ' ' + tM.user.lastname + ' - ' + tM.fromNow
+                                else if tM.user.id === ticket.partner.user.id
+                                    cite.margin-top-20= ticket.partner.title + ' - ' + tM.fromNow
+                                else
+                                    cite.margin-top-20= 'IMOGES - ' + tM.fromNow
+                        if ticket.status < 3
+                            hr
+                            form.nomargin.sky-form#message_form(action="/tickets/message" method="post" enctype="multipart/form-data")
+                                fieldset
+                                    .row
+                                        .col-md-12
+                                            .form-group
+                                                label Commentaire *
+                                                textarea.form-control.height-150(required row="4" name="message" placeholder="Ajouter un commentaire au ticket du client...")
+                                                input(type="hidden" name="ticketId" value=`${ticket.id}`)
+                                                input(type="hidden" name="realtyId" value=`${ticket.realty.id}`)
+                                    .row
+                                        .col-md-12
+                                            .form-group
+                                                label Photos
+                                                .fancy-file-upload.fancy-file-primary
+                                                    input.custom-file-upload(name="pictures" type="file" data-btn-text="Selectionner des photos" multiple)
+                                    .row.margin-top-20
+                                        button.btn.btn-primary(type="submit")
+                                            i.fa.fa-check
+                                            | Envoyer le message
+                                        if isAdmin
+                                            button.btn.btn-default(onclick="return false;" data-toggle="modal" data-target="#closeTicketModal") Clôturer le ticket
+                    else
+                        .alert.alert-danger(role="alert") Désolé, ce ticket ne vous est pas destiné!
+                else
+                    .alert.alert-danger(role="alert") Désolé, ce ticket n'existe pas!
+    #setPlannedDateModal.modal.fade(tabindex="-1" role="dialog" aria-labelledby="closeTicketModal" aria-hidden="true")
+        .modal-dialog
+            .modal-content
+                .modal-header
+                    button.close(data-dismiss="modal" aria-label="Close")
+                        span(aria-hidden="true")
+                    h4.modal-title#closeTicketModalLabel Planifier une intervention
+                .modal-body
+                    p Avant de planifier une intervention, merci de vous arranger avec le client de sa disponibilité si sa présence est requise.
+                    p
+                        strong= user.firstname + " " + user.lastname + " - Tel: " + user.mobile + " - Mail: " + user.email
+                    .input-group.date
+                        input(type="text" id="ticket-plan-date" placeholder="Choisissez une date" class="form-control datepicker" data-format="dd-mm-yyyy" data-lang="fr" data-RTL="false")
+                        .input-group-addon
+                            span.fa.fa-calendar
+                .modal-footer
+                    button.btn.btn-default(data-dismiss="modal") Annuler
+                    button.btn.btn-primary(onclick="setWoDate(" + ticket.id + ")") Planifier
+
+    #doneModal.modal.fade(tabindex="-1" role="dialog" aria-labelledby="closeTicketModal" aria-hidden="true")
+        .modal-dialog
+            .modal-content
+                .modal-header
+                    button.close(data-dismiss="modal" aria-label="Close")
+                        span(aria-hidden="true")
+                    h4.modal-title#closeTicketModalLabel Intervention réalisée
+                .modal-body
+                    p Confirmez-vous avoir réalisé l'intervention demandée par le client?
+
+                .modal-footer
+                    button.btn.btn-default(data-dismiss="modal") Annuler
+                    button.btn.btn-primary(onclick="setWoDone(" + ticket.id + ")") Je confirme
+
+    #closeTicketModal.modal.fade(tabindex="-1" role="dialog" aria-labelledby="closeTicketModal" aria-hidden="true")
+        .modal-dialog
+            .modal-content
+                .modal-header
+                    button.close(data-dismiss="modal" aria-label="Close")
+                        span(aria-hidden="true")
+                    h4.modal-title#closeTicketModalLabel Fermer le ticket
+                .modal-body
+                    p Vous être sur le point de clôturer ce ticket. Cette action est définitive. Voulez-vous vraiment clôturer ce ticket?
+                .modal-footer
+                    button.btn.btn-default(data-dismiss="modal") Annuler
+                    button.btn.btn-primary(onclick="closeTicket(" + ticket.id + ")") Fermer le ticket

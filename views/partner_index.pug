@@ -1,5 +1,22 @@
 extends partner_layout
 block content
-    section
-        .container
-            p I'm on partner side...
+    if(session.isAdmin || session.isPartner)
+        section
+            .container
+                p!= "Bonjour <strong>" + session.user.firstname + "</strong> voici les tickets en cours."
+                .ticket-list
+                    each ticket in tickets
+                        if ticket.status < 3
+                            .panel.panel-default
+                                a(href="account/ticket?id=" + ticket.id)
+                                    .panel-body
+                                        .col-md-3= ticket.realty.realty_title
+                                        .col-md-3= ticket.title
+                                        .col-md-3= ticket.date
+                                        .col-md-3= ticket.statusLabel
+                                            if ticket.status === 1
+                                                = " le " + ticket.plannedDate
+    else
+        section
+            .container
+                .alert.alert-danger(role="alert")!= 'Désolé, cet accès est exclusivement réservé aux partenaires agréés IMOGES. Vous êtes connecté à la partie publique du site web <a href="https://imoges.be">https://imoges.be</a>.'

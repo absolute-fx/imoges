@@ -1,5 +1,8 @@
 const Realties = require('../repositories/Realties');
 const Projects = require('../repositories/Projects');
+const Tickets = require('../repositories/Tickets');
+let Account = require('../controllers/account');
+const moment = require('moment');
 const Tools = require('../classes/Tools');
 
 exports.index = function(req, res, next) {
@@ -35,14 +38,37 @@ exports.index = function(req, res, next) {
     }else{
         if(req.session.token){
             // Partner dashboard
-            res.render('partner_index', {
-                type: 'root',
-                css_paths: [
+            //console.log(req.session);
+            Tickets.getAllTickets(req).then(tickets =>{
+                tickets.forEach((ticket)=>{
+                    ticket.date = moment(ticket.createdAt).format('DD/MM/YYYY');
+                    switch (ticket.status){
+                        case 0:
+                            ticket.statusLabel = "En attente";
+                            break;
+                        case 1:
+                            ticket.statusLabel = "Prestation planifiée";
+                            ticket.plannedDate = moment(ticket.planned).format('DD/MM/YYYY');
+                            break;
+                        case 2:
+                            ticket.statusLabel = "Prestation effectuée";
+                            break;
+                    }
+                });
 
-                ],
-                js_paths:[
-                ],
-                topNavActive: 'index',
+                res.render('partner_index', {
+                    type: 'root',
+                    css_paths: [
+
+                    ],
+                    js_paths:[
+                        '/javascripts/ticket.js'
+                    ],
+                    topNavActive: 'home',
+                    isAdmin: req.isAdmin,
+                    isPartner: req.isPartner,
+                    tickets: tickets
+                });
             });
         }else{
             res.render('partner_login', {
@@ -52,8 +78,7 @@ exports.index = function(req, res, next) {
                 ],
                 js_paths:[
                     "/javascripts/auth_partner.js"
-                ],
-                topNavActive: 'index',
+                ]
             });
         }
 

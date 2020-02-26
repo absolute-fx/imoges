@@ -22,23 +22,37 @@ exports.index = function(req, res) {
 };
 
 exports.userData = function (req, res) {
-    Users.userData({id: req.session.user.id, token: req.session.token}).then( user => {
-        console.log(user);
-        res.render('userdata', {
-            title: 'Données utilisateur',
-            topNavActive: 'account',
-            sideNavActive: 'user',
-            breadcrumb: [
-                {label: 'Accueil', link: '/'},
-                {label: 'Mon compte', link: '/account'},
-                {label: 'Mes données'}
-            ],
-            js_paths:[
-                '../javascripts/update-user-infos.js'
-            ],
-            user: user
+    if(req.mainDomain){
+        Users.userData({id: req.session.user.id, token: req.session.token}).then( user => {
+            console.log(user);
+            res.render('userdata', {
+                title: 'Données utilisateur',
+                topNavActive: 'account',
+                sideNavActive: 'user',
+                breadcrumb: [
+                    {label: 'Accueil', link: '/'},
+                    {label: 'Mon compte', link: '/account'},
+                    {label: 'Mes données'}
+                ],
+                js_paths:[
+                    '../javascripts/update-user-infos.js'
+                ],
+                user: user
+            });
         });
-    });
+    }else{
+        Users.userData({id: req.session.user.id, token: req.session.token}).then( user => {
+            console.log(user);
+            res.render('partnerdata', {
+                title: 'Données utilisateur',
+                topNavActive: 'user',
+                js_paths:[
+                    '../javascripts/update-user-infos.js'
+                ],
+                user: user
+            });
+        });
+    }
 };
 
 exports.updateUser = function(req, res){
@@ -109,8 +123,7 @@ exports.afterSale = function (req, res) {
 
 exports.getAllTickets = function(req, res){
     Tickets.getAllTickets(req).then(tickets =>{
-        console.log(tickets);
-
+        //console.log(tickets);
         for(let i in tickets){
             tickets[i].ref = moment(tickets[i].createdAt).format('YYYY') + '-' + moment(tickets[i].createdAt).format('MM') + '-' + tickets[i].realtyId + '-' + tickets[i].id ;
             tickets[i].statusLabel = setStatus(tickets[i].status);
@@ -133,54 +146,95 @@ exports.getAllTickets = function(req, res){
 
 exports.getTicket = function(req, res){
     Tickets.getTicket({id: req.query.id, token: req.session.token}).then(data =>{
-        moment.lang("fr");
-        data.ticket.ref = moment(data.ticket.createdAt).format('YYYY') + '-' + moment(data.ticket.createdAt).format('MM') + '-' + data.ticket.realtyId + '-' + data.ticket.id ;
-        data.ticket.startDate = moment(data.ticket.createdAt).format('dddd') + " " + moment(data.ticket.createdAt).format('DD/MM/YYYY à HH[h]mm');
-        if(data.ticket.status === 3 || data.ticket.status === 4){
-            data.ticket.closeDate = moment(data.ticket.updatedAt).format('dddd') + " " + moment(data.ticket.updatedAt).format('DD/MM/YYYY à HH[h]mm');
-        }
-        data.ticket.fromNow = moment(data.ticket.createdAt).fromNow();
-        data.ticket.statusLabel = setStatus(data.ticket.status);
-        data.ticket.priorityLabel = setPriority(data.ticket.priority);
-        const now = moment();
-        if( data.ticket.realty.realty_reception_date){
-            const fromNow = now.diff(moment(data.ticket.realty.realty_reception_date), 'months');
-             if(fromNow > parseInt(data.ticket.realty.realty_warranty)){
-                 data.ticket.realty.warranty = false;
-             }else{
-                 data.ticket.realty.warranty = true;
-             }
-
-        }
-
-        if(data.ticket.planned){
-            data.ticket.plannedDate = moment(data.ticket.planned).format('dddd') + " " + moment(data.ticket.planned).format('DD/MM/YYYY');
-        }
-        for(let i in data.ticket.ticketmessages){
-            data.ticket.ticketmessages[i].fromNow = moment(data.ticket.ticketmessages[i].createdAt).fromNow();
-            if(data.ticket.ticketmessages[i].librarycategories[0]){
-                if (data.ticket.ticketmessages[i].librarycategories[0].libraries.length <= 4){
-                    data.ticket.ticketmessages[i].imgCount = data.ticket.ticketmessages[i].librarycategories[0].libraries.length;
+        if(data.ticket!== null){
+            moment.lang("fr");
+            data.ticket.ref = moment(data.ticket.createdAt).format('YYYY') + '-' + moment(data.ticket.createdAt).format('MM') + '-' + data.ticket.realtyId + '-' + data.ticket.id ;
+            data.ticket.startDate = moment(data.ticket.createdAt).format('dddd') + " " + moment(data.ticket.createdAt).format('DD/MM/YYYY à HH[h]mm');
+            if(data.ticket.status === 3 || data.ticket.status === 4){
+                data.ticket.closeDate = moment(data.ticket.updatedAt).format('dddd') + " " + moment(data.ticket.updatedAt).format('DD/MM/YYYY à HH[h]mm');
+            }
+            data.ticket.fromNow = moment(data.ticket.createdAt).fromNow();
+            data.ticket.statusLabel = setStatus(data.ticket.status);
+            data.ticket.priorityLabel = setPriority(data.ticket.priority);
+            const now = moment();
+            if( data.ticket.realty.realty_reception_date){
+                const fromNow = now.diff(moment(data.ticket.realty.realty_reception_date), 'months');
+                if(fromNow > parseInt(data.ticket.realty.realty_warranty)){
+                    data.ticket.realty.warranty = false;
                 }else{
-                    data.ticket.ticketmessages[i].imgCount = 4
+                    data.ticket.realty.warranty = true;
+                }
+
+            }
+
+            if(data.ticket.planned){
+                data.ticket.plannedDate = moment(data.ticket.planned).format('dddd') + " " + moment(data.ticket.planned).format('DD/MM/YYYY');
+            }
+            for(let i in data.ticket.ticketmessages){
+                data.ticket.ticketmessages[i].fromNow = moment(data.ticket.ticketmessages[i].createdAt).fromNow();
+                if(data.ticket.ticketmessages[i].librarycategories[0]){
+                    if (data.ticket.ticketmessages[i].librarycategories[0].libraries.length <= 4){
+                        data.ticket.ticketmessages[i].imgCount = data.ticket.ticketmessages[i].librarycategories[0].libraries.length;
+                    }else{
+                        data.ticket.ticketmessages[i].imgCount = 4
+                    }
                 }
             }
-        }
 
-        console.log(data.ticket);
-        res.render('ticket', {
-            title: 'Ticket ' + data.ticket.ref,
-            topNavActive: 'account',
-            sideNavActive: 'tickets',
-            breadcrumb: [
-                {label: 'Accueil', link: '/'},
-                {label: 'Mon compte', link: '/account'},
-                {label: 'Mes tickets', link: '/account/tickets'},
-                {label: 'Ticket ' + data.ticket.ref},
-            ],
-            js_paths: ['/javascripts/ticket.js'],
-            ticket: data.ticket
-        });
+            console.log(data.ticket);
+            if(req.mainDomain) {
+                res.render('ticket', {
+                    title: 'Ticket ' + data.ticket.ref,
+                    topNavActive: 'account',
+                    sideNavActive: 'tickets',
+                    breadcrumb: [
+                        {label: 'Accueil', link: '/'},
+                        {label: 'Mon compte', link: '/account'},
+                        {label: 'Mes tickets', link: '/account/tickets'},
+                        {label: 'Ticket ' + data.ticket.ref},
+                    ],
+                    js_paths: ['/javascripts/ticket.js'],
+                    ticket: data.ticket
+                });
+            }else{
+                Users.userData({id: data.ticket.userId, token: req.session.token}).then((user)=>{
+                    res.render('ticket_partner', {
+                        title: 'Ticket ' + data.ticket.ref,
+                        topNavActive: 'account',
+                        sideNavActive: 'tickets',
+                        breadcrumb: [
+                            {label: 'Accueil', link: '/'},
+                            {label: 'Mon compte', link: '/account'},
+                            {label: 'Mes tickets', link: '/account/tickets'},
+                            {label: 'Ticket ' + data.ticket.ref},
+                        ],
+                        js_paths: ['/javascripts/ticket.js'],
+                        ticket: data.ticket,
+                        user: user,
+                        isAdmin: req.isAdmin
+                    });
+                })
+            }
+        }else{
+            let tplt = ""
+            if(req.mainDomain) {
+                tplt = "ticket"
+            }else{
+                tplt = "ticket_partner"
+            }
+            res.render(tplt, {
+                title: 'Ticket ',
+                topNavActive: 'account',
+                sideNavActive: 'tickets',
+                breadcrumb: [
+                    {label: 'Accueil', link: '/'},
+                    {label: 'Mon compte', link: '/account'},
+                    {label: 'Mes tickets', link: '/account/tickets'},
+                    {label: 'Ticket inexistant'},
+                ],
+                js_paths: ['/javascripts/ticket.js']
+            });
+        }
     });
 };
 

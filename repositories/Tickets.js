@@ -31,7 +31,12 @@ class TicketsRepository
 
     getAllTickets(data){
         return new Promise((resolve, reject) => {
-            axios.get(apiLink + 'tickets', {headers: {"x-access-token": data.session.token}})
+            let domain = data.mainDomain? 'main': 'partner';
+            let get = '?role=USER&domain=' + domain;
+            if(data.session.isPartner) get = '?role=PARTNER&domain=' + domain + '&partnerId=' + data.session.partner.id;
+            if(data.session.isAdmin) get = '?role=ADMIN&domain=' + domain;
+            console.log(apiLink + 'tickets'+ get);
+            axios.get(apiLink + 'tickets'+ get, {headers: {"x-access-token": data.session.token}})
                 .then((res) => {
                     resolve(res.data);
                 })
@@ -82,8 +87,33 @@ class TicketsRepository
 
     closeTicket(data){
         return new Promise((resolve, reject) => {
-            console.log(apiLink + 'ticket?id=' + data.query.id);
             axios.put(apiLink + 'ticket/' + data.query.id ,{action:'close'}, {headers: {"x-access-token": data.session.token}})
+                .then((res) => {
+                    resolve(res.data);
+                })
+                .catch((error) => {
+                    console.error(error.response.data);
+                    resolve(error.response.data);
+                })
+        });
+    }
+
+    planWo(data){
+        return new Promise((resolve, reject) => {
+            axios.put(apiLink + 'ticket/' + data.query.id ,{action:'plan', date:data.query.date_en}, {headers: {"x-access-token": data.session.token}})
+                .then((res) => {
+                    resolve(res.data);
+                })
+                .catch((error) => {
+                    console.error(error.response.data);
+                    resolve(error.response.data);
+                })
+        });
+    }
+
+    setWoDone(data){
+        return new Promise((resolve, reject) => {
+            axios.put(apiLink + 'ticket/' + data.query.id ,{action:'done'}, {headers: {"x-access-token": data.session.token}})
                 .then((res) => {
                     resolve(res.data);
                 })

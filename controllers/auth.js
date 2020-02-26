@@ -1,13 +1,26 @@
 const Auth = require("../repositories/Auth");
+const Partners = require("../repositories/Partners");
 
 exports.signin = function(req, res) {
     Auth.singin(req.body).then( data => {
-        console.log("Data sent");
+        console.log("Signin Data sent");
         if(data.auth){
             req.session.token = data.accessToken;
             req.session.user = data.user;
-            console.log(req.session);
-            res.send(data);
+
+            data.user.roles.forEach((role)=>{
+                req.session.isAdmin = role.name === 'ADMIN';
+                req.session.isPartner = role.name === 'PARTNER';
+            });
+            if(req.session.isPartner){
+                Partners.getOne(req.session.user.id).then((partner)=>{
+                    req.session.partner = partner;
+                    //console.log(partner);
+                    res.send(data);
+                });
+            }else{
+                res.send(data);
+            }
         } else{
             res.send(data);
         }
@@ -125,15 +138,16 @@ exports.savePass = function(req, res){
 
 exports.logout = function(req, res){
     req.session.destroy();
-    let ext, http, port;
+    let ext, http, port, subdomain;
     if (process.env.NODE_ENV === "development" || process.env.NODE_ENV === undefined) {
         ext = 'loc';
         http = 'http';
-        port = ':3000'
+        port = ':3000';
     }else{
         ext = 'be';
         http = 'https';
         port ='';
     }
-    res.redirect(302, http + "://imoges." + ext + port + "/login");
+    subdomain = req.mainDomain ? '' : 'partners.';
+    res.redirect(302, http + "://" + subdomain + "imoges." + ext + port + "/login");
 };
