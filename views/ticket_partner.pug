@@ -91,7 +91,7 @@ block content
                                                 label Commentaire *
                                                 textarea.form-control.height-150(required row="4" name="message" placeholder="Ajouter un commentaire au ticket du client...")
                                                 input(type="hidden" name="ticketId" value=`${ticket.id}`)
-                                                input(type="hidden" name="realtyId" value=`${ticket.realty.id}`)
+                                                input(type="hidden" id="inputRealtyId" name="realtyId" value=`${ticket.realty.id}`)
                                     .row
                                         .col-md-12
                                             .form-group

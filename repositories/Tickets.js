@@ -100,7 +100,7 @@ class TicketsRepository
 
     planWo(data){
         return new Promise((resolve, reject) => {
-            axios.put(apiLink + 'ticket/' + data.query.id ,{action:'plan', date:data.query.date_en}, {headers: {"x-access-token": data.session.token}})
+            axios.put(apiLink + 'ticket/' + data.query.id ,{action:'plan', date:data.query.date_en, realtyId:data.query.realtyId}, {headers: {"x-access-token": data.session.token}})
                 .then((res) => {
                     resolve(res.data);
                 })
@@ -113,7 +113,7 @@ class TicketsRepository
 
     setWoDone(data){
         return new Promise((resolve, reject) => {
-            axios.put(apiLink + 'ticket/' + data.query.id ,{action:'done'}, {headers: {"x-access-token": data.session.token}})
+            axios.put(apiLink + 'ticket/' + data.query.id ,{action:'done', realtyId:data.query.realtyId}, {headers: {"x-access-token": data.session.token}})
                 .then((res) => {
                     resolve(res.data);
                 })
