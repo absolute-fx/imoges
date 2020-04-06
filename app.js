@@ -36,6 +36,7 @@ const accountRouter = require('./routes/account');
 const googleRouter = require('./routes/google');
 const cgRouter = require('./routes/cg');
 const ticketsRooter = require('./routes/tickets');
+const supportcategoriesRooter = require('./routes/supportcategories');
 
 const app = express();
 
@@ -119,7 +120,7 @@ app.use('/realty', realtyRouter);
 app.use('/realties', realtiesRouter);
 app.use('/invest', investRouter);
 app.use('/sav', savRouter);
-app.use('/faq', faqRouter);
+app.use('/faqs', faqRouter);
 app.use('/login', loginRouter);
 app.use('/videogal', videogalRouter);
 app.use('/photogal', photogalRouter);
@@ -130,6 +131,7 @@ app.use('/account', accountRouter);
 app.use('/google75ff5b703311b407.html', googleRouter);
 app.use('/cg', cgRouter);
 app.use('/tickets', ticketsRooter);
+app.use('/supportcategories', supportcategoriesRooter);
 
 
 // catch 404 and forward to error handler

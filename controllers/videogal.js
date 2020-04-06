@@ -1,10 +1,10 @@
 const LibrarieCategories = require("../repositories/Librarycategories");
 exports.index = function(req, res, next) {
-    const cat = "youtube";
-    const orderField = "id";
-    const orderDirection = "desc";
-    //LibrarieCategories.getAll({cat, orderField, orderDirection}).then(videos => {
+    LibrarieCategories.getAll({type: "video", orderField: "createdAt", orderDirection: "desc"}).then(videos => {
         //console.log(videos);
+        const lastVideo = videos[0];
+        videos.shift();
+        console.log(videos);
         res.render('videogal', {
             title: 'Galerie vidéo Imoges',
             topNavActive: 'media',
@@ -12,7 +12,8 @@ exports.index = function(req, res, next) {
                 {label: 'Accueil', link: '/'},
                 {label: 'Galerie vidéo'}
             ],
-            //videos: videos
-        //});
+            lastVideo: lastVideo,
+            videos: videos
+        });
     });
 };

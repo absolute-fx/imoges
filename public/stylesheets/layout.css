@@ -9710,3 +9710,13 @@ h3 .invest-bien
 }
 
 
+.faqs-cat-list{
+    margin-bottom: 30px;
+}
+
+.cat-label{
+    text-align: center;
+    color: white;
+    background-color: #3d4547;
+    padding: 10px;
+}

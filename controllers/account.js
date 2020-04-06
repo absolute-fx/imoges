@@ -1,5 +1,6 @@
 const Users = require('../repositories/Users');
 const Tickets = require('../repositories/Tickets');
+const SupportCategories = require('../repositories/Supportcategories');
 const moment = require('moment');
 
 
@@ -94,7 +95,7 @@ exports.realtiesList = function(req, res){
 
 exports.afterSale = function (req, res) {
     Users.userRealties({id: req.session.user.id, token: req.session.token}).then( user => {
-        console.log();
+        //console.log();
         for (const i in user.realties){
             if(user.realties[i].realty_reception_date){
                 const now = moment();
@@ -104,18 +105,22 @@ exports.afterSale = function (req, res) {
                 user.realties[i].months_from_reception = 0;
             }
         }
-        console.log(user.realties);
-        res.render('accountsav', {
-            title: "Demande d'intervention",
-            topNavActive: 'account',
-            sideNavActive: 'sav',
-            breadcrumb: [
-                {label: 'Accueil', link: '/'},
-                {label: 'Mon compte', link: '/account'},
-                {label: 'Demande d\'intervention'}
-            ],
-            js_paths: ['/javascripts/sav.js'],
-            realties: user.realties
+        //console.log(user.realties);
+        SupportCategories.getAllCategories({token: req.session.token}).then((data)=>{
+            console.log(data);
+            res.render('accountsav', {
+                title: "Demande d'intervention",
+                topNavActive: 'account',
+                sideNavActive: 'sav',
+                breadcrumb: [
+                    {label: 'Accueil', link: '/'},
+                    {label: 'Mon compte', link: '/account'},
+                    {label: 'Demande d\'intervention'}
+                ],
+                js_paths: ['/javascripts/sav.js'],
+                realties: user.realties,
+                categories: data.categories
+            });
         });
     });
 };

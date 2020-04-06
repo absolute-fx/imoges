@@ -1,10 +1,11 @@
-exports.index = function(req, res, next) {
-    res.render('faq', {
-        title: 'Questions fréquentes',
-        topNavActive: 'contact',
-        breadcrumb: [
-            {label: 'Accueil', link: '/'},
-            {label: 'Questions fréquentes'}
-        ]
-    });
+const Faqs = require('../repositories/Faqs');
+
+exports.index = function(req, res) {
+    if(req.body.terms !== ''){
+        Faqs.search({terms: req.body.terms, token: req.session.token}).then(faqs =>{
+            res.send(faqs);
+        });
+    }else{
+
+    }
 };

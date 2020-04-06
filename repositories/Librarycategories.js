@@ -6,6 +6,7 @@ else
 {
     http = require("https");
 }
+const axios = require('axios');
 const Promise = require("bluebird");
 const fs = require('fs');
 let config = require('../config/config');
@@ -13,6 +14,33 @@ const apiLink = config.ws_settings.coreConfig.api;
 
 class LibrarycategoriesRepository {
     getAll(args){
+        return new Promise((resolve, reject) => {
+            let data = '?';
+            if(args){
+                if(args.type){
+                    data += "type=" + args.type + "&";
+                }
+                if(args.orderField){
+                    data += "orderField=" + args.orderField + "&";
+                }
+                if(args.orderDirection){
+                    data += "orderDirection=" + args.orderDirection + "&";
+                }
+            }
+            data = data.slice(0, -1);
+            console.log(apiLink + 'medias' + data);
+            axios.get(apiLink + 'medias' + data)
+                .then((res) => {
+                    //res.data.root = root;
+                    //console.log(res.data);
+                    resolve(res.data);
+                })
+                .catch((error) => {
+                    console.error(error.response.data);
+                    resolve(error.response.data);
+                })
+        });
+        /*
         let parameters = "";
         let getAllMedia = true;
         let searchBy;
@@ -67,6 +95,7 @@ class LibrarycategoriesRepository {
                 reject(err);
             });
         });
+         */
     }
 }
 module.exports = new LibrarycategoriesRepository();

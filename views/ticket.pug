@@ -50,29 +50,58 @@ block content
                                         | Ce bien n'est plus sous garantie. Des frais d'intervention pourraient être à votre charge.
                         .divider.divider-circle.divider-center
                             .fa.fa-users
-                        each tM in ticket.ticketmessages
-                            - cls = ''
-                            - msgCls = ''
-                            if tM.user.id !== ticket.user.id
-                                - cls = 'quote reverse'
-                                -msgCls = 'bold'
-                            blockquote.quote(class=`${cls}` id=`message-${tM.id}`)
-                                p.size-14.text-left(class=`${msgCls}`)= tM.message
-                                if tM.librarycategories[0]
-                                    - opt = '{"singleItem": false, "items": "'+ tM.imgCount + '", "autoPlay": 3500, "navigation": true, "pagination": false}'
-                                    .owl-carousel.owl-padding-1.nomargin.buttons-autohide.controlls-over(data-plugin-options=`${opt}`)
-                                        each i in tM.librarycategories[0].libraries
-                                            .item-box
-                                                figure
-                                                    - url = "../" + "tickets_libraries/" + ticket.realtyId + "/" + tM.userId + "/" + i.library_media_name
-                                                    a.lightbox(href=`${ url }` data-plugin-options='{"type":"image"}')
-                                                        img.img-responsive(src=`${ url }` width="600" height="399")
+                        .comment-list
+                            each tM in ticket.ticketmessages
                                 if tM.user.id === ticket.user.id
-                                    cite.margin-top-20= tM.user.firstname + ' ' + tM.user.lastname + ' - ' + tM.fromNow
+                                    - image = "../images/avatar2.jpg"
+                                    - caption = "Client"
+                                    - msgClient = true
+                                    - align = 'left'
+                                    - msgAuthor = " " + tM.user.firstname + ' ' + tM.user.lastname
                                 else if tM.user.id === ticket.partner.user.id
-                                    cite.margin-top-20= ticket.partner.title + ' - ' + tM.fromNow
+                                    - image = "../images/avatar2.jpg"
+                                    - caption = "Partenaire"
+                                    - msgClient = false
+                                    - align = 'right'
+                                    - msgAuthor = " " + tM.user.company_name
                                 else
-                                    cite.margin-top-20= 'IMOGES - ' + tM.fromNow
+                                    - image = "../images/avatar2.jpg"
+                                    - caption = "Admin"
+                                    - msgClient = false
+                                    - align = 'right'
+                                    - msgAuthor = " IMOGES"
+                                .row
+                                    if msgClient
+                                        .col-md-2.col-sm-2.hidden-xs
+                                            figure.thumbnail
+                                                img.img-responsive(src=`${image}`)
+                                                figcaption.text-center= caption
+                                    .col-md-10.col-sm-10
+                                        .panel.panel-default.arrow(class=`${align}`)
+                                            .panel-body
+                                                header(class=`text-${align}`)
+                                                    .comment-user
+                                                        i.fa.fa-user
+                                                        = msgAuthor
+                                                    span.comment-date
+                                                        i.fa.fa-clock-o
+                                                        = " " + tM.fromNow
+                                                .comment-post
+                                                    p= tM.message
+                                                    if tM.librarycategories[0]
+                                                        - opt = '{"singleItem": false, "items": "'+ tM.imgCount + '", "autoPlay": 3500, "navigation": true, "pagination": false}'
+                                                        .owl-carousel.owl-padding-1.nomargin.buttons-autohide.controlls-over(data-plugin-options=`${opt}`)
+                                                            each i in tM.librarycategories[0].libraries
+                                                                .item-box
+                                                                    figure
+                                                                        - url = "../" + "tickets_libraries/" + ticket.realtyId + "/" + tM.userId + "/" + i.library_media_name
+                                                                        a.lightbox(href=`${ url }` data-plugin-options='{"type":"image"}')
+                                                                            img.img-responsive(src=`${ url }` width="600" height="399")
+                                    if !msgClient
+                                        .col-md-2.col-sm-2.hidden-xs
+                                            figure.thumbnail
+                                                img.img-responsive(src=`${image}`)
+                                                figcaption.text-center= caption
                         if ticket.status !== 3 && ticket.status !== 4
                             hr
                             form.nomargin.sky-form#message_form(action="/tickets/message" method="post" enctype="multipart/form-data")

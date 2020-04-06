@@ -7,70 +7,93 @@ block content
                 .col-md-3
                     include accountsidenav
                 .col-md-9
+                    .heading-title.heading-line-single
+                        h3!= "Les questions <span>fréquentes</span>"
+                    p Avant d'introduire une demande d'intervention, merci de parcourir nos faqs qui vous aideront peut-être à résoudre votre problème directement.
+                    .row.margin-bottom-20
+                        form.sky-form.nomargin#search-faqs
+                            .col-md-10
+                                .fancy-form
+                                    i.fa.fa-user
+                                    input(required type="text" id="terms" name="terms" class="form-control" placeholder="Entrez un mot clé")
+                            .col-md-2
+                                button.btn.btn-primary(type="submit")
+                                    i.fa.fa-check
+                                    | Chercher
+                    .cat-list
+                        each category in categories
+                            if category.faqs.length > 0
+                                a.tag(href="#" data-id=`${category.id}`)
+                                    span.txt= category.title
+                                    span.num= category.faqs.length
+                    #faq-list.toggle.toggle-transparent.toggle-bordered-full.margin-top-30
+                    .divider.divider-dotted
                     if realties
-                        .heading-title.heading-line-single
-                            h3!= "Demander <span>une intervention</span>"
-                        - realtiesList = []
-                        form.nomargin.sky-form#savr_form(action="/tickets" method="post" enctype="multipart/form-data")
-                            fieldset
-                                .row
-                                    .col-md-12
-                                        .form-group
-                                            label Bien concerné *
-                                            select.form-control#realties-list(required name="realtyId")
-                                                each r in realties
-                                                    option(value=`${r.id}`)= r.project.project_title + ' - ' + r.realty_title
-                                                    - realtiesList.push({id: r.id, realty_reception_date: r.realty_reception_date, months_from_reception: r.months_from_reception, realty_warranty: r.realty_warranty, partners: r.project.partners})
-                                            #infos-holder
-                                                if realties[0].realty_reception_date
-                                                    if parseInt(realties[0].realty_warranty) < realties[0].months_from_reception
-                                                        .alert.alert-danger.margin-top-10
+                        #intervention-form
+                            .heading-title.heading-line-single
+                                h3!= "Demander <span>une intervention</span>"
+                            - realtiesList = []
+                            form.nomargin.sky-form#savr_form(action="/tickets" method="post" enctype="multipart/form-data")
+                                fieldset
+                                    .row
+                                        .col-md-12
+                                            .form-group
+                                                label Bien concerné *
+                                                select.form-control#realties-list(required name="realtyId")
+                                                    each r in realties
+                                                        option(value=`${r.id}`)= r.project.project_title + ' - ' + r.realty_title
+                                                        - realtiesList.push({id: r.id, realty_reception_date: r.realty_reception_date, months_from_reception: r.months_from_reception, realty_warranty: r.realty_warranty, partners: r.project.partners})
+                                                #infos-holder
+                                                    if realties[0].realty_reception_date
+                                                        if parseInt(realties[0].realty_warranty) < realties[0].months_from_reception
+                                                            .alert.alert-danger.margin-top-10
+                                                                strong.fa.fa-exclamation-triangle.margin-right-10
+                                                                | Ce bien n'est plus sous garantie. Des frais d'intervention pourraient être à votre charge.
+                                                        if parseInt(realties[0].realty_warranty) >= realties[0].months_from_reception
+                                                            .alert.alert-success.margin-top-10
+                                                                strong.fa.fa-check.margin-right-10
+                                                                | Ce bien est toujours sous garantie
+                                                    else
+                                                        .alert.alert-warning.margin-top-10
                                                             strong.fa.fa-exclamation-triangle.margin-right-10
-                                                            | Ce bien n'est plus sous garantie. Des frais d'intervention pourraient être à votre charge.
-                                                    if parseInt(realties[0].realty_warranty) >= realties[0].months_from_reception
-                                                        .alert.alert-success.margin-top-10
-                                                            strong.fa.fa-check.margin-right-10
-                                                            | Ce bien est toujours sous garantie
-                                                else
-                                                    .alert.alert-warning.margin-top-10
-                                                        strong.fa.fa-exclamation-triangle.margin-right-10
-                                                        | Ce bien n'a pas encore été réceptionné
-                                .row
-                                    .col-md-6
-                                        .form-group
-                                            label Type d'intervention *
-                                            select.form-control#partners-list(required name="partnerId")
-                                                option(value="") Sélectionnez un service
-                                                each partner in realties[0].project.partners
-                                                    option(value=`${partner.id}`)= partner.title
-                                    .col-md-6
-                                        .form-group
-                                            label Priorité *
-                                            select.form-control#priority-list(required name="priority")
-                                                option(value="") Sélectionnez une priorité
-                                                option(value="0") Pas urgent
-                                                option(value="1") Urgent
-                                                option(value="2") Très urgent
-                                .row
-                                    .col-md-12
-                                        .form-group
-                                            label Libellé du problème *
-                                            input.form-control(type="text" required name="title")
-                                .row
-                                    .col-md-12
-                                        .form-group
-                                            label Description du problème *
-                                            textarea.form-control.height-150(required row="4" name="message")
-                                .row
-                                    .col-md-12
-                                        .form-group
-                                            label Photos
-                                            .fancy-file-upload.fancy-file-primary
-                                                input.custom-file-upload(name="pictures" type="file" data-btn-text="Selectionner des photos" multiple)
-                                .row.margin-top-20
-                                    button.btn.btn-primary(type="submit")
-                                        i.fa.fa-check
-                                        | Envoyer
+                                                            | Ce bien n'a pas encore été réceptionné
+                                    .row
+                                        .col-md-6
+                                            .form-group
+                                                label Type d'intervention *
+                                                select.form-control#partners-list(required name="partnerId")
+                                                    option(value="" data-active="0") Sélectionnez une catégorie
+                                                    each partner in realties[0].project.partners
+                                                        option(value=`${partner.id}` data-active=`${partner.active}`)= partner.title
+                                        .col-md-6
+                                            .form-group
+                                                label Priorité *
+                                                select.form-control#priority-list(required name="priority")
+                                                    option(value="") Sélectionnez une priorité
+                                                    option(value="0") Pas urgent
+                                                    option(value="1") Urgent
+                                                    option(value="2") Très urgent
+                                    #form-container(style="display:none")
+                                        .row
+                                            .col-md-12
+                                                .form-group
+                                                    label Libellé du problème *
+                                                    input.form-control(type="text" required name="title")
+                                        .row
+                                            .col-md-12
+                                                .form-group
+                                                    label Description du problème *
+                                                    textarea.form-control.height-150(required row="4" name="message")
+                                        .row
+                                            .col-md-12
+                                                .form-group
+                                                    label Photos
+                                                    .fancy-file-upload.fancy-file-primary
+                                                        input.custom-file-upload(name="pictures" type="file" data-btn-text="Selectionner des photos" multiple)
+                                        .row.margin-top-20
+                                            button.btn.btn-primary(type="submit")
+                                                i.fa.fa-check
+                                                | Envoyer
                         script(type='text/javascript').
                             var realties = !{JSON.stringify(realtiesList)}
                     else
