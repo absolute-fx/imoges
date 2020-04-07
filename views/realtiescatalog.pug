@@ -3,7 +3,7 @@
         - cssClasses = tools.getSortClass(r)
         - imgs = tools.getRealtyImages(r.librarycategories);
         .col-md-3.col-sm-3.col-xs-12.mix.realties-box(class= cssClasses data-id=`${ r.id }`)
-            .box-inner
+            .box-inner.box-neumorphism
                 if r.realty_status === 0
                     h3.text-left.bold.size-16.elipsis
                         a(href=`/realty?id=${r.id}`)= r.realty_title

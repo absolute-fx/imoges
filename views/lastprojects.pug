@@ -1,7 +1,7 @@
 .row
     each p in projects
         .col-md-6.col-sm-6.home-project-box(data-projectid=`${p.id}` id=`project-box-${p.id}`)
-            .box-static.box-border-top.padding-30.margin-bottom-20.relative
+            .box-static.box-border-top.padding-30.margin-bottom-20.relative.box-neumorphism
                 if p.prctSold > 1
                     .ribbon
                         .ribbon-inner= p.prctSold + "% vendu"

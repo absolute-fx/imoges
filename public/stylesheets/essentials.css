@@ -28521,3 +28521,9 @@ section.dark .md-editor.md-fullscreen-mode
     vertical-align: middle;
     float: none;
 }
+
+.box-neumorphism{
+    box-shadow: 10px 10px 10px rgba(0,0,0,0.1), -10px -10px 10px rgba(255,255,255, 0.9) !important;
+    background-color: rgba(0,0,0,0.025) !important;
+    border-radius: 10px !important;
+}
