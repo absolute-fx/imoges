@@ -17,7 +17,7 @@ exports.index = function(req, res, next) {
             const libraryMediaExt = "jpg";
 
             Librarycategories.getAll({table, tblId, cat, libraryMediaExt}).then(librarycategories =>{
-                console.log(librarycategories);
+                //console.log(librarycategories);
                 res.render('realty', {
                     title: 'Imoges - Promotion immobilière',
                     page_description: realty.realty_long_description,
