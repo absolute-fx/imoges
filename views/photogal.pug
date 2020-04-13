@@ -12,5 +12,5 @@ block content
                 .col-md-12
                     div(class=`masonry-gallery columns-5 clearfix lightbox` data-img-big="1" data-plugin-options='{"delegate": "a", "gallery": {"enabled": true}}')
                         each m in media
-                            a.image-hover(href=`${ m.media_url }`)
-                                img(src=`${ m.media_url }`)
+                            a.image-hover(href=`${ m.fhd }`)
+                                img(src=`${ m.thumb }`)

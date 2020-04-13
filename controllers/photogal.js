@@ -1,4 +1,8 @@
 exports.index = function(req, res, next) {
+    let media = [];
+    for (let i=1; i<= 40; i++){
+        media.push({thumb: '/images/website_gal/thumb_' + i + '.jpg', fhd: '/images/website_gal/fhd_' + i + '.jpg'});
+    }
     res.render('photogal', {
         title: 'Galerie photo Imoges',
         topNavActive: 'media',
@@ -6,18 +10,6 @@ exports.index = function(req, res, next) {
             {label: 'Accueil', link: '/'},
             {label: 'Galerie photo'}
         ],
-        media: [
-            {media_url : "/images/temp_projects/gal/01-maxi.jpg"},
-            {media_url : "/images/temp_projects/gal/02-maxi.jpg"},
-            {media_url : "/images/temp_projects/gal/03-maxi.jpg"},
-            {media_url : "/images/temp_projects/gal/04-maxi.jpg"},
-            {media_url : "/images/temp_projects/gal/05-maxi.jpg"},
-            {media_url : "/images/temp_projects/gal/06-maxi.jpg"},
-            {media_url : "/images/temp_projects/gal/07-maxi.jpg"},
-            {media_url : "/images/temp_projects/gal/08-maxi.jpg"},
-            {media_url : "/images/temp_projects/gal/09-maxi.jpg"},
-            {media_url : "/images/temp_projects/gal/10-maxi.jpg"},
-            {media_url : "/images/temp_projects/gal/11-maxi.jpg"}
-        ]
+        media: media
     });
 };
