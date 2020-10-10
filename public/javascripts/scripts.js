@@ -120,19 +120,15 @@
 
 /** Preloader
  **************************************************************** **/
-	if(jQuery('#preloader').length > 0) {
+/*	if(jQuery('#preloader').length > 0) {
 
 		jQuery(window).load(function() {
 
 			jQuery('#preloader').fadeOut(1000, function() {
 				jQuery('#preloader').remove();
 			});
-
-			// setTimeout(function() {}, 1000);
-
 		});
-
-	}
+	}*/
 
 
 
