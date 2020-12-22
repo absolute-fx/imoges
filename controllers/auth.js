@@ -69,12 +69,14 @@ exports.validationMail = function(req, res){
 };
 
 exports.forgottenPass = function(req, res){
+    const mail = req.query.mail ? req.query.mail : "";
     res.render('forgottenpass', {
         title: 'Mot de passe oublié',
         page_description: "Mot de passe oublié",
         breadcrumb: [
             {label: 'Accueil', link: '/'}
-        ]
+        ],
+        mail: mail
     });
 };
 

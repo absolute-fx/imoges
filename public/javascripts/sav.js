@@ -32,6 +32,7 @@ function search(id, myArray){
 }
 
 function setWoSelect(partners){
+    console.log(partners)
     $('#partners-list').html('');
     $('#partners-list').append('<option value="" data-active="0">Sélectionnez une catégorie</option>');
     for(let p in partners){
@@ -44,8 +45,28 @@ function setFormVisibility(){
     $('#partners-list').change(function(e){
         if($(this).find(':selected').data('active')){
             $('#form-container').fadeIn();
+            $('#partnerInfos').html('');
         }else{
             $('#form-container').fadeOut();
+            // load partner info
+
+            const uid = $(this).find(':selected').data('uid');
+            if(uid) {
+                $.ajax({
+                    method: "GET",
+                    url: "http://127.0.0.1:4000/api/partner/" + uid
+                })
+                    .done(function (partnerInfo) {
+                        let msg = "<p>Pour ce type d'intervention, veuillez directement contacter la société <strong>" + partnerInfo.user.company_name + "</strong> via les coordonnées ci-dessous:</p>";
+                        if (partnerInfo.user.email) msg += "Mail: <strong>" + partnerInfo.user.email + "</strong><br>";
+                        if (partnerInfo.user.mobile) msg += "Mobile 1: <strong>" + partnerInfo.user.mobile + "</strong><br>";
+                        if (partnerInfo.user.mobile2) msg += "Mobile 2: <strong>" + partnerInfo.user.mobile2 + "</strong><br>";
+                        if (partnerInfo.user.phone) msg += "Téléphone: <strong>" + partnerInfo.user.phone + "</strong><br>";
+                        $('#partnerInfos').html(msg);
+                    });
+            }else{
+                $('#partnerInfos').html('');
+            }
         }
     });
 }

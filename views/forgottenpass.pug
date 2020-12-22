@@ -10,6 +10,6 @@ block content
             form.margin-bottom-200(action="/auth/resetpass" method="post")
                 .row
                     .col-md-6
-                        input.form-control(type="email" name="email" required placeholder="Email")
+                        input.form-control(type="email" name="email" required placeholder="Email" value=`${mail}`)
                     .col-md-6
                         button.btn.btn-primary(type="submit") Envoyer le mail de réinitialisation
