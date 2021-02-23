@@ -36,10 +36,12 @@ app2.get('*', function(req, res) {
 let mainApp = vhost('imoges.' + ext, app);
 let redirectApp = vhost('www.imoges.' + ext, app2);
 let redirectPartnersApp = vhost('partners.imoges.' + ext, app);
+let testApp = vhost('http://imoges.alwaysdata.net/', app);
 
 server.use(mainApp);
 server.use(redirectApp);
 server.use(redirectPartnersApp);
+server.use(testApp);
 
 server.listen(port);
 
