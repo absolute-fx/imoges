@@ -42,9 +42,9 @@ server.use(redirectApp);
 server.use(redirectPartnersApp);
 
 if(process.env.PORT === "8100"){
-    let testApp = vhost(process.env.IP, app);
+    let testApp = vhost("http://imoges.alwaysdata.net/", app);
     server.use(testApp);
-    console.log('Allways Data');
+    console.log('Allways Data OK');
 }
 
 
