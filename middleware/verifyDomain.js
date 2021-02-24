@@ -11,6 +11,8 @@ verifyDomain  = (req, res, next) => {
             req.mainDomain = true;
         }else if(domain === 'partners.imoges.be'){
             req.mainDomain = false;
+        }else if(domain === 'http://imoges.alwaysdata.net/'){
+            req.mainDomain = true;
         }
     }
     next();
