@@ -7,13 +7,7 @@ verifyDomain  = (req, res, next) => {
             req.mainDomain = false;
         }
     }else{
-        if(domain === 'imoges.be'){
-            req.mainDomain = true;
-        }else if(domain === 'partners.imoges.be'){
-            req.mainDomain = false;
-        }else if(domain === process.env.IP){
-            req.mainDomain = true;
-        }
+        req.mainDomain = true;
     }
     next();
 };
