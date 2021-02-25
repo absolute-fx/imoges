@@ -96,6 +96,7 @@ app.use(fileUpload());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
+console.log('DIR', __dirname);
 app.set('view engine', 'pug');
 
 app.use(logger('dev'));
