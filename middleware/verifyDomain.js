@@ -15,6 +15,7 @@ verifyDomain  = (req, res, next) => {
             req.mainDomain = true;
         }
     }
+    console.log(domain);
     next();
 };
 
