@@ -37,14 +37,16 @@ let mainApp = vhost('imoges.' + ext, app);
 let redirectApp = vhost('www.imoges.' + ext, app2);
 let redirectPartnersApp = vhost('partners.imoges.' + ext, app);
 
-server.use(mainApp);
-server.use(redirectApp);
-server.use(redirectPartnersApp);
+
 
 if(process.env.PORT === "8100"){
     let testApp = vhost(process.env.IP, app);
     server.use(testApp);
     console.log('Allways Data OK');
+}else{
+    server.use(mainApp);
+    server.use(redirectApp);
+    server.use(redirectPartnersApp);
 }
 
 
