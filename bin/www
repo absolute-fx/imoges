@@ -15,9 +15,39 @@ let port = normalizePort(process.env.PORT || '3000');
  * Module dependencies.
  */
 
-let testApp = vhost(process.env.IP, app);
-server.use(testApp);
-console.log('Allways Data OK');
+let ext, http;
+if (process.env.NODE_ENV === "development" || process.env.NODE_ENV === undefined) {
+    ext = 'loc';
+    http = 'http';
+}else{
+    ext = 'be';
+    http = 'https';
+}
+
+let app2 = express();
+app2.get('*', function(req, res) {
+    console.log(req);
+    res.writeHead(301, { "Location": http + "://imoges." + ext + req.url });
+    return res.end();
+});
+
+
+
+let mainApp = vhost('imoges.' + ext, app);
+let redirectApp = vhost('www.imoges.' + ext, app2);
+let redirectPartnersApp = vhost('partners.imoges.' + ext, app);
+
+
+
+if(process.env.PORT === "8100"){
+    let testApp = vhost(process.env.IP, app);
+    server.use(testApp);
+    console.log('Allways Data OK');
+}else{
+    server.use(mainApp);
+    server.use(redirectApp);
+    server.use(redirectPartnersApp);
+}
 
 
 server.listen(port);

@@ -150,5 +150,7 @@ app.use(function(err, req, res, next) {
 	res.render('error');
 });
 
+console.log('GET ENV', app.get('env') );
+
 module.exports = app;
 
