@@ -2,7 +2,6 @@ const Projects = require('../repositories/Projects');
 const Realties = require('../repositories/Realties');
 
 exports.index = function(req, res, next) {
-    console.log('PROJECT');
     const projectId = req.query.id;
     const active = 1;
     const diffused = 1;
