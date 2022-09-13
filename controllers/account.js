@@ -25,7 +25,7 @@ exports.index = function(req, res) {
 exports.userData = function (req, res) {
     if(req.mainDomain){
         Users.userData({id: req.session.user.id, token: req.session.token}).then( user => {
-            console.log(user);
+            //console.log(user);
             res.render('userdata', {
                 title: 'Données utilisateur',
                 topNavActive: 'account',
@@ -43,7 +43,7 @@ exports.userData = function (req, res) {
         });
     }else{
         Users.userData({id: req.session.user.id, token: req.session.token}).then( user => {
-            console.log(user);
+            //console.log(user);
             res.render('partnerdata', {
                 title: 'Données utilisateur',
                 topNavActive: 'user',
@@ -61,7 +61,7 @@ exports.updateUser = function(req, res){
     data.token = req.session.token;
     data.userId = req.session.user.id;
     Users.updateUser(data).then( user => {
-        console.log(data);
+        //console.log(data);
         res.send(user);
     });
 };
@@ -77,7 +77,7 @@ exports.realtiesList = function(req, res){
                 user.realties[i].months_from_reception = 0;
             }
         }
-        console.log(user.realties);
+        //console.log(user.realties);
         res.render('accountrealties', {
             title: 'Liste des mes biens',
             topNavActive: 'account',
@@ -107,7 +107,7 @@ exports.afterSale = function (req, res) {
         }
         //console.log(user.realties);
         SupportCategories.getAllCategories({token: req.session.token}).then((data)=>{
-            console.log(data);
+            //console.log(data);
             res.render('accountsav', {
                 title: "Demande d'intervention",
                 topNavActive: 'account',
@@ -186,7 +186,7 @@ exports.getTicket = function(req, res){
                 }
             }
 
-            console.log(data.ticket);
+            //console.log(data.ticket);
             if(req.mainDomain) {
                 res.render('ticket', {
                     title: 'Ticket ' + data.ticket.ref,

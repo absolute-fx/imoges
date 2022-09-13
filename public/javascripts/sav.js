@@ -4,6 +4,7 @@ $('document').ready(function(){
         getCategory($(this).data('id'));
     });
     setFormVisibility();
+    console.log(realties);
 });
 
 $('#realties-list').change(function(){
@@ -54,9 +55,10 @@ function setFormVisibility(){
             if(uid) {
                 $.ajax({
                     method: "GET",
-                    url: "http://127.0.0.1:4000/api/partner/" + uid
+                    url: "http://127.0.0.1:4000/api/partner/" + $(this).val()
                 })
                     .done(function (partnerInfo) {
+                        console.log(partnerInfo)
                         let msg = "<p>Pour ce type d'intervention, veuillez directement contacter la société <strong>" + partnerInfo.user.company_name + "</strong> via les coordonnées ci-dessous:</p>";
                         if (partnerInfo.user.email) msg += "Mail: <strong>" + partnerInfo.user.email + "</strong><br>";
                         if (partnerInfo.user.mobile) msg += "Mobile 1: <strong>" + partnerInfo.user.mobile + "</strong><br>";
